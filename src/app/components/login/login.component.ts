@@ -10,11 +10,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username :string='';
+  email :string='';
   password :string='';
   onSubmit(){
     console.log(
-      this.username
+      this.email
     );
   }
 }
+
+
