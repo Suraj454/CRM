@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone:true,
@@ -12,7 +13,9 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   email :string='';
   password :string='';
+  constructor(private router:Router){}
   onSubmit(){
+    this.router.navigate(['/'])
     console.log(
       this.email
     );

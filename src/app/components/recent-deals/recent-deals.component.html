@@ -1,0 +1,39 @@
+<div class="bg-gradient-to-br from-white to-gray-100 rounded-2xl shadow-lg p-6 max-w-3xl mx-auto">
+
+    <!-- Header Section -->
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="text-xl font-bold text-gray-800">Recent Deals</h2>
+      <a href="#" class="text-blue-600 text-sm font-medium hover:underline hover:text-blue-800">View All</a>
+    </div>
+  
+    <!-- Deals List -->
+    <div *ngFor="let deal of deals" 
+         class="flex justify-between items-center p-4 rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 mb-3 border border-gray-200 last:mb-0">
+      
+      <!-- Company Info -->
+      <div class="flex items-center">
+        <span
+          class="w-12 h-12 flex items-center justify-center rounded-full text-white text-lg font-semibold"
+          [ngClass]="deal.color"
+        >
+          <i class="fas fa-building"></i>
+        </span>
+        <div class="ml-4">
+          <p class="text-lg font-medium text-gray-900">{{ deal.name }}</p>
+          <p class="text-sm text-gray-500">{{ deal.service }}</p>
+        </div>
+      </div>
+  
+      <!-- Deal Amount & Status -->
+      <div class="text-right">
+        <p class="text-lg font-bold text-gray-900">${{ deal.amount | number }}</p>
+        <p class="text-sm font-medium mt-1 px-2 py-1 rounded-lg"
+           [ngClass]="deal.statusColor + ' bg-opacity-20'"
+           [ngStyle]="{ 'background-color': getBgColor(deal.statusColor) }">
+          {{ deal.status }}
+        </p>
+      </div>
+  
+    </div>
+  </div>
+  
