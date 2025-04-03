@@ -24,7 +24,14 @@ export class ClientTableComponent {
     { name: 'John Doe', email: 'johndoe@example.com', contact: '1234567890', status: 'Professional', date: new Date('2024-03-01') },
     { name: 'Jane Smith', email: 'janesmith@example.com', contact: '1234567890', status: 'Rejected', date: new Date('2024-03-02') },
     { name: 'Alice Johnson', email: 'alicejohnson@example.com', contact: '1234567890', status: 'Applied', date: new Date('2024-03-03') },
-    { name: 'Bob Brown', email: 'bobrown@example.com', status: 'Current', contact: '1234567890', date: new Date('2024-03-04') }
+    { name: 'John Doe', email: 'johndoe@example.com', contact: '1234567890', status: 'Professional', date: new Date('2024-03-01') },
+    { name: 'Bob Brown', email: 'bobrown@example.com', status: 'Current', contact: '1234567890', date: new Date('2024-03-04') },
+    { name: 'Jane Smith', email: 'janesmith@example.com', contact: '1234567890', status: 'Rejected', date: new Date('2024-03-02') },
+    { name: 'Bob Brown', email: 'bobrown@example.com', status: 'Current', contact: '1234567890', date: new Date('2024-03-04') },
+    { name: 'John Doe', email: 'johndoe@example.com', contact: '1234567890', status: 'Professional', date: new Date('2024-03-01') },
+    { name: 'Alice Johnson', email: 'alicejohnson@example.com', contact: '1234567890', status: 'Applied', date: new Date('2024-03-03') },
+    { name: 'Jane Smith', email: 'janesmith@example.com', contact: '1234567890', status: 'Rejected', date: new Date('2024-03-02') },
+    { name: 'Alice Johnson', email: 'alicejohnson@example.com', contact: '1234567890', status: 'Applied', date: new Date('2024-03-03') }
   ];
 
   // Get the badge class based on the status

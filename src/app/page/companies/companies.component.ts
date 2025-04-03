@@ -4,13 +4,12 @@ import { ClientTableComponent } from '../../components/client-table/client-table
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 
-
 @Component({
-  selector: 'app-client',
+  selector: 'app-companies',
   imports: [TableHeaderComponent,ClientTableComponent,PageHeaderComponent,PaginationComponent],
-  templateUrl: './client.component.html',
-  styleUrl: './client.component.css'
+  templateUrl: './companies.component.html',
+  styleUrl: './companies.component.css'
 })
-export class ClientComponent {
+export class CompaniesComponent {
 
 }
