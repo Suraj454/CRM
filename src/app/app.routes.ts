@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from '../app/login/login.component';
 
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { ClientComponent } from './page/client/client.component';
@@ -21,7 +21,7 @@ export const routes: Routes = [
             {path:'leads', component:LeadsComponent},
             {path:'tasks', component:TasksComponent}
         ]
-    }
+    },
 
-
+    {path:'**',redirectTo:"/login"}
 ];
