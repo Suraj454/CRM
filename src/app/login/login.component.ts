@@ -39,14 +39,38 @@ export class LoginComponent {
 //   }
 // 
 
+// onSubmit() {
+//   if (this.email && this.password) {
+//     this.loginService.login(this.email, this.password).subscribe({
+//       next: (response: any) => {
+//         if (response === true) {
+//           alert('Login successful!');
+//           localStorage.setItem('isLoggined', 'true');
+//           this.router.navigate(['/dashboard']); // Redirect to dashboard
+//         } else {
+//           alert('Invalid email or password.');
+//         }
+//       },
+//       error: (error) => {
+//         console.error('Login failed', error);
+//         alert('Something went wrong. Please try again later.');
+//       }
+//     });
+//   } else {
+//     alert('Please enter both email and password.');
+//   }
+// }
+
 onSubmit() {
   if (this.email && this.password) {
     this.loginService.login(this.email, this.password).subscribe({
       next: (response: any) => {
-        if (response === true) {
+        if (response && response.userId) {
           alert('Login successful!');
           localStorage.setItem('isLoggined', 'true');
-          this.router.navigate(['/dashboard']); // Redirect to dashboard
+          localStorage.setItem('userId', response.userId); // optional
+          localStorage.setItem('username', response.userName); // optional
+          this.router.navigate(['/dashboard']);
         } else {
           alert('Invalid email or password.');
         }
@@ -60,6 +84,7 @@ onSubmit() {
     alert('Please enter both email and password.');
   }
 }
+
 
 }
 
