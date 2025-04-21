@@ -1,25 +1,28 @@
-<nav class="w-full flex justify-between items-center py-6 px-12 bg-gray-800 text-white">
+<nav class="w-full flex justify-between items-center py-6 px-12 bg-gradient-to-r from-purple-800 to-slate-800 text-white">
     <!-- Left Side: Dashboard -->
-    <div class="text-lg font-semibold ">
+    <div class="text-lg font-semibold">
         Dashboard
     </div>
 
-    <!-- Right Side: User Info (Logo, Name, Notification) -->
+    <!-- Right Side: Notification, User Info, and Image -->
     <div class="flex items-center space-x-4">
         <!-- Notification Icon -->
         <div class="relative">
             <button class="p-2">
-                <!-- Bell Icon for Notifications -->
-              
+                <!-- Font Awesome Bell Icon for Notifications -->
+                <i class="fas fa-bell text-xl"></i>
+                
                 <!-- Badge Notification (Optional) -->
                 <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold rounded-full">3</span>
             </button>
         </div>
 
-        <!-- User Logo and Name -->
+        <!-- User Info -->
         <div class="flex items-center space-x-2">
-            <img src="https://via.placeholder.com/40" alt="User Logo" class="w-10 h-10 rounded-full object-cover">
-            <span class="text-lg font-semibold ">John Doe</span>
+            <span class="text-lg font-semibold">John Doe</span>
         </div>
+
+        <!-- User Image on the Right Side -->
+        <img src="https://via.placeholder.com/40x40" alt="User Logo" class="w-10 h-10 rounded-full object-cover">
     </div>
 </nav>
