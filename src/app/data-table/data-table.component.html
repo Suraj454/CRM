@@ -1,0 +1,100 @@
+
+   <!-- <div class="w-full overflow-x-auto">
+    <table class="min-w-full table-auto my-2 text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th *ngFor="let col of columns" class="px-6 py-3">{{ col.header }}</th>
+          <th *ngIf="showActions" class="px-6 py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data" class="bg-white border-b ">
+
+          <td *ngFor="let col of columns" class="px-6 py-4">
+            <ng-container *ngIf="col.field !== 'type' && col.field !== 'service' && col.field !== 'status'; else badgeTemplate">
+              {{ row[col.field] }}
+            </ng-container>
+            <ng-template #badgeTemplate>
+              <span [ngClass]="getBadgeClass(row[col.field], col.field)" class="text-xs px-2 py-1 rounded">
+                {{ row[col.field] }}
+              </span>
+            </ng-template>
+          </td>
+          
+  
+          <td *ngIf="showActions" class="px-6 py-4 flex space-x-2">
+            <button (click)="onEdit(row)" class="btn-action">
+              <span class="icon-[tabler--pencil]"></span>
+            </button>
+            <button (click)="onDelete(row)" class="btn-action">
+              <span class="icon-[tabler--trash]"></span>
+            </button>
+            <button (click)="onOptions(row)" class="btn-action">
+              <span class="icon-[tabler--dots-vertical]"></span>
+            </button>
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+   -->
+
+
+   <div class="w-full overflow-x-auto">
+    <table class="min-w-full table-auto my-4 text-sm text-left text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm">
+      <thead class="text-xs uppercase bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+        <tr>
+          <th *ngFor="let col of columns" class="px-6 py-3 font-semibold tracking-wide">{{ col.header }}</th>
+          <th *ngIf="showActions" class="px-6 py-3 font-semibold tracking-wide">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let row of data"
+          class="bg-white dark:bg-gray-900 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+        >
+          <td *ngFor="let col of columns" class="px-6 py-4">
+            <ng-container *ngIf="col.field !== 'type' && col.field !== 'service' && col.field !== 'status'; else badgeTemplate">
+              {{ row[col.field] }}
+            </ng-container>
+            <ng-template #badgeTemplate>
+              <span
+                [ngClass]="getBadgeClass(row[col.field], col.field)"
+                class="text-xs font-medium px-2 py-1 rounded-full"
+              >
+                {{ row[col.field] }}
+              </span>
+            </ng-template>
+          </td>
+  
+          <td *ngIf="showActions" class="px-6 py-4">
+            <div class="flex items-center space-x-2">
+              <button
+                (click)="onEdit(row)"
+                class="p-2 bg-blue-100 text-blue-600 rounded-full hover:bg-blue-200 transition"
+                title="Edit"
+              >
+                <span class="icon-[tabler--pencil] w-4 h-4"></span>
+              </button>
+              <button
+                (click)="onDelete(row)"
+                class="p-2 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition"
+                title="Delete"
+              >
+                <span class="icon-[tabler--trash] w-4 h-4"></span>
+              </button>
+              <button
+                (click)="onOptions(row)"
+                class="p-2 bg-gray-100 text-gray-600 rounded-full hover:bg-gray-200 transition"
+                title="More"
+              >
+                <span class="icon-[tabler--dots-vertical] w-4 h-4"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

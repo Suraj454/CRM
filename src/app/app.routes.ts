@@ -8,6 +8,7 @@ import { DealsComponent } from './page/deals/deals.component';
 import { LeadsComponent } from './page/leads/leads.component';
 import { TasksComponent } from './page/tasks/tasks.component';
 import { SignUpComponent } from './page/sign-up/sign-up.component';
+import { LeadSourceComponent } from './page/lead-source/lead-source.component';
 
 
 export const routes: Routes = [
@@ -20,7 +21,8 @@ export const routes: Routes = [
             {path:'companies', component:CompaniesComponent},
             {path:'deals', component:DealsComponent},
             {path:'leads', component:LeadsComponent},
-            {path:'tasks', component:TasksComponent}
+            {path:'tasks', component:TasksComponent},
+            {path:'leadsource', component:LeadSourceComponent}
         ]
     },
 

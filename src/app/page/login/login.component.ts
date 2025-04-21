@@ -35,13 +35,17 @@ onSubmit() {
           console.log(role);
           if (role === 'client') {
             this.router.navigate(['/clients']);
-          } else if (role === 'saleperson') {
-            this.router.navigate(['/leads']);
-          } else if (role === 'marketing') {
+          } 
+          else if (role === 'marketing') {
+            this.router.navigate(['/leadsource']);
+          } 
+          else if (role === 'saleperson') {
             this.router.navigate(['/deals']);
-          } else if (role === 'support') {
-            this.router.navigate(['/support-dashboard']);
-          } else {
+          } 
+          else if (role === 'support') {
+            this.router.navigate(['/dashboard']);
+          } 
+          else {
             this.router.navigate(['/dashboard']); 
           }
         } else {

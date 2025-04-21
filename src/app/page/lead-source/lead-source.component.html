@@ -1,10 +1,14 @@
-<app-page-header></app-page-header>
+<app-page-header
+  [title]="'Lead Source'"
+  [buttonLabel]="'Add Lead Source'"
+  (addAction)="addLeadSource()">
+</app-page-header>
 
 
 <app-table-header></app-table-header>
 <app-data-table
   [columns]="columns"
-  [data]="leads"
+  [data]="leadSource"
   [getBadgeClass]="getBadgeClass"
   [onEdit]="editUser"
   [onDelete]="deleteUser"

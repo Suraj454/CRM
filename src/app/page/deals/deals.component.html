@@ -1,1 +1,14 @@
-<p>Deal works</p>
+<app-page-header></app-page-header>
+<app-table-header></app-table-header>
+<app-data-table
+  [columns]="columns"
+  [data]="deals"
+  [getBadgeClass]="getBadgeClass"
+  [onEdit]="editUser"
+  [onDelete]="deleteUser"
+  [onOptions]="showOptions">
+</app-data-table>
+
+
+
+<app-pagination></app-pagination>
