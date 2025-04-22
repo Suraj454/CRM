@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './page/login/login.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { ClientComponent } from './page/client/client.component';
+import { ClientComponent } from './page/Clients/client/client.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
-import { CompaniesComponent } from './page/companies/companies.component';
-import { DealsComponent } from './page/deals/deals.component';
-import { LeadsComponent } from './page/leads/leads.component';
-import { TasksComponent } from './page/tasks/tasks.component';
+import { DealsComponent } from './page/Deals/deals/deals.component';
+import { LeadsComponent } from './page/Leads/leads/leads.component';
 import { SignUpComponent } from './page/sign-up/sign-up.component';
-import { LeadSourceComponent } from './page/lead-source/lead-source.component';
+import { LeadSourceComponent } from './page/Leads/lead-source/lead-source.component';
+import { LeadDashboardComponent } from './page/Leads/lead-dashboard/lead-dashboard.component';
+import { LeadReportsComponent } from './page/Leads/lead-reports/lead-reports.component';
 
 
 export const routes: Routes = [
@@ -18,11 +18,11 @@ export const routes: Routes = [
         children:[
             {path:'dashboard',component:DashboardComponent},
             {path:'clients',component:ClientComponent},
-            {path:'companies', component:CompaniesComponent},
             {path:'deals', component:DealsComponent},
             {path:'leads', component:LeadsComponent},
-            {path:'tasks', component:TasksComponent},
-            {path:'leadsource', component:LeadSourceComponent}
+            {path:'leadsource', component:LeadSourceComponent},
+            {path:'lead/dashboard', component:LeadDashboardComponent},
+            {path:'leadreports', component:LeadReportsComponent}
         ]
     },
 

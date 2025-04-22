@@ -48,11 +48,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
@@ -60,44 +62,51 @@ export class SidebarComponent implements OnInit {
 
   sidebarItems: any[] = [];
 
+
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
-    const role = localStorage.getItem('userRole')?.toLowerCase(); // Get user role from localStorage
+    const role = localStorage.getItem('role')?.toLowerCase(); // Get user role from localStorage
 
     // Role-based sidebar items with Font Awesome icons
     if (role === 'marketing') {
       this.sidebarItems = [
+        { name: 'Dashboard', link: '/lead/dashboard', icon: 'fa fa-sitemap' },
         { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-sitemap' },
-        { name: 'Leads', link: '/marketing/leads', icon: 'fa fa-users' },
-        { name: 'Add Lead', link: '/marketing/addlead', icon: 'fa fa-user-plus' },
-        { name: 'Reports', link: '/marketing/reports', icon: 'fa fa-chart-line' },
+        { name: 'Leads', link: '/leads', icon: 'fa fa-users' },
+        { name: 'Reports', link: 'lead/reports', icon: 'fa fa-chart-line' },
+        { name: 'Log Out', icon: 'fa fa-sign-out-alt' }
+      ];
+    }
+    else if (role === 'saleperson') {
+      this.sidebarItems = [
+        { name: 'Leads', link: '/leads', icon: 'fa fa-users' },
+        { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
+        { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
+        { name: 'Reports', link: 'deals/reports', icon: 'fa fa-chart-line' },
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
-    else if (role === 'SALES') {
+    else if (role === 'admin') {
       this.sidebarItems = [
-        { name: 'Dashboard', link: '/sales/dashboard', icon: 'fa fa-tachometer-alt' },
-        { name: 'Leads', link: '/sales/leads', icon: 'fa fa-users' },
-        { name: 'Deals', link: '/sales/deals', icon: 'fa fa-handshake' },
-        { name: 'Clients', link: '/sales/clients', icon: 'fa fa-briefcase' },
-        { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
-      ];
-    }
-    else if (role === 'ADMIN') {
-      this.sidebarItems = [
-        { name: 'User Management', link: '/admin/users', icon: 'fa fa-users-cog' },
+        { name: 'Dashboard', link: '/dashboard', icon: 'fa fa-users-cog' },
+        { name: 'Leads', link: '/leads', icon: 'fa fa-users' },
+        { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
+        {name: 'client',link:'/clients', icon:'fa fa-users' },
         { name: 'Reports', link: '/admin/reports', icon: 'fa fa-chart-line' },
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
-    else if (role === 'CLIENT') {
+    else if (role === 'client') {
       this.sidebarItems = [
         { name: 'Dashboard', link: '/client/dashboard', icon: 'fa fa-tachometer-alt' },
-        { name: 'My Profile', link: '/client/profile', icon: 'fa fa-user' },
+        {name:'Service', link: '/service', icon: 'fa fa-sign-out-alt'},
         { name: 'Support', link: '/client/support', icon: 'fa fa-life-ring' },
+        { name: 'Reports', link: '/client/reports', icon: 'fa fa-chart-line' },
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
-    else if (role === 'SUPPORT') {
+    else if (role === 'support') {
       this.sidebarItems = [
         { name: 'Dashboard', link: '/support/dashboard', icon: 'fa fa-tachometer-alt' },
         { name: 'Tickets', link: '/support/tickets', icon: 'fa fa-ticket-alt' },
@@ -115,6 +124,14 @@ export class SidebarComponent implements OnInit {
   }
 
   onItemClick(item: any) {
-    console.log(`${item.name} clicked`);
+    if (item.name === 'Log Out') {
+      localStorage.clear();
+      this.router.navigate(['/login']);
+      console.log("Log out");
+      alert("Log ")
+    } else if (item.link) {
+      this.router.navigate([item.link]);
+    }
   }
+
 }

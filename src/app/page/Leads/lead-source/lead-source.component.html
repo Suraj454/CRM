@@ -1,0 +1,108 @@
+<div class="p-6">
+  <!-- Add Lead Source Button -->
+  <button (click)="addLeadSource()" class="mb-4 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow transition-all duration-200">
+    + Add Lead Source
+  </button>
+
+  <!-- Lead Sources Table -->
+  <div class="overflow-x-auto bg-white rounded-xl shadow">
+    <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
+      <thead class="bg-gray-100 text-xs uppercase text-gray-600">
+        <tr>
+          <th class="px-6 py-3">Lead Name</th>
+          <th class="px-6 py-3">Source Type</th>
+          <th class="px-6 py-3">Description</th>
+          <th class="px-6 py-3">Service Name</th>
+          <th class="px-6 py-3">Contact No</th>
+          <th class="px-6 py-3">Company Name</th>
+          <th class="px-6 py-3">Company Add</th>
+          <th class="px-6 py-3">Lead Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4">{{ lead.leadName }}</td>
+          <td class="px-6 py-4">{{ lead.sourceType }}</td>
+          <td class="px-6 py-4">{{ lead.description }}</td>
+          <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
+          <td class="px-6 py-4">{{ lead.contactNo }}</td>
+          <td class="px-6 py-4">{{ lead.companyName }}</td>
+          <td class="px-6 py-4">{{ lead.companyAdd }}</td>
+          <td class="px-6 py-4">{{ lead.leadEmail }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal Form -->
+<div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg w-full max-w-2xl p-6 shadow-xl">
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">Add Lead Source</h2>
+    <form (ngSubmit)="saveLeadSource()" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label for="leadName" class="block font-medium mb-1">Lead Name</label>
+        <input id="leadName" [(ngModel)]="newLeadSource.leadName" name="leadName" required class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+
+      <div>
+        <label for="SourceType" class="block font-medium mb-1">Source Type</label>
+        <select id="SourceType" [(ngModel)]="newLeadSource.sourceType" name="SourceType" required class="w-full p-2 border border-gray-300 rounded bg-white">
+          <option value="" disabled selected>Select Source</option>
+          <option value="ONLINE">Online</option>
+          <option value="REFERENCE">Reference</option>
+          <option value="EVENT">Event</option>
+          <option value="SOCIAL_MEDIA">Social Media</option>
+        </select>
+      </div>
+
+
+      <div>
+        <label for="description" class="block font-medium mb-1">Description</label>
+        <input id="description" [(ngModel)]="newLeadSource.description" name="description" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+
+      <div>
+        <label for="serviceId" class="block font-medium mb-1">Service</label>
+        <select id="serviceId" [(ngModel)]="newLeadSource.crmService" name="serviceId" required class="w-full p-2 border border-gray-300 rounded bg-white">
+          <option value="" disabled selected>Select Service</option>
+          <option value="1">Service1</option>
+          <option value="2">Service2</option>
+          <option value="3">Service3</option>
+          <option value="4">Service4</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="contactNo" class="block font-medium mb-1">Contact No</label>
+        <input id="contactNo" [(ngModel)]="newLeadSource.contactNo" name="contactNo" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+
+      <div>
+        <label for="companyName" class="block font-medium mb-1">Company Name</label>
+        <input id="companyName" [(ngModel)]="newLeadSource.companyName" name="companyName" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+
+      <div>
+        <label for="companyAdd" class="block font-medium mb-1">Company Add</label>
+        <input id="companyAdd" [(ngModel)]="newLeadSource.companyAdd" name="companyAdd" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+
+
+      <div class="md:col-span-2">
+        <label for="leadEmail" class="block font-medium mb-1">Lead Email</label>
+        <input id="leadEmail" [(ngModel)]="newLeadSource.leadEmail" name="leadEmail" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+
+      <!-- Buttons -->
+      <div class="md:col-span-2 flex justify-end gap-4 mt-4">
+        <button type="submit" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition">
+          Save
+        </button>
+        <button type="button" (click)="closeModal()" class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

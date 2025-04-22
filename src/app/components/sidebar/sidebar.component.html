@@ -1,5 +1,5 @@
 <div class="relative flex h-screen w-2xs flex-col bg-neutral-900 p-4 text-white shadow-xl rounded-b-lg">
-  
+
   <!-- Sidebar header -->
   <div class="p-4 mb-6">
     <h5 class="text-xl font-semibold text-white">CRM DASHBOARD</h5>
@@ -8,18 +8,17 @@
   <!-- Sidebar navigation -->
   <nav class="flex flex-col gap-1 p-2 text-base">
     <div *ngFor="let item of sidebarItems"
-         class="flex items-center p-3 rounded-lg transition-colors duration-300 hover:bg-neutral-800">
+         class="flex items-center p-3 rounded-lg transition-colors duration-300 hover:bg-neutral-800 cursor-pointer"
+         (click)="onItemClick(item)">
       
-      <!-- Angular RouterLink -->
-      <a [routerLink]="item.link" class="flex items-center w-full">
-        <div class="grid mr-4 place-items-center">
-          <!-- Font Awesome Icon -->
-          <i [class]="item.icon" class="text-white"></i>
-        </div>
-        <span class="text-white hover:text-violet-400 hover:underline hover:underline-offset-4 hover:decoration-violet-500 transition-all duration-200">
-          {{ item.name }}
-        </span>
-      </a>
+      <div class="grid mr-4 place-items-center">
+        <i [class]="item.icon" class="text-white"></i>
+      </div>
+
+      <span class="text-white hover:text-violet-400 hover:underline hover:underline-offset-4 hover:decoration-violet-500 transition-all duration-200">
+        {{ item.name }}
+      </span>
     </div>
   </nav>
+
 </div>

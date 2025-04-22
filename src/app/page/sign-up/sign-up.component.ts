@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../services/loginservices/login.service';
 import { Router } from '@angular/router';
 
 
@@ -19,37 +19,6 @@ export class SignUpComponent {
   roleId : number = 0;
   constructor(private router:Router,private loginService:LoginService){}
 
-//   onSubmit() {
-//     if (!this.username || !this.email || !this.password ) {
-//       alert('All fields are required!');
-//       return;
-//     }
-
-//     // if (this.password !== this.cfpassword) {
-//     //   alert('Passwords do not match.');
-//     //   return;
-//     // }
-
-//     const userData = {
-//       userName: this.username,
-//       emailId: this.email,
-//       password: this.password,
-//       role: this.role
-//     };
-
-//     this.loginService.signup(this.username, this.email, this.password,).subscribe({
-//       next: (response: any) => {
-//         console.log('Signup response:', response); // ✅ just log to check data
-//         alert('Signup successful!');
-//         this.router.navigate(['/login']);
-//       },
-//       error: (err) => {
-//         console.error('Signup failed', err);
-//         alert('Something went wrong during signup. Please try again later.');
-//       }
-//     });
-//   }
-// }
    
 
 onSubmit() {
@@ -74,7 +43,7 @@ onSubmit() {
 
   this.loginService.signup(this.username, this.email, this.password, this.roleId).subscribe({
     next: (res) => {
-      alert('Signup successful!');
+    //  alert('Signup successful!');
       this.router.navigate(['/login']);
     },
     error: (err) => {
