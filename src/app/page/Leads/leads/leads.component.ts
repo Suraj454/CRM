@@ -17,7 +17,6 @@
 
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageHeaderComponent } from '../../../components/page-header/page-header.component';
 import { TableHeaderComponent } from '../../../components/table-header/table-header.component';
 import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
@@ -27,7 +26,7 @@ import { DataTableComponent } from '../../../data-table/data-table.component';
 @Component({
   selector: 'app-leads',
   standalone: true,
-  imports: [CommonModule, DataTableComponent,PageHeaderComponent,TableHeaderComponent,PaginationComponent,FormsModule],
+  imports: [CommonModule, DataTableComponent,TableHeaderComponent,PaginationComponent,FormsModule],
   templateUrl: './leads.component.html',
    styleUrl: './leads.component.css'
 })

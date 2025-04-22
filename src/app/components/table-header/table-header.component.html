@@ -1,39 +1,40 @@
-<div class="px-4 mx-auto lg:px-4 py-2 w-full">
-    <div class="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-      <div class="flex items-center justify-between p-3 space-y-3 md:space-y-0 md:space-x-4">
+
+<div class="px-4 mx-auto lg:px-4 py-4 w-full">
+  <div class="relative bg-gray-900 text-white shadow-lg ring-1 ring-gray-700 sm:rounded-xl">
+    
+    <!-- Header Content -->
+    <div class="flex flex-col md:flex-row items-center justify-between p-4 space-y-4 md:space-y-0 md:space-x-4">
+
+      <!-- 🔍 Search and Filters -->
+      <div class="flex flex-wrap items-center w-full md:w-auto">
         
-        <!-- Search Form -->
-        <div class="w-full flex md:w-lg">
-
-          <form class="flex items-center">
-            <label for="simple-search" class="sr-only">Search</label>
-            <div class="relative w-full">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <input type="text" id="simple-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Search" required="">
+        <!-- Search Input -->
+        <form class="flex items-center w-full md:w-80">
+          <label for="search" class="sr-only">Search leads</label>
+          <div class="relative w-full">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+              <i class="fas fa-search"></i>
             </div>
-          </form>
+            <input type="text" id="search" placeholder="Search leads..." class="block w-full p-2 pl-10 text-sm text-white border border-gray-700 rounded-lg bg-gray-800 focus:ring-blue-500 focus:border-blue-500" required>
+          </div>
+        </form>
 
-          <button id="filterDropdownButton" class="px-6 py-2 ml-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-            Industries
-          </button>
-          <button id="filterDropdownButton" class="px-6 py-2 ml-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-            Status
-          </button>
+        <!-- Filters -->
+        <button class="ml-3 mt-2 md:mt-0 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700">
+          <i class="fas fa-building mr-2"></i> Industry
+        </button>
 
-        </div>
-  
-        <!-- Action Buttons -->
-        <div class="flex items-center space-x-3">
-          <button id="filterDropdownButton"  class="px-6 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-            Filter
-          </button>
-        </div>
-  
+        <button class="ml-3 mt-2 md:mt-0 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700">
+          <i class="fas fa-flag-checkered mr-2"></i> Lead Status
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-3">
+        <button class="inline-flex items-center px-5 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500">
+          <i class="fas fa-filter mr-2"></i> Apply Filters
+        </button>
       </div>
     </div>
   </div>
-  
+</div>
