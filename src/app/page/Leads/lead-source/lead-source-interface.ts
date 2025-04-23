@@ -5,6 +5,7 @@ crmService:number | any,
 leadName:string,
 contactNo:string,
 companyName:string,
-companyAdd:string
-leadEmail:string
+companyAdd:string,
+leadEmail:string,
+leadSourceId:number
 }

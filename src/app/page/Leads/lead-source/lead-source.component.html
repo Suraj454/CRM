@@ -5,7 +5,7 @@
   </button>
 
   <!-- Lead Sources Table -->
-  <div class="overflow-x-auto bg-white rounded-xl shadow">
+  <!-- <div class="overflow-x-auto bg-white rounded-xl shadow">
     <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
       <thead class="bg-gray-100 text-xs uppercase text-gray-600">
         <tr>
@@ -33,7 +33,55 @@
       </tbody>
     </table>
   </div>
+</div> -->
+
+
+<!-- Lead Sources Table -->
+<div class="overflow-x-auto bg-white rounded-xl shadow">
+  <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
+    <thead class="bg-gray-100 text-xs uppercase text-gray-600">
+      <tr>
+        <th class="px-6 py-3">Lead Name</th>
+        <th class="px-6 py-3">Source Type</th>
+        <th class="px-6 py-3">Description</th>
+        <th class="px-6 py-3">Service Name</th>
+        <th class="px-6 py-3">Contact No</th>
+        <th class="px-6 py-3">Company Name</th>
+        <th class="px-6 py-3">Company Add</th>
+        <th class="px-6 py-3">Lead Email</th>
+        <th class="px-6 py-3 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition">
+        <td class="px-6 py-4">{{ lead.leadName }}</td>
+        <td class="px-6 py-4">{{ lead.sourceType }}</td>
+        <td class="px-6 py-4">{{ lead.description }}</td>
+        <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
+        <td class="px-6 py-4">{{ lead.contactNo }}</td>
+        <td class="px-6 py-4">{{ lead.companyName }}</td>
+        <td class="px-6 py-4">{{ lead.companyAdd }}</td>
+        <td class="px-6 py-4">{{ lead.leadEmail }}</td>
+        <td class="px-6 py-4 text-center">
+          <button 
+          (click)="onEditLead(lead)" 
+          class="text-blue-500 hover:text-blue-700 mx-1" 
+          title="Edit">
+          <i class="fas fa-edit"></i> <!-- Edit Icon -->
+        </button>
+        
+        <button 
+          (click)="onDeleteLead(lead.leadSourceId)" 
+          class="text-red-500 hover:text-red-700 mx-1" 
+          title="Delete">
+          <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
+        </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 
 
 <!-- Modal Form -->
