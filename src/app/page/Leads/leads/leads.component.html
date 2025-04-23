@@ -1,13 +1,271 @@
-
+<!-- 
 <app-leadtable-header-features></app-leadtable-header-features>
-<app-data-table
-  [columns]="columns"
-  [data]="leads"
-  [getBadgeClass]="getBadgeClass"
-  [onEdit]="editUser"
-  [onDelete]="deleteUser"
-  [onOptions]="showOptions">
-</app-data-table>
+<div class="overflow-x-auto bg-white rounded-xl shadow mt-6">
+  <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
+    <thead class="bg-gray-100 text-xs uppercase text-gray-600">
+      <tr>
+        <th class="px-6 py-3">Lead Name</th>
+        <th class="px-6 py-3">Source Type</th>
+        <th class="px-6 py-3">Description</th>
+        <th class="px-6 py-3">Service Name</th>
+        <th class="px-6 py-3">Contact No</th>
+        <th class="px-6 py-3">Company Name</th>
+        <th class="px-6 py-3">Company Address</th>
+        <th class="px-6 py-3">Lead Email</th>
+        <th class="px-6 py-3">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-gray-50 transition">
+        <td class="px-6 py-4">Suraj</td>
+        <td class="px-6 py-4">Google</td>
+        <td class="px-6 py-4">Lead from Google</td>
+        <td class="px-6 py-4">Web Development</td>
+        <td class="px-6 py-4">1234567890</td>
+        <td class="px-6 py-4">ABC Corp</td>
+        <td class="px-6 py-4">123 Street, City</td>
+        <td class="px-6 py-4">surajcom</td>
+        <td class="px-6 py-4">New Lead</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
+
+
+<app-pagination></app-pagination> -->
+
+
+
+<!-- Header Feature Component -->
+<!-- <app-leadtable-header-features (addLeadClicked)="togglePreviewRow()"></app-leadtable-header-features>
+
+<
+<div *ngIf="showPreviewRow" class="mt-4 mx-4 overflow-x-auto text-sm text-gray-700">
+  <table class="w-full text-left border border-gray-200 rounded">
+    <thead class="bg-gray-100 text-gray-800">
+      <tr>
+        <th class="px-2 py-2">Lead Name</th>
+        <th class="px-2 py-2">Source Type</th>
+        <th class="px-2 py-2">Description</th>
+        <th class="px-2 py-2">Service Name</th>
+        <th class="px-2 py-2">Contact No</th>
+        <th class="px-2 py-2">Company Name</th>
+        <th class="px-2 py-2">Company Address</th>
+        <th class="px-2 py-2">Lead Email</th>
+        <th class="px-2 py-2">Status</th>
+        <th class="px-2 py-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-blue-50 border-t border-gray-200">
+        <td class="px-2 py-2">{{ previewLead.LeadName }}</td>
+        <td class="px-2 py-2">{{ previewLead.SourceType }}</td>
+        <td class="px-2 py-2">{{ previewLead.Description }}</td>
+        <td class="px-2 py-2">{{ previewLead.ServiceName }}</td>
+        <td class="px-2 py-2">{{ previewLead.ContactNo }}</td>
+        <td class="px-2 py-2">{{ previewLead.CompanyName }}</td>
+        <td class="px-2 py-2">{{ previewLead.CompanyAdd }}</td>
+        <td class="px-2 py-2">{{ previewLead.LeadEmail }}</td>
+        <td class="px-2 py-2">
+          <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
+                [ngClass]="getBadgeClass(previewLead.Status)">
+            {{ previewLead.Status }}
+          </span>
+        </td>
+        <td class="px-2 py-2">
+          <button
+            class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
+            (click)="addPreviewLead()"
+          >
+            Add
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+
+
+
+
+<!-- Dropdown-style preview row -->
+<!-- 
+<app-leadtable-header-features (addLeadClicked)="togglePreviewRow()"></app-leadtable-header-features>
+<div *ngIf="showPreviewRow" class="mt-4 mx-4">
+  <div class="flex items-center space-x-4 bg-blue-50 border border-blue-200 px-4 py-2 rounded shadow text-sm text-gray-700 overflow-x-auto">
+    <div><strong>{{ previewLead.LeadName }}</strong></div>
+    <div>{{ previewLead.SourceType }}</div>
+    <div>{{ previewLead.Description }}</div>
+    <div>{{ previewLead.ServiceName }}</div>
+    <div>{{ previewLead.ContactNo }}</div>
+    <div>{{ previewLead.CompanyName }}</div>
+    <div>{{ previewLead.CompanyAdd }}</div>
+    <div>{{ previewLead.LeadEmail }}</div>
+    <div>
+      <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
+            [ngClass]="getBadgeClass(previewLead.Status)">
+        {{ previewLead.Status }}
+      </span>
+    </div>
+    <button (click)="addPreviewLead()"
+            class="ml-auto bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">
+      Add
+    </button>
+  </div>
+</div>
+
+
+<table class="w-full mt-4 text-sm text-gray-700 border border-gray-200">
+  <thead class="bg-gray-100">
+    <tr>
+      <th class="p-2">Lead Name</th>
+      <th class="p-2">Source Type</th>
+      <th class="p-2">Description</th>
+      <th class="p-2">Service Name</th>
+      <th class="p-2">Contact No</th>
+      <th class="p-2">Company Name</th>
+      <th class="p-2">Company Address</th>
+      <th class="p-2">Lead Email</th>
+      <th class="p-2">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lead of leads">
+      <td class="p-2">{{ lead.LeadName }}</td>
+      <td class="p-2">{{ lead.SourceType }}</td>
+      <td class="p-2">{{ lead.Description }}</td>
+      <td class="p-2">{{ lead.ServiceName }}</td>
+      <td class="p-2">{{ lead.ContactNo }}</td>
+      <td class="p-2">{{ lead.CompanyName }}</td>
+      <td class="p-2">{{ lead.CompanyAdd }}</td>
+      <td class="p-2">{{ lead.LeadEmail }}</td>
+      <td class="p-2">
+        <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
+              [ngClass]="getBadgeClass(lead.Status)">
+          {{ lead.Status }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pagination></app-pagination> -->
+<!-- 
+<app-leadtable-header-features (addLeadClicked)="togglePreviewRow()"></app-leadtable-header-features>
+
+<div *ngIf="showPreviewRow" class="mt-4 mx-4">
+  <div class="flex flex-wrap gap-4 bg-blue-50 border border-blue-200 p-4 rounded shadow text-sm text-gray-700">
+    <input [(ngModel)]="previewLead.leadName" placeholder="Lead Name" class="border px-2 py-1 rounded w-40">
+    <input [(ngModel)]="previewLead.sourceType" placeholder="Source Type" class="border px-2 py-1 rounded w-40">
+    <input [(ngModel)]="previewLead.description" placeholder="Description" class="border px-2 py-1 rounded w-40">
+    <input [(ngModel)]="previewLead.crmService" placeholder="Service Name" class="border px-2 py-1 rounded w-40">
+    <input [(ngModel)]="previewLead.contactNo" placeholder="Contact No" class="border px-2 py-1 rounded w-40">
+    <input [(ngModel)]="previewLead.companyName" placeholder="Company Name" class="border px-2 py-1 rounded w-40">
+    <input [(ngModel)]="previewLead.companyAdd" placeholder="Company Address" class="border px-2 py-1 rounded w-40">
+    <input [(ngModel)]="previewLead.leadEmail" placeholder="Lead Email" class="border px-2 py-1 rounded w-40">
+    <select [(ngModel)]="previewLead.Status" class="border px-2 py-1 rounded w-40">
+      <option>New</option>
+      <option>Contacted</option>
+      <option>Qualified</option>
+    </select>
+
+    <button (click)="addPreviewLead()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add</button>
+  </div>
+</div>
+
+<table class="w-full mt-4 text-sm text-gray-700 border border-gray-200">
+  <thead class="bg-gray-100">
+    <tr>
+      <th class="p-2">Lead Name</th>
+      <th class="p-2">Source Type</th>
+      <th class="p-2">Description</th>
+      <th class="p-2">Service Name</th>
+      <th class="p-2">Contact No</th>
+      <th class="p-2">Company Name</th>
+      <th class="p-2">Company Address</th>
+      <th class="p-2">Lead Email</th>
+      <th class="p-2">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lead of leads">
+      <td class="p-2">{{ lead.leadName }}</td>
+      <td class="p-2">{{ lead.sourceType }}</td>
+      <td class="p-2">{{ lead.description }}</td>
+      <td class="p-2">{{ lead.crmService }}</td>
+      <td class="p-2">{{ lead.contactNo }}</td>
+      <td class="p-2">{{ lead.companyName }}</td>
+      <td class="p-2">{{ lead.companyAdd }}</td>
+      <td class="p-2">{{ lead.leadEmail }}</td>
+      <td class="p-2">
+        <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
+              [ngClass]="getBadgeClass(lead.Status)">
+          {{ lead.Status }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pagination></app-pagination> -->
+
+
+<app-leadtable-header-features (addLeadClicked)="togglePreviewRow()"></app-leadtable-header-features>
+
+<!-- Dropdown view for available lead sources -->
+<div *ngIf="showPreviewRow" class="mt-4 mx-4">
+  <div class="space-y-2">
+    <div *ngFor="let source of leadSources" class="flex flex-wrap justify-between items-center gap-4 bg-blue-50 border border-blue-200 p-4 rounded shadow text-sm text-gray-700">
+      <div class="flex flex-wrap gap-3">
+        <span><strong>Name:</strong> {{ source.leadName }}</span>
+        <span><strong>Source:</strong> {{ source.sourceType }}</span>
+        <span><strong>Description:</strong> {{ source.description }}</span>
+        <span><strong>Service:</strong> {{ source.crmService }}</span>
+        <span><strong>Email:</strong> {{ source.leadEmail }}</span>
+        <span><strong>Company:</strong> {{ source.companyName }}</span>
+      </div>
+      <button (click)="addLeadFromSource(source)" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700">
+        Add
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Leads Table -->
+<table class="w-full mt-4 text-sm text-gray-700 border border-gray-200">
+  <thead class="bg-gray-100">
+    <tr>
+      <th class="p-2">Lead Name</th>
+      <th class="p-2">Source Type</th>
+      <th class="p-2">Description</th>
+      <th class="p-2">Service Name</th>
+      <th class="p-2">Contact No</th>
+      <th class="p-2">Company Name</th>
+      <th class="p-2">Company Address</th>
+      <th class="p-2">Lead Email</th>
+      <th class="p-2">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lead of leads">
+      <td class="p-2">{{ lead.leadName }}</td>
+      <td class="p-2">{{ lead.sourceType }}</td>
+      <td class="p-2">{{ lead.description }}</td>
+      <td class="p-2">{{ lead.crmService }}</td>
+      <td class="p-2">{{ lead.contactNo }}</td>
+      <td class="p-2">{{ lead.companyName }}</td>
+      <td class="p-2">{{ lead.companyAdd }}</td>
+      <td class="p-2">{{ lead.leadEmail }}</td>
+      <td class="p-2">
+        <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
+              [ngClass]="getBadgeClass(lead.leadStatus)">
+          {{ lead.leadStatus }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <app-pagination></app-pagination>

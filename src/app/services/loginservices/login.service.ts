@@ -23,9 +23,7 @@ export class LoginService {
       userName: username,
       emailId: email,
       password: password,
-      role: {
-        roleId: roleId
-      }
+        role: roleId
     });
   }
   

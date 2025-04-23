@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-leadtable-header-features',
@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './leadtable-header-features.component.css'
 })
 export class LeadtableHeaderFeaturesComponent {
+
+  @Output() addLeadClicked = new EventEmitter<void>();
+
+  onAddLeadClick() {
+    this.addLeadClicked.emit();
+  }
 
 }
