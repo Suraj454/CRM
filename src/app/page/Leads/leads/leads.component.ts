@@ -17,16 +17,16 @@
 
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableHeaderComponent } from '../../../components/table-header/table-header.component';
 import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
 import { DataTableComponent } from '../../../data-table/data-table.component';
+import { LeadtableHeaderFeaturesComponent } from '../../../components/LeadsComponent/leadtable-header-features/leadtable-header-features.component';
 
 
 @Component({
   selector: 'app-leads',
   standalone: true,
-  imports: [CommonModule, DataTableComponent,TableHeaderComponent,PaginationComponent,FormsModule],
+  imports: [CommonModule, DataTableComponent,LeadtableHeaderFeaturesComponent,PaginationComponent,FormsModule],
   templateUrl: './leads.component.html',
    styleUrl: './leads.component.css'
 })

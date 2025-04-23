@@ -175,33 +175,42 @@ export class LeadSourceComponent {
     this.resetForm();
   }
 
-  saveLeadSource() {
-    if (this.isEditMode && this.editingLeadId !== null) {
-      // Update existing lead
-      this.leadSourceService.updateLeadSource(this.editingLeadId, this.newLeadSource).subscribe({
-        next: () => {
-          console.log('Lead source updated successfully');
-          this.fetchLeadSources();
-          this.closeModal();
-        },
-        error: (error) => {
-          console.error('Error updating lead source:', error);
-        }
-      });
-    } else {
-      // Create new lead
-      this.leadSourceService.createLeadSource(this.newLeadSource).subscribe({
-        next: (response) => {
-          console.log('Lead source saved successfully:', response);
-          this.fetchLeadSources();
-          this.closeModal();
-        },
-        error: (error) => {
-          console.error('Error saving lead source:', error);
-        }
-      });
-    }
+
+saveLeadSource() {
+  const payload = {
+    ...this.newLeadSource,
+    crmService: typeof this.newLeadSource.crmService === 'object'
+      ? this.newLeadSource.crmService.serviceId
+      : this.newLeadSource.crmService
+  };
+
+  if (this.isEditMode && this.editingLeadId !== null) {
+    // ✅ Update existing lead
+    this.leadSourceService.updateLeadSource(this.editingLeadId, payload).subscribe({
+      next: () => {
+        console.log('Lead source updated successfully');
+        this.fetchLeadSources();
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error updating lead source:', error);
+      }
+    });
+  } else {
+    // ✅ Create new lead
+    this.leadSourceService.createLeadSource(payload).subscribe({
+      next: (response) => {
+        console.log('Lead source saved successfully:', response);
+        this.fetchLeadSources();
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error saving lead source:', error);
+      }
+    });
   }
+}
+
 
   onEditLead(lead: LeadSourceInterface) {
     this.newLeadSource = { ...lead }; // Clone to avoid reference issues

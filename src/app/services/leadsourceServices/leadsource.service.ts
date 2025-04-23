@@ -20,10 +20,15 @@ export class LeadsourceService {
   }
 
    // ✅ Add this method
-   deleteLeadSource(id: number): Observable<void> {
+  //  deleteLeadSource(id: number): Observable<void> {
+  //   console.log(id);
+  //   return this.http.delete<void>(`${this.leadSourceUrl}/${id}`);
+  // }
+
+  deleteLeadSource(id: number): Observable<void> {
     console.log(id);
-    return this.http.delete<void>(`${this.leadSourceUrl}/${id}`);
-  }
+    return this.http.delete<void>(`${this.leadSourceUrl}${id}`);
+}
 
   // ✅ Optional: Add update method if editing is enabled
   updateLeadSource(id: number, leadSource: LeadSourceInterface): Observable<LeadSourceInterface> {
