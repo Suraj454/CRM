@@ -13,5 +13,4 @@ export class LeadtableHeaderFeaturesComponent {
   onAddLeadClick() {
     this.addLeadClicked.emit();
   }
-
 }

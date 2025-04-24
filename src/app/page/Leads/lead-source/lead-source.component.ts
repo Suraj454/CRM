@@ -136,14 +136,15 @@ export class LeadSourceComponent {
 
   newLeadSource: LeadSourceInterface = {
     sourceType: '',
-    description: '',
     crmService: 0,
     leadName: '',
     contactNo: '',
     companyName: '',
     companyAdd: '',
     leadEmail: '',
-    leadSourceId:0
+    leadSourceId:0,
+    timeStamp: ''
+
   };
 
   constructor(private leadSourceService: LeadsourceService) { }
@@ -236,14 +237,14 @@ saveLeadSource() {
   private resetForm() {
     this.newLeadSource = {
       sourceType: '',
-      description: '',
       crmService: 0,
       leadName: '',
       contactNo: '',
       companyName: '',
       companyAdd: '',
       leadEmail: '',
-      leadSourceId:0
+      leadSourceId:0,
+      timeStamp: ''
     };
     this.editingLeadId = null;
     this.isEditMode = false;

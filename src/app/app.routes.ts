@@ -9,6 +9,8 @@ import { SignUpComponent } from './page/sign-up/sign-up.component';
 import { LeadSourceComponent } from './page/Leads/lead-source/lead-source.component';
 import { LeadDashboardComponent } from './page/Leads/lead-dashboard/lead-dashboard.component';
 import { LeadReportsComponent } from './page/Leads/lead-reports/lead-reports.component';
+import { SalesleadsComponent } from './page/Deals/salesleads/salesleads.component';
+import { NegotiationComponent } from './page/Deals/negotiation/negotiation.component';
 
 
 export const routes: Routes = [
@@ -22,7 +24,9 @@ export const routes: Routes = [
             {path:'leads', component:LeadsComponent},
             {path:'leadsource', component:LeadSourceComponent},
             {path:'lead/dashboard', component:LeadDashboardComponent},
-            {path:'leadreports', component:LeadReportsComponent}
+            {path:'leadreports', component:LeadReportsComponent},
+            {path:'sales/leads', component:SalesleadsComponent},
+            {path:'negotiation',component:NegotiationComponent}
         ]
     },
 

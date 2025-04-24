@@ -80,8 +80,8 @@ export class SidebarComponent implements OnInit {
     }
     else if (role === 'saleperson') {
       this.sidebarItems = [
-        { name: 'Leads', link: '/leads', icon: 'fa fa-users' },
-        { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
+        { name: 'Leads', link: '/sales/leads', icon: 'fa fa-users' },
+        { name: 'Negotiation', link: '/negotiation', icon: 'fa fa-handshake' },
         { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
         { name: 'Reports', link: 'deals/reports', icon: 'fa fa-chart-line' },
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }

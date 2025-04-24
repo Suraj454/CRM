@@ -17,7 +17,15 @@ export class LeadservicesService {
   getLeads(): Observable<Lead[]> {
     return this.http.get<Lead[]>(`${this.baseUrl}/leadsall`);  }
 
-    addLead(leadId: number): Observable<Lead> {
-      return this.http.post<Lead>(`${this.baseUrl}/add/${leadId}`, null);
+    addLead(leadId: number,timeStamp:string): Observable<Lead> {
+      return this.http.post<Lead>(`${this.baseUrl}/add/${leadId}?datetime=${timeStamp}`, null);
+    }
+
+    getFilteredLeadSources(): Observable<LeadSourceInterface[]> {
+      return this.http.get<LeadSourceInterface[]>(this.baseUrl+'/all');
+    }
+
+    changeStatus(leadId: number, status: string) {
+      return this.http.put(this.baseUrl+`/edit/${leadId}?status=${status}`,{});
     }
 }

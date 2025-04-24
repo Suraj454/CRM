@@ -4,64 +4,33 @@
     + Add Lead Source
   </button>
 
-  <!-- Lead Sources Table -->
-  <!-- <div class="overflow-x-auto bg-white rounded-xl shadow">
-    <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
-      <thead class="bg-gray-100 text-xs uppercase text-gray-600">
-        <tr>
-          <th class="px-6 py-3">Lead Name</th>
-          <th class="px-6 py-3">Source Type</th>
-          <th class="px-6 py-3">Description</th>
-          <th class="px-6 py-3">Service Name</th>
-          <th class="px-6 py-3">Contact No</th>
-          <th class="px-6 py-3">Company Name</th>
-          <th class="px-6 py-3">Company Add</th>
-          <th class="px-6 py-3">Lead Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition">
-          <td class="px-6 py-4">{{ lead.leadName }}</td>
-          <td class="px-6 py-4">{{ lead.sourceType }}</td>
-          <td class="px-6 py-4">{{ lead.description }}</td>
-          <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
-          <td class="px-6 py-4">{{ lead.contactNo }}</td>
-          <td class="px-6 py-4">{{ lead.companyName }}</td>
-          <td class="px-6 py-4">{{ lead.companyAdd }}</td>
-          <td class="px-6 py-4">{{ lead.leadEmail }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div> -->
-
-
 <!-- Lead Sources Table -->
 <div class="overflow-x-auto bg-white rounded-xl shadow">
   <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
     <thead class="bg-gray-100 text-xs uppercase text-gray-600">
       <tr>
         <th class="px-6 py-3">Lead Name</th>
-        <th class="px-6 py-3">Source Type</th>
-        <th class="px-6 py-3">Description</th>
-        <th class="px-6 py-3">Service Name</th>
+        <th class="px-6 py-3">Lead Email</th>
         <th class="px-6 py-3">Contact No</th>
         <th class="px-6 py-3">Company Name</th>
         <th class="px-6 py-3">Company Add</th>
-        <th class="px-6 py-3">Lead Email</th>
+        <th class="px-6 py-3">Source Type</th>
+        <th class="px-6 py-3">Service Name</th>
+        <th class="px-6 py-3">Date</th>
         <th class="px-6 py-3 text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition">
         <td class="px-6 py-4">{{ lead.leadName }}</td>
-        <td class="px-6 py-4">{{ lead.sourceType }}</td>
-        <td class="px-6 py-4">{{ lead.description }}</td>
-        <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
+        <td class="px-6 py-4">{{ lead.leadEmail }}</td>
         <td class="px-6 py-4">{{ lead.contactNo }}</td>
         <td class="px-6 py-4">{{ lead.companyName }}</td>
         <td class="px-6 py-4">{{ lead.companyAdd }}</td>
-        <td class="px-6 py-4">{{ lead.leadEmail }}</td>
+        <td class="px-6 py-4">{{ lead.sourceType }}</td>
+        <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
+        <td class="px-6 py-4">{{ lead.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</td>
+  
         <td class="px-6 py-4 text-center">
           <button 
           (click)="onEditLead(lead)" 
@@ -101,41 +70,14 @@
         </div>
       </div>
 
-      <div>
-        <label for="SourceType" class="block font-medium mb-2">Source Type</label>
-        <div class="relative">
-          <select id="SourceType" [(ngModel)]="newLeadSource.sourceType" name="SourceType" required class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
-            <option value="" disabled selected>Select Source</option>
-            <option value="ONLINE">Online</option>
-            <option value="REFERRAL">Referral</option>
-            <option value="EVENT">Event</option>
-            <option value="SOCIAL_MEDIA">Social Media</option>
-          </select>
-          <i class="fas fa-share-nodes absolute top-3 left-3 text-gray-400"></i>
-        </div>
-      </div>
-
-      <div>
-        <label for="description" class="block font-medium mb-2">Description</label>
+      <div class="md:col-span-2">
+        <label for="leadEmail" class="block font-medium mb-2">Lead Email</label>
         <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-align-left text-gray-400 mr-2"></i>
-          <input id="description" [(ngModel)]="newLeadSource.description" name="description" class="w-full p-2 outline-none" />
+          <i class="fas fa-envelope text-gray-400 mr-2"></i>
+          <input id="leadEmail" [(ngModel)]="newLeadSource.leadEmail" name="leadEmail" class="w-full p-2 outline-none" />
         </div>
       </div>
 
-      <div>
-        <label for="serviceId" class="block font-medium mb-2">Service</label>
-        <div class="relative">
-          <select id="serviceId" [(ngModel)]="newLeadSource.crmService" name="serviceId" required class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
-            <option value="" disabled selected>Select Service</option>
-            <option value="1">Service1</option>
-            <option value="2">Service2</option>
-            <option value="3">Service3</option>
-            <option value="4">Service4</option>
-          </select>
-          <i class="fas fa-cogs absolute top-3 left-3 text-gray-400"></i>
-        </div>
-      </div>
 
       <div>
         <label for="contactNo" class="block font-medium mb-2">Contact No</label>
@@ -161,13 +103,50 @@
         </div>
       </div>
 
-      <div class="md:col-span-2">
-        <label for="leadEmail" class="block font-medium mb-2">Lead Email</label>
-        <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-envelope text-gray-400 mr-2"></i>
-          <input id="leadEmail" [(ngModel)]="newLeadSource.leadEmail" name="leadEmail" class="w-full p-2 outline-none" />
+
+      <div>
+        <label for="SourceType" class="block font-medium mb-2">Source Type</label>
+        <div class="relative">
+          <select id="SourceType" [(ngModel)]="newLeadSource.sourceType" name="SourceType" required class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
+            <option value="" disabled selected>Select Source</option>
+            <option value="ONLINE">Online</option>
+            <option value="REFERRAL">Referral</option>
+            <option value="EVENT">Event</option>
+            <option value="SOCIAL_MEDIA">Social Media</option>
+          </select>
+          <i class="fas fa-share-nodes absolute top-3 left-3 text-gray-400"></i>
         </div>
       </div>
+
+      <div>
+        <label for="serviceId" class="block font-medium mb-2">Service</label>
+        <div class="relative">
+          <select id="serviceId" [(ngModel)]="newLeadSource.crmService" name="serviceId" required class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
+            <option value="" disabled selected>Select Service</option>
+            <option value="1">Service1</option>
+            <option value="2">Service2</option>
+            <option value="3">Service3</option>
+            <option value="4">Service4</option>
+          </select>
+          <i class="fas fa-cogs absolute top-3 left-3 text-gray-400"></i>
+        </div>
+      </div>
+
+      <div>
+        <label for="dateTime" class="block font-medium mb-2">Date & Time</label>
+        <div class="flex items-center border border-gray-300 rounded-lg px-3">
+          <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>
+          <input
+            type="datetime-local"
+            id="dateTime"
+            [(ngModel)]="newLeadSource.timeStamp"
+            name="dateTime"
+            class="w-full p-2 outline-none"
+          />
+        </div>
+      </div>
+
+     
 
       <!-- Buttons -->
       <div class="md:col-span-2 flex justify-end gap-4 mt-6">

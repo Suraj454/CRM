@@ -146,6 +146,7 @@ import { Lead } from './lead-interface';
 import { LeadservicesService } from '../../../services/leadServices/leadservices.service';
 import { LeadSourceInterface } from '../lead-source/lead-source-interface';
 import { LeadsourceService } from '../../../services/leadsourceServices/leadsource.service';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-leads',
@@ -159,18 +160,23 @@ export class LeadsComponent implements OnInit {
   leads: Lead[] = [];
   leadSources: LeadSourceInterface[] = [];
 
+  timenow:string|any=''
+ 
   showPreviewRow = false;
   previewLead: Lead = {
+    leadId: 0,
     leadName: '',
     leadSourceId: 0,
     sourceType: '',
-    description: '',
-    crmService: '',
+    crmService: {
+      serviceName: ''
+    },
     contactNo: '',
     companyName: '',
     companyAdd: '',
     leadEmail: '',
-    leadStatus: ''
+    leadStatus: '',
+    timeDate: ''
   };
 
   constructor(
@@ -184,16 +190,33 @@ export class LeadsComponent implements OnInit {
   }
 
   // Load all leads from the backend
+
   loadLeads(): void {
     this.leadService.getLeads().subscribe({
-      next: (data) => this.leads = data,
-      error: (err) => console.error('Error loading leads', err)
+    next: (data) => {
+    this.leads = data.map((item: any) => ({
+      leadId: item.leadId,
+    leadName: item.leadsource.leadName,
+    sourceType: item.leadsource.sourceType,
+    crmService:{
+       serviceName: item.leadsource.crmService.serviceName
+    },
+    contactNo: item.leadsource.contactNo,
+    companyName: item.leadsource.companyName,
+    companyAdd: item.leadsource.companyAdd,
+    leadEmail: item.leadsource.leadEmail,
+    leadStatus: item.leadStatus,
+    leadSourceId: item.leadsource.leadSourceId,
+    timeDate:item.timeStamp
+    }));
+    },
+    error: (err) => console.error('Error loading leads', err)
     });
-  }
+    }
 
   // Load all lead sources from the backend
   loadLeadSources(): void {
-    this.leadSourceService.getLeadSources().subscribe({
+    this.leadService.getFilteredLeadSources().subscribe({
       next: (data) => this.leadSources = data,
       error: (err) => console.error('Error loading lead sources', err)
     });
@@ -207,8 +230,10 @@ export class LeadsComponent implements OnInit {
   // Add a new lead from a selected lead source
   addLeadFromSource(source: LeadSourceInterface): void {
     const leadId = source.leadSourceId;  // Use the leadSourceId as the leadId
+    const timenow = new Date().toISOString();
+    console.log('Current time:', timenow);
   
-    this.leadService.addLead(leadId).subscribe({
+    this.leadService.addLead(leadId,timenow).subscribe({
       next: (addedLead) => {
         this.leads.push(addedLead);  // Add the created lead to the list
         this.showPreviewRow = false; // Hide preview row after adding
@@ -217,14 +242,22 @@ export class LeadsComponent implements OnInit {
     });
   }
 
+
   // Get the CSS class for a lead's status (for badges)
   getBadgeClass(status: string): string {
     switch (status) {
-      case 'New': return 'bg-blue-200 text-blue-800';
-      case 'Contacted': return 'bg-green-200 text-green-800';
-      case 'Qualified': return 'bg-purple-200 text-purple-800';
+      case 'NEW_LEAD': return 'bg-blue-200 text-blue-800';
+      case 'QUALIFIED': return 'bg-purple-200 text-purple-800';
       default: return 'bg-gray-200 text-gray-800';
     }
+  }
+  onStatusChange(lead: Lead): void {
+    this.leadService.changeStatus(lead.leadId, lead.leadStatus).subscribe({
+      next: () => {
+        console.log(`Status updated for leadId ${lead.leadId} to ${lead.leadStatus}`);
+      },
+      error: (err) => console.error('Error updating status', err)
+    });
   }
 
   // Get the source name by lead source ID

@@ -21,10 +21,22 @@
   
           <!-- Filters -->
   
-          <button class="ml-3 mt-2 md:mt-0 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700">
-            <i class="fas fa-flag-checkered mr-2"></i> Lead Status
+          <button (click)="onAddLeadClick()" class="inline-flex items-center px-5 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500">
+            <i class="fas fa-plus mr-2"></i> Add Leads
           </button>
-        </div>
+          
+          <!-- Dummy preview row shown below the button -->
+          <div *ngIf="showPreview" class="mt-4 bg-gray-800 text-white p-4 rounded-lg shadow-md">
+            <p><strong>Lead Name:</strong> Suraj</p>
+            <p><strong>Source Type:</strong> Google</p>
+            <p><strong>Description:</strong> Lead from Google</p>
+            <p><strong>Service Name:</strong> Web Development</p>
+            <p><strong>Contact No:</strong> 1234567890</p>
+            <p><strong>Company Name:</strong> ABC Corp</p>
+            <p><strong>Company Address:</strong> 123 Street, City</p>
+            <p><strong>Lead Email:</strong> surajgmail.com</p>
+            <p><strong>Status:</strong> New</p>
+          </div>
   
         <!-- Action Buttons -->
         <div class="flex items-center space-x-3">
