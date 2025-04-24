@@ -99,6 +99,7 @@ export class SidebarComponent implements OnInit {
     }
     else if (role === 'client') {
       this.sidebarItems = [
+        {name:'Profile', link: '/client/profile', icon: 'fa fa-sign-out-alt'},
         { name: 'Dashboard', link: '/client/dashboard', icon: 'fa fa-tachometer-alt' },
         {name:'Service', link: '/service', icon: 'fa fa-sign-out-alt'},
         { name: 'Support', link: '/client/support', icon: 'fa fa-life-ring' },

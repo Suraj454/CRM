@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-leadtable-header-features',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './leadtable-header-features.component.html',
   styleUrl: './leadtable-header-features.component.css'
 })

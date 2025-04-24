@@ -26,7 +26,8 @@ export const routes: Routes = [
             {path:'lead/dashboard', component:LeadDashboardComponent},
             {path:'leadreports', component:LeadReportsComponent},
             {path:'sales/leads', component:SalesleadsComponent},
-            {path:'negotiation',component:NegotiationComponent}
+            {path:'negotiation',component:NegotiationComponent},
+
         ]
     },
 

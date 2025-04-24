@@ -57,6 +57,7 @@ export class SalesleadsComponent implements OnInit {
     to: '',
     subject: '',
     body: '',
+    proposedValue: '',
     attachment: null as File | null
   };
 

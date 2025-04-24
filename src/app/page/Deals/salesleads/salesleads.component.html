@@ -41,57 +41,78 @@
     </tbody>
   </table>
   
-  <!-- Email Modal -->
-<div *ngIf="showEmailModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-white/20">
-    <div class="bg-white rounded-2xl p-8 w-full max-w-2xl shadow-2xl relative">
-      <button class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl" (click)="discardEmail()">
-        <i class="fas fa-times"></i>
-      </button>
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2">
-        <i class="fas fa-paper-plane text-blue-600"></i> Send Email
-      </h2>
-  
-      <div class="mb-5">
-        <label class="block text-sm font-semibold mb-1 text-gray-700">To</label>
-        <div class="flex items-center border rounded-lg px-3 py-2 gap-2">
-          <i class="fas fa-envelope text-gray-500"></i>
-          <input type="email" [(ngModel)]="emailForm.to" class="flex-1 outline-none" placeholder="Recipient email" />
-        </div>
-      </div>
-  
-      <div class="mb-5">
-        <label class="block text-sm font-semibold mb-1 text-gray-700">Subject</label>
-        <div class="flex items-center border rounded-lg px-3 py-2 gap-2">
-          <i class="fas fa-heading text-gray-500"></i>
-          <input type="text" [(ngModel)]="emailForm.subject" class="flex-1 outline-none" placeholder="Email subject" />
-        </div>
-      </div>
-  
-      <div class="mb-5">
-        <label class="block text-sm font-semibold mb-1 text-gray-700">Body</label>
-        <div class="flex items-start border rounded-lg px-3 py-2 gap-2">
-          <i class="fas fa-align-left mt-1 text-gray-500"></i>
-          <textarea [(ngModel)]="emailForm.body" class="flex-1 outline-none resize-none" rows="4" placeholder="Write your message..."></textarea>
-        </div>
-      </div>
-  
-      <div class="mb-6">
-        <label class="block text-sm font-semibold mb-1 text-gray-700">Attachment</label>
-        <div class="flex items-center gap-2">
-          <i class="fas fa-paperclip text-gray-500"></i>
-          <input type="file" (change)="onFileSelected($event)" />
-          <span *ngIf="emailForm.attachment" class="text-sm text-gray-600">{{ emailForm.attachment.name }}</span>
-        </div>
-      </div>
-  
-      <div class="flex justify-end gap-3">
-        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-5 py-2 rounded-lg font-medium" (click)="discardEmail()">
-          <i class="fas fa-ban mr-2"></i>Discard
-        </button>
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium" (click)="sendEmail()">
-          <i class="fas fa-paper-plane mr-2"></i>Send
-        </button>
+<!-- Email Modal -->
+<div *ngIf="showEmailModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/50">
+  <div class="bg-white rounded-lg p-8 w-full max-w-xl shadow-md relative">
+    
+    <!-- Close Button -->
+    <button class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl" (click)="discardEmail()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <h2 class="text-xl font-semibold mb-6 text-gray-800 flex items-center gap-2">
+      <i class="fas fa-paper-plane text-blue-600"></i> Send Email
+    </h2>
+
+    <!-- To -->
+    <div class="mb-5">
+      <label class="block text-sm font-medium text-gray-700 mb-1">To</label>
+      <div class="flex items-center border border-gray-300 rounded-md px-3 py-2 gap-2">
+        <i class="fas fa-envelope text-gray-500"></i>
+        <input type="email" [(ngModel)]="emailForm.to" placeholder="Recipient email"
+               class="flex-1 outline-none bg-transparent" />
       </div>
     </div>
+
+    <!-- Subject -->
+    <div class="mb-5">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+      <div class="flex items-center border border-gray-300 rounded-md px-3 py-2 gap-2">
+        <i class="fas fa-heading text-gray-500"></i>
+        <input type="text" [(ngModel)]="emailForm.subject" placeholder="Email subject"
+               class="flex-1 outline-none bg-transparent" />
+      </div>
+    </div>
+
+    <!-- Proposed Value -->
+    <div class="mb-5">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Proposed Value</label>
+      <div class="flex items-center border border-gray-300 rounded-md px-3 py-2 gap-2">
+        <i class="fas fa-dollar-sign text-gray-500"></i>
+        <input type="text" [(ngModel)]="emailForm.proposedValue" placeholder="Enter proposed value"
+               class="flex-1 outline-none bg-transparent" />
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="mb-5">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Body</label>
+      <div class="flex items-start border border-gray-300 rounded-md px-3 py-2 gap-2">
+        <i class="fas fa-align-left text-gray-500 mt-1"></i>
+        <textarea [(ngModel)]="emailForm.body" rows="4" placeholder="Write your message..."
+                  class="flex-1 outline-none resize-none bg-transparent"></textarea>
+      </div>
+    </div>
+
+    <!-- Attachment -->
+    <div class="mb-5">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Attachment</label>
+      <div class="flex items-center gap-2">
+        <i class="fas fa-paperclip text-gray-500"></i>
+        <input type="file" (change)="onFileSelected($event)"
+               class="text-sm text-gray-700" />
+        <span *ngIf="emailForm.attachment" class="text-sm text-gray-600">{{ emailForm.attachment.name }}</span>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-end gap-3">
+      <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-md" (click)="discardEmail()">
+        <i class="fas fa-ban mr-2"></i>Discard
+      </button>
+      <button class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md" (click)="sendEmail()">
+        <i class="fas fa-paper-plane mr-2"></i>Send
+      </button>
+    </div>
   </div>
-  
+</div>
