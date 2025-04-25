@@ -15,16 +15,14 @@
 
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageHeaderComponent } from '../../../components/page-header/page-header.component';
-import { TableHeaderComponent } from '../../../components/table-header/table-header.component';
-
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
 import { DataTableComponent } from '../../../data-table/data-table.component';
+import { DealstableheaderComponent } from '../../../components/DealsComponent/dealstableheader/dealstableheader.component';
 
 @Component({
   selector: 'app-deals',
   standalone: true,
-  imports: [CommonModule, DataTableComponent,PageHeaderComponent,TableHeaderComponent,PaginationComponent],
+  imports: [CommonModule, DataTableComponent,DealstableheaderComponent,PaginationComponent],
   templateUrl: './deals.component.html',
    styleUrl: './deals.component.css'
 })

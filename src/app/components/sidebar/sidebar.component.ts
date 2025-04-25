@@ -90,6 +90,7 @@ export class SidebarComponent implements OnInit {
     else if (role === 'admin') {
       this.sidebarItems = [
         { name: 'Dashboard', link: '/dashboard', icon: 'fa fa-users-cog' },
+        { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-sitemap' },
         { name: 'Leads', link: '/leads', icon: 'fa fa-users' },
         { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
         {name: 'client',link:'/clients', icon:'fa fa-users' },
@@ -99,7 +100,6 @@ export class SidebarComponent implements OnInit {
     }
     else if (role === 'client') {
       this.sidebarItems = [
-        {name:'Profile', link: '/client/profile', icon: 'fa fa-sign-out-alt'},
         { name: 'Dashboard', link: '/client/dashboard', icon: 'fa fa-tachometer-alt' },
         {name:'Service', link: '/service', icon: 'fa fa-sign-out-alt'},
         { name: 'Support', link: '/client/support', icon: 'fa fa-life-ring' },

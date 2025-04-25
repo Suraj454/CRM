@@ -143,13 +143,27 @@
         </div>
 
 
-        <!-- Date & Time -->
+        <!-- Date & Time
         <input type="datetime-local" id="dateTime" [(ngModel)]="newLeadSource.timeStamp" name="dateTime" required
           #dateTime="ngModel" class="w-full p-2 outline-none" />
-        <p *ngIf="dateTime.invalid && dateTime.touched" class="text-red-500 text-sm">Date and time are required</p>
+        <p *ngIf="dateTime.invalid && dateTime.touched" class="text-red-500 text-sm">Date and time are required</p> -->
 
-
-
+        <div>
+          <label for="dateTime" class="block font-medium mb-2">Date & Time</label>
+          <div class="relative">
+            <i class="fas fa-calendar-alt absolute top-3 left-3 text-gray-400"></i>
+            <input
+              type="datetime-local"
+              id="dateTime"
+              [(ngModel)]="newLeadSource.timeStamp"
+              name="dateTime"
+              required
+              #dateTime="ngModel"
+              class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white outline-none"
+            />
+          </div>
+          <p *ngIf="dateTime.invalid && dateTime.touched" class="text-red-500 text-sm">Date and time are required</p>
+        </div>
 
         <!-- Buttons -->
         <div class="md:col-span-2 flex justify-end gap-4 mt-6">

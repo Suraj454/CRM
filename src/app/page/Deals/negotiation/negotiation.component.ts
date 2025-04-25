@@ -14,12 +14,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LeadtableHeaderFeaturesComponent } from '../../../components/LeadsComponent/leadtable-header-features/leadtable-header-features.component';
+import { DealstableheaderComponent } from '../../../components/DealsComponent/dealstableheader/dealstableheader.component';
 
 @Component({
   selector: 'app-negotiation',
   standalone: true,
-  imports: [CommonModule, FormsModule, LeadtableHeaderFeaturesComponent],
+  imports: [CommonModule, FormsModule,DealstableheaderComponent ],
   templateUrl: './negotiation.component.html',
   styleUrl: './negotiation.component.css'
 })

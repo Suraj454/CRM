@@ -93,14 +93,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LeadtableHeaderFeaturesComponent } from '../../../components/LeadsComponent/leadtable-header-features/leadtable-header-features.component';
 import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.service';
 import { SalesLeadInterface } from './sales-lead-interface';
+import { DealstableheaderComponent } from '../../../components/DealsComponent/dealstableheader/dealstableheader.component';
 
 @Component({
   selector: 'app-salesleads',
   standalone: true,
- imports: [CommonModule,LeadtableHeaderFeaturesComponent,FormsModule, ],
+ imports: [CommonModule,FormsModule,DealstableheaderComponent ],
   templateUrl: './salesleads.component.html',
   styleUrl: './salesleads.component.css'
 })
@@ -152,7 +152,7 @@ export class SalesleadsComponent implements OnInit {
     this.emailForm.subject = '';
     this.emailForm.body = '';
     this.emailForm.proposedValue = '';
-    this.emailForm.attachment = null;
+    // this.emailForm.attachment = null;
     this.currentLeadId = lead.salesLeadId;  // Store this ID
     this.showEmailModal = true;
   }
@@ -181,7 +181,7 @@ export class SalesleadsComponent implements OnInit {
     this.salesLeadsService.sendEmailToLead(this.currentLeadId, emailPayload).subscribe({
       next: (response) => {
         console.log('Email sent successfully:', response);
-        this.showEmailModal = false;
+        this.showEmailModal = false;  // Close the modal after sending
       },
       error: (error) => {
         console.error('Error sending email:', error);

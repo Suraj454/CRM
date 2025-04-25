@@ -36,9 +36,7 @@ onSubmit() {
     userName: this.username,
     emailId: this.email,
     password: this.password,
-    role: {
-      roleId: this.roleId  // 👈 Send nested role object
-    }
+    roleId: this.roleId  // 👈 Send nested role object
   };
 
   this.loginService.signup(this.username, this.email, this.password, this.roleId).subscribe({

@@ -5,6 +5,7 @@ export interface SalesLeadInterface {
     lead: {
         leadStatus: string;
         leadsource: LeadSourceInterface;
+        leadId: number;
     };  // This will be the source lead data
     leadStatus: string;
     timeStamp: string;
