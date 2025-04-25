@@ -178,12 +178,27 @@ export class LeadSourceComponent {
 
 
 saveLeadSource() {
+
   const payload = {
     ...this.newLeadSource,
     crmService: typeof this.newLeadSource.crmService === 'object'
       ? this.newLeadSource.crmService.serviceId
       : this.newLeadSource.crmService
   };
+
+
+   // 🛑 Check for duplicates before calling API
+   const isDuplicate = this.leadSources.some(ls =>
+    ls.leadName.trim().toLowerCase() === this.newLeadSource.leadName.trim().toLowerCase() &&
+    ls.leadEmail.trim().toLowerCase() === this.newLeadSource.leadEmail.trim().toLowerCase() &&
+    (!this.isEditMode || ls.leadSourceId !== this.editingLeadId) // skip match if editing current item
+  );
+
+  if (isDuplicate) {
+    alert('Lead with same name and email already exists!');
+    return;
+  }
+
 
   if (this.isEditMode && this.editingLeadId !== null) {
     // ✅ Update existing lead
@@ -210,6 +225,7 @@ saveLeadSource() {
       }
     });
   }
+
 }
 
 

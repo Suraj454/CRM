@@ -1,162 +1,168 @@
 <div class="p-6">
   <!-- Add Lead Source Button -->
-  <button (click)="addLeadSource()" class="mb-4 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow transition-all duration-200">
+  <button (click)="addLeadSource()"
+    class="mb-4 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow transition-all duration-200">
     + Add Lead Source
   </button>
 
-<!-- Lead Sources Table -->
-<div class="overflow-x-auto bg-white rounded-xl shadow">
-  <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
-    <thead class="bg-gray-100 text-xs uppercase text-gray-600">
-      <tr>
-        <th class="px-6 py-3">Lead Name</th>
-        <th class="px-6 py-3">Lead Email</th>
-        <th class="px-6 py-3">Contact No</th>
-        <th class="px-6 py-3">Company Name</th>
-        <th class="px-6 py-3">Company Add</th>
-        <th class="px-6 py-3">Source Type</th>
-        <th class="px-6 py-3">Service Name</th>
-        <th class="px-6 py-3">Date</th>
-        <th class="px-6 py-3 text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition">
-        <td class="px-6 py-4">{{ lead.leadName }}</td>
-        <td class="px-6 py-4">{{ lead.leadEmail }}</td>
-        <td class="px-6 py-4">{{ lead.contactNo }}</td>
-        <td class="px-6 py-4">{{ lead.companyName }}</td>
-        <td class="px-6 py-4">{{ lead.companyAdd }}</td>
-        <td class="px-6 py-4">{{ lead.sourceType }}</td>
-        <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
-        <td class="px-6 py-4">{{ lead.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</td>
-  
-        <td class="px-6 py-4 text-center">
-          <button 
-          (click)="onEditLead(lead)" 
-          class="text-blue-500 hover:text-blue-700 mx-1" 
-          title="Edit">
-          <i class="fas fa-edit"></i> <!-- Edit Icon -->
-        </button>
-        
-        <button 
-          (click)="onDeleteLead(lead.leadSourceId)" 
-          class="text-red-500 hover:text-red-700 mx-1" 
-          title="Delete">
-          <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
-        </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <!-- Lead Sources Table -->
+  <div class="overflow-x-auto bg-white rounded-xl shadow">
+    <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
+      <thead class="bg-gray-100 text-xs uppercase text-gray-600">
+        <tr>
+          <th class="px-6 py-3">Lead Name</th>
+          <th class="px-6 py-3">Lead Email</th>
+          <th class="px-6 py-3">Contact No</th>
+          <th class="px-6 py-3">Company Name</th>
+          <th class="px-6 py-3">Company Add</th>
+          <th class="px-6 py-3">Source Type</th>
+          <th class="px-6 py-3">Service Name</th>
+          <th class="px-6 py-3">Date</th>
+          <th class="px-6 py-3 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4">{{ lead.leadName }}</td>
+          <td class="px-6 py-4">{{ lead.leadEmail }}</td>
+          <td class="px-6 py-4">{{ lead.contactNo }}</td>
+          <td class="px-6 py-4">{{ lead.companyName }}</td>
+          <td class="px-6 py-4">{{ lead.companyAdd }}</td>
+          <td class="px-6 py-4">{{ lead.sourceType }}</td>
+          <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
+          <td class="px-6 py-4">{{ lead.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</td>
 
+          <td class="px-6 py-4 text-center">
+            <button (click)="onEditLead(lead)" class="text-blue-500 hover:text-blue-700 mx-1" title="Edit">
+              <i class="fas fa-edit"></i> <!-- Edit Icon -->
+            </button>
 
-
-<!-- Modal Form -->
-<div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-white/20">
-  <div class="bg-white rounded-xl w-full max-w-4xl p-8 shadow-2xl">
-    <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center gap-2">
-      <i class="fas fa-plus-circle text-green-600 text-xl"></i> Add Lead Source
-    </h2>
-
-    <form (ngSubmit)="saveLeadSource()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      
-      <div>
-        <label for="leadName" class="block font-medium mb-2">Lead Name</label>
-        <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-user text-gray-400 mr-2"></i>
-          <input id="leadName" [(ngModel)]="newLeadSource.leadName" name="leadName" required class="w-full p-2 outline-none" />
-        </div>
-      </div>
-
-      <div class="md:col-span-2">
-        <label for="leadEmail" class="block font-medium mb-2">Lead Email</label>
-        <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-envelope text-gray-400 mr-2"></i>
-          <input id="leadEmail" [(ngModel)]="newLeadSource.leadEmail" name="leadEmail" class="w-full p-2 outline-none" />
-        </div>
-      </div>
-
-
-      <div>
-        <label for="contactNo" class="block font-medium mb-2">Contact No</label>
-        <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-phone text-gray-400 mr-2"></i>
-          <input id="contactNo" [(ngModel)]="newLeadSource.contactNo" name="contactNo" class="w-full p-2 outline-none" />
-        </div>
-      </div>
-
-      <div>
-        <label for="companyName" class="block font-medium mb-2">Company Name</label>
-        <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-building text-gray-400 mr-2"></i>
-          <input id="companyName" [(ngModel)]="newLeadSource.companyName" name="companyName" class="w-full p-2 outline-none" />
-        </div>
-      </div>
-
-      <div>
-        <label for="companyAdd" class="block font-medium mb-2">Company Address</label>
-        <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
-          <input id="companyAdd" [(ngModel)]="newLeadSource.companyAdd" name="companyAdd" class="w-full p-2 outline-none" />
-        </div>
-      </div>
-
-
-      <div>
-        <label for="SourceType" class="block font-medium mb-2">Source Type</label>
-        <div class="relative">
-          <select id="SourceType" [(ngModel)]="newLeadSource.sourceType" name="SourceType" required class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
-            <option value="" disabled selected>Select Source</option>
-            <option value="ONLINE">Online</option>
-            <option value="REFERRAL">Referral</option>
-            <option value="EVENT">Event</option>
-            <option value="SOCIAL_MEDIA">Social Media</option>
-          </select>
-          <i class="fas fa-share-nodes absolute top-3 left-3 text-gray-400"></i>
-        </div>
-      </div>
-
-      <div>
-        <label for="serviceId" class="block font-medium mb-2">Service</label>
-        <div class="relative">
-          <select id="serviceId" [(ngModel)]="newLeadSource.crmService" name="serviceId" required class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
-            <option value="" disabled selected>Select Service</option>
-            <option value="1">Service1</option>
-            <option value="2">Service2</option>
-            <option value="3">Service3</option>
-            <option value="4">Service4</option>
-          </select>
-          <i class="fas fa-cogs absolute top-3 left-3 text-gray-400"></i>
-        </div>
-      </div>
-
-      <div>
-        <label for="dateTime" class="block font-medium mb-2">Date & Time</label>
-        <div class="flex items-center border border-gray-300 rounded-lg px-3">
-          <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>
-          <input
-            type="datetime-local"
-            id="dateTime"
-            [(ngModel)]="newLeadSource.timeStamp"
-            name="dateTime"
-            class="w-full p-2 outline-none"
-          />
-        </div>
-      </div>
-
-     
-
-      <!-- Buttons -->
-      <div class="md:col-span-2 flex justify-end gap-4 mt-6">
-        <button type="submit" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all shadow">
-          <i class="fas fa-save mr-2"></i> Save
-        </button>
-        <button type="button" (click)="closeModal()" class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-all shadow">
-          <i class="fas fa-times mr-2"></i> Cancel
-        </button>
-      </div>
-    </form>
+            <button (click)="onDeleteLead(lead.leadSourceId)" class="text-red-500 hover:text-red-700 mx-1"
+              title="Delete">
+              <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</div>
+
+
+
+  <!-- Modal Form -->
+  <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-white/20">
+    <div class="bg-white rounded-xl w-full max-w-4xl p-8 shadow-2xl">
+      <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center gap-2">
+        <i class="fas fa-plus-circle text-green-600 text-xl"></i> Add Lead Source
+      </h2>
+
+      <form #leadForm="ngForm" (ngSubmit)="saveLeadSource()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Lead Name -->
+        <div>
+          <label for="leadName" class="block font-medium mb-2">Lead Name</label>
+          <div class="flex items-center border border-gray-300 rounded-lg px-3">
+            <i class="fas fa-user text-gray-400 mr-2"></i>
+            <input id="leadName" [(ngModel)]="newLeadSource.leadName" name="leadName" required #leadName="ngModel"
+              class="w-full p-2 outline-none" />
+          </div>
+          <p *ngIf="leadName.invalid && leadName.touched" class="text-red-500 text-sm">Lead name is required</p>
+        </div>
+
+        <!-- Lead Email -->
+        <div class="md:col-span-2">
+          <label for="leadEmail" class="block font-medium mb-2">Lead Email</label>
+          <div class="flex items-center border border-gray-300 rounded-lg px-3">
+            <i class="fas fa-envelope text-gray-400 mr-2"></i>
+            <input id="leadEmail" [(ngModel)]="newLeadSource.leadEmail" name="leadEmail" required pattern="^.*@.*\..*$"
+              #leadEmail="ngModel" class="w-full p-2 outline-none" />
+          </div>
+          <p *ngIf="leadEmail.invalid && leadEmail.touched" class="text-red-500 text-sm">Valid email is required</p>
+        </div>
+
+        <!-- Contact No -->
+        <div>
+          <label for="contactNo" class="block font-medium mb-2">Contact No</label>
+          <div class="flex items-center border border-gray-300 rounded-lg px-3">
+            <i class="fas fa-phone text-gray-400 mr-2"></i>
+            <input id="contactNo" [(ngModel)]="newLeadSource.contactNo" name="contactNo" required pattern="^[0-9]{10}$"
+              #contactNo="ngModel" class="w-full p-2 outline-none" />
+          </div>
+          <p *ngIf="contactNo.invalid && contactNo.touched" class="text-red-500 text-sm">Enter valid 10-digit number</p>
+        </div>
+
+        <div>
+          <label for="companyName" class="block font-medium mb-2">Company Name</label>
+          <div class="flex items-center border border-gray-300 rounded-lg px-3">
+            <i class="fas fa-building text-gray-400 mr-2"></i>
+            <input id="companyName" [(ngModel)]="newLeadSource.companyName" name="companyName" required
+              #companyName="ngModel" class="w-full p-2 outline-none" />
+          </div>
+          <p *ngIf="companyName.invalid && companyName.touched" class="text-red-500 text-sm">Company name is required
+          </p>
+        </div>
+
+        <div>
+          <label for="companyAdd" class="block font-medium mb-2">Company Address</label>
+          <div class="flex items-center border border-gray-300 rounded-lg px-3">
+            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+            <input id="companyAdd" [(ngModel)]="newLeadSource.companyAdd" name="companyAdd" required
+              #companyAdd="ngModel" class="w-full p-2 outline-none" />
+          </div>
+          <p *ngIf="companyAdd.invalid && companyAdd.touched" class="text-red-500 text-sm">Address is required</p>
+        </div>
+
+        <div>
+          <label for="SourceType" class="block font-medium mb-2">Source Type</label>
+          <div class="relative">
+            <select id="SourceType" [(ngModel)]="newLeadSource.sourceType" name="SourceType" required
+              class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
+              <option value="" disabled selected>Select Source</option>
+              <option value="ONLINE">Online</option>
+              <option value="REFERRAL">Referral</option>
+              <option value="EVENT">Event</option>
+              <option value="SOCIAL_MEDIA">Social Media</option>
+            </select>
+            <i class="fas fa-share-nodes absolute top-3 left-3 text-gray-400"></i>
+          </div>
+        </div>
+
+        <div>
+          <label for="serviceId" class="block font-medium mb-2">Service</label>
+          <div class="relative">
+            <select id="serviceId" [(ngModel)]="newLeadSource.crmService" name="serviceId" required
+              class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
+              <option value="" disabled selected>Select Service</option>
+              <option value="1">Service1</option>
+              <option value="2">Service2</option>
+              <option value="3">Service3</option>
+              <option value="4">Service4</option>
+            </select>
+            <i class="fas fa-cogs absolute top-3 left-3 text-gray-400"></i>
+          </div>
+        </div>
+
+
+        <!-- Date & Time -->
+        <input type="datetime-local" id="dateTime" [(ngModel)]="newLeadSource.timeStamp" name="dateTime" required
+          #dateTime="ngModel" class="w-full p-2 outline-none" />
+        <p *ngIf="dateTime.invalid && dateTime.touched" class="text-red-500 text-sm">Date and time are required</p>
+
+
+
+
+        <!-- Buttons -->
+        <div class="md:col-span-2 flex justify-end gap-4 mt-6">
+          <button type="submit" [disabled]="leadForm.invalid"
+            class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all shadow">
+            <i class="fas fa-save mr-2"></i> Save
+          </button>
+
+          <button type="button" (click)="closeModal()"
+            class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-all shadow">
+            <i class="fas fa-times mr-2"></i> Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

@@ -2,27 +2,36 @@
 <app-leadtable-header-features (addLeadClicked)="togglePreviewRow()"></app-leadtable-header-features>
 
 <!-- Dropdown view for available lead sources -->
-<div *ngIf="showPreviewRow" class="mt-4 mx-4">
-  <div class="space-y-2">
-    <div *ngFor="let source of leadSources" class="flex flex-wrap justify-between items-center gap-4 bg-blue-50 border border-blue-200 p-4 rounded shadow text-sm text-gray-700">
-      <div class="flex flex-wrap gap-3">
-        <span><strong>Name:</strong> {{ source.leadName }}</span>
-        <span><strong>Email:</strong> {{ source.leadEmail }}</span>
-        <span><strong>Contact No:</strong> {{ source.contactNo }}</span>
-        <span><strong>Company Name:</strong> {{ source.companyName }}</span>
-        <span><strong>Company Add:</strong> {{ source.companyAdd }}</span>
-      <span><strong>Source:</strong> {{ source.sourceType }}</span>
-        <span><strong>Service:</strong> {{ source.crmService.serviceName }}</span>
-        <span><strong>Date:</strong> {{ source.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</span>
+<div *ngIf="showPreviewRow" class="mt-8 mx-8">
+  <div class="space-y-6">
+    <div *ngFor="let source of leadSources" class="flex items-center justify-between border border-gray-300 bg-blue-50 px-8 py-6 rounded-2xl shadow-md hover:bg-blue-100 transition duration-300 text-lg text-gray-800 font-[Inter]">
 
-       
+      <!-- Data row -->
+      <div class="flex flex-wrap gap-x-10 gap-y-3 items-center w-full">
+        <span><span class="text-blue-900 font-semibold text-lg">Name:</span> {{ source.leadName }}</span>
+        <span><span class="text-blue-900 font-semibold text-lg">Email:</span> {{ source.leadEmail }}</span>
+        <span><span class="text-blue-900 font-semibold text-lg">Contact:</span> {{ source.contactNo }}</span>
+        <span><span class="text-blue-900 font-semibold text-lg">Company:</span> {{ source.companyName }}</span>
+        <span><span class="text-blue-900 font-semibold text-lg">Address:</span> {{ source.companyAdd }}</span>
+        <span><span class="text-blue-900 font-semibold text-lg">Source:</span> {{ source.sourceType }}</span>
+        <span><span class="text-blue-900 font-semibold text-lg">Service:</span> {{ source.crmService?.serviceName }}</span>
+        <span><span class="text-blue-900 font-semibold text-lg">Date:</span> {{ source.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</span>
       </div>
-      <button (click)="addLeadFromSource(source)" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700">
+
+      <!-- Action button -->
+      <button 
+        (click)="addLeadFromSource(source)" 
+        class="ml-6 bg-blue-600 text-white px-8 py-2 rounded-lg hover:bg-blue-700 transition duration-200 text-md font-medium shadow-lg"
+      >
         Add
       </button>
     </div>
   </div>
 </div>
+
+
+
+
 
 <!-- Leads Table -->
  
