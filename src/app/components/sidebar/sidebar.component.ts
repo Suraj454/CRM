@@ -78,7 +78,7 @@ export class SidebarComponent implements OnInit {
         { name: 'Log Out', icon: 'fa fa-sign-out-alt' }
       ];
     }
-    else if (role === 'saleperson') {
+    else if (role === 'salesperson') {
       this.sidebarItems = [
         { name: 'Leads', link: '/sales/leads', icon: 'fa fa-users' },
         { name: 'Negotiation', link: '/negotiation', icon: 'fa fa-handshake' },

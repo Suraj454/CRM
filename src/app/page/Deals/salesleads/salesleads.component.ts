@@ -145,14 +145,17 @@ export class SalesleadsComponent implements OnInit {
   };
 
   // Modal functions
-  openEmailModal(lead: any): void {
-    this.emailForm.to = lead.leadEmail || '';
+  currentLeadId: number | null = null;
+
+  openEmailModal(lead: SalesLeadInterface): void {
+    this.emailForm.to = lead.lead.leadsource.leadEmail || '';
     this.emailForm.subject = '';
     this.emailForm.body = '';
+    this.emailForm.proposedValue = '';
     this.emailForm.attachment = null;
+    this.currentLeadId = lead.salesLeadId;  // Store this ID
     this.showEmailModal = true;
   }
-
   discardEmail(): void {
     this.showEmailModal = false;
   }
@@ -165,8 +168,24 @@ export class SalesleadsComponent implements OnInit {
   }
 
   sendEmail(): void {
-    console.log('Sending Email:', this.emailForm);
-    // Here you can call your email sending API
-    this.showEmailModal = false;
+    if (this.currentLeadId === null) return;
+  
+    const emailPayload = {
+      recipient: this.emailForm.to,
+      subject: this.emailForm.subject,
+      msgBody: this.emailForm.body,
+      attachment: this.emailForm.attachment ? this.emailForm.attachment.name : '',
+      dealValue: parseFloat(this.emailForm.proposedValue) || 0
+    };
+  
+    this.salesLeadsService.sendEmailToLead(this.currentLeadId, emailPayload).subscribe({
+      next: (response) => {
+        console.log('Email sent successfully:', response);
+        this.showEmailModal = false;
+      },
+      error: (error) => {
+        console.error('Error sending email:', error);
+      }
+    });
   }
 }

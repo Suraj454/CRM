@@ -16,4 +16,10 @@ export class SalesLeadsService {
   getQualifiedLeads(): Observable<SalesLeadInterface[]> {
     return this.http.get<SalesLeadInterface[]>(this.apiUrl);  // Fetch qualified leads from the API
   }
+
+  sendEmailToLead(id: number, emailData: any): Observable<any> {
+    return this.http.post(`http://localhost:8080/salesLeads/sendmail/${id}`, emailData);
+  }
+  
 }
+// 'http://localhost:8080/salesLeads/sendmail/{id}

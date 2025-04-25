@@ -43,45 +43,49 @@
 
 
   <!-- Qualified Leads Table -->
-<table class="w-full mt-4 text-sm text-gray-700 border border-gray-200">
-  <thead class="bg-gray-100">
-    <tr>
-      <th class="p-2">Lead Name</th>
-      <th class="p-2">Lead Email</th>
-      <th class="p-2">Contact No</th>
-      <th class="p-2">Company Name</th>
-      <th class="p-2">Company Address</th>
-      <th class="p-2">Source Type</th>
-      <th class="p-2">Service Name</th>
-      <th class="p-2">Date</th>
-      <th class="p-2">Status</th>
-      <th class="p-2">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let lead of qualifiedLeads">
-      <td class="p-2">{{ lead.lead.leadName }}</td>
-      <td class="p-2">{{ lead.lead.leadEmail }}</td>
-      <td class="p-2">{{ lead.lead.contactNo }}</td>
-      <td class="p-2">{{ lead.lead.companyName }}</td>
-      <td class="p-2">{{ lead.lead.companyAdd }}</td>
-      <td class="p-2">{{ lead.lead.sourceType }}</td>
-      <td class="p-2">{{ lead.lead.crmService.serviceName }}</td>
-      <td class="p-2">{{ lead.lead.timeDate | date: 'short' }}</td>
-      <td class="p-2">
-        <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
-              [ngClass]="getBadgeClass(lead.lead.leadStatus)">
-          {{ lead.lead.leadStatus }}
-        </span>
-      </td>
-      <td class="p-2 text-center">
-          <button (click)="openEmailModal(lead)" title="Send Email" class="text-blue-600 hover:text-blue-800">
-            <i class="fas fa-envelope"></i>
-          </button>
-        </td>
-    </tr>
-  </tbody>
-</table>
+
+  <table class="w-full mt-4 text-sm text-gray-700 border border-gray-200">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2">Lead Name</th>
+        <th class="p-2">Lead Email</th>
+        <th class="p-2">Contact No</th>
+        <th class="p-2">Company Name</th>
+        <th class="p-2">Company Address</th>
+        <th class="p-2">Source Type</th>
+        <th class="p-2">Service Name</th>
+        <th class="p-2">Date</th>
+        <th class="p-2">Status</th>
+        <th class="p-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+  <tr *ngFor="let salesLead of qualifiedLeads">
+    <td class="p-2">{{ salesLead.lead.leadsource.leadName }}</td>
+    <td class="p-2">{{ salesLead.lead.leadsource.leadEmail }}</td>
+    <td class="p-2">{{ salesLead.lead.leadsource.contactNo }}</td>
+    <td class="p-2">{{ salesLead.lead.leadsource.companyName }}</td>
+    <td class="p-2">{{ salesLead.lead.leadsource.companyAdd }}</td>
+    <td class="p-2">{{ salesLead.lead.leadsource.sourceType }}</td>
+    <td class="p-2">{{ salesLead.lead.leadsource.crmService.serviceName }}</td>
+    <td class="p-2">{{ salesLead.lead.leadsource.timeStamp | date: 'short' }}</td>
+    <td class="p-2">
+      <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
+            [ngClass]="getBadgeClass(salesLead.lead.leadStatus)">
+        {{ salesLead.lead.leadStatus }}
+      </span>
+    </td>
+    <td class="p-2 text-center">
+      <button (click)="openEmailModal(salesLead)" title="Send Email" class="text-blue-600 hover:text-blue-800">
+        <i class="fas fa-envelope"></i>
+      </button>
+    </td>
+  </tr>
+
+</tbody>
+</table> 
+
+  
   
 <!-- Email Modal -->
 <div *ngIf="showEmailModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/50">

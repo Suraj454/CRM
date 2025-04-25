@@ -1,8 +1,11 @@
-import { Lead } from "../../Leads/leads/lead-interface";
+import { LeadSourceInterface } from "../../Leads/lead-source/lead-source-interface";
 
 export interface SalesLeadInterface {
     salesLeadId: number;
-    lead: Lead;  // This will be the source lead data
+    lead: {
+        leadStatus: string;
+        leadsource: LeadSourceInterface;
+    };  // This will be the source lead data
     leadStatus: string;
     timeStamp: string;
     proposedValue: number;
