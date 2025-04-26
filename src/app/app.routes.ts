@@ -11,6 +11,9 @@ import { LeadDashboardComponent } from './page/Leads/lead-dashboard/lead-dashboa
 import { LeadReportsComponent } from './page/Leads/lead-reports/lead-reports.component';
 import { SalesleadsComponent } from './page/Deals/salesleads/salesleads.component';
 import { NegotiationComponent } from './page/Deals/negotiation/negotiation.component';
+import { ClientServiceComponent } from './page/Clients/client-service/client-service.component';
+import { ClientProfileComponent } from './page/Clients/client-profile/client-profile.component';
+import { ClientSupportComponent } from './page/Clients/client-support/client-support.component';
 
 
 export const routes: Routes = [
@@ -27,6 +30,9 @@ export const routes: Routes = [
             {path:'leadreports', component:LeadReportsComponent},
             {path:'sales/leads', component:SalesleadsComponent},
             {path:'negotiation',component:NegotiationComponent},
+            {path:'client/profile', component:ClientProfileComponent},
+            {path:'client/service', component:ClientServiceComponent},
+            {path:'client/support', component:ClientSupportComponent}
 
         ]
     },

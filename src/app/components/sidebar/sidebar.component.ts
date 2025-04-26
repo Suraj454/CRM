@@ -71,52 +71,52 @@ export class SidebarComponent implements OnInit {
     // Role-based sidebar items with Font Awesome icons
     if (role === 'marketing') {
       this.sidebarItems = [
-        { name: 'Dashboard', link: '/lead/dashboard', icon: 'fa fa-sitemap' },
-        { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-sitemap' },
-        { name: 'Leads', link: '/leads', icon: 'fa fa-users' },
-        { name: 'Reports', link: 'lead/reports', icon: 'fa fa-chart-line' },
-        { name: 'Log Out', icon: 'fa fa-sign-out-alt' }
+        { name: 'Dashboard', link: '/lead/dashboard', icon: 'fa fa-tachometer-alt' }, // Dashboard (Performance)
+        { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-bullseye' }, // Lead Sources (Target)
+        { name: 'Leads', link: '/leads', icon: 'fa fa-user-plus' }, // Leads (Adding users)
+        { name: 'Reports', link: 'lead/reports', icon: 'fa fa-chart-line' }, // Reports (Growth Line)
+        { name: 'Log Out', icon: 'fa fa-sign-out-alt' } // Log Out
       ];
     }
     else if (role === 'salesperson') {
       this.sidebarItems = [
-        { name: 'Leads', link: '/sales/leads', icon: 'fa fa-users' },
-        { name: 'Negotiation', link: '/negotiation', icon: 'fa fa-handshake' },
-        { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
-        { name: 'Reports', link: 'deals/reports', icon: 'fa fa-chart-line' },
+        { name: 'Leads', link: '/sales/leads', icon: 'fa fa-address-book' }, // Leads (Contacts)
+        { name: 'Negotiation', link: '/negotiation', icon: 'fa fa-handshake' }, // Negotiation (Deal Handshake)
+        { name: 'Deals', link: '/deals', icon: 'fa fa-hand-holding-usd' }, // Deals (Money Deal)
+        { name: 'Reports', link: 'deals/reports', icon: 'fa fa-chart-line' }, // Reports (Bar Chart)
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
     else if (role === 'admin') {
       this.sidebarItems = [
-        { name: 'Dashboard', link: '/dashboard', icon: 'fa fa-users-cog' },
-        { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-sitemap' },
-        { name: 'Leads', link: '/leads', icon: 'fa fa-users' },
-        { name: 'Deals', link: '/deals', icon: 'fa fa-handshake' },
-        {name: 'client',link:'/clients', icon:'fa fa-users' },
-        { name: 'Reports', link: '/admin/reports', icon: 'fa fa-chart-line' },
+        { name: 'Dashboard', link: '/dashboard', icon: 'fa fa-tachometer-alt' }, 
+        { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-bullseye' }, 
+        { name: 'Leads', link: '/leads', icon: 'fa fa-users' }, 
+        { name: 'Deals', link: '/deals', icon: 'fa fa-hand-holding-usd' },
+        { name: 'Clients', link: '/clients', icon: 'fa fa-building' }, // Clients (Organization)
+        { name: 'Reports', link: '/admin/reports', icon: 'fa fa-chart-pie' },
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
     else if (role === 'client') {
       this.sidebarItems = [
-        { name: 'Dashboard', link: '/client/dashboard', icon: 'fa fa-tachometer-alt' },
-        {name:'Service', link: '/service', icon: 'fa fa-sign-out-alt'},
-        { name: 'Support', link: '/client/support', icon: 'fa fa-life-ring' },
-        { name: 'Reports', link: '/client/reports', icon: 'fa fa-chart-line' },
+        { name: 'Service', link: '/client/service', icon: 'fa fa-cogs' }, // Service (Settings/Cogs)
+        { name: 'Support', link: '/client/support', icon: 'fa fa-life-ring' }, // Support (Help Lifesaver)
+        { name: 'Profile', link: '/client/profile', icon: 'fa fa-user-circle' }, // Profile (User Circle)
+        { name: 'Dashboard', link: '/client/dashboard', icon: 'fa fa-home' }, // Dashboard (Home for client)
+        { name: 'Reports', link: '/client/reports', icon: 'fa fa-file-alt' }, // Reports (Document Report)
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
     else if (role === 'support') {
       this.sidebarItems = [
         { name: 'Dashboard', link: '/support/dashboard', icon: 'fa fa-tachometer-alt' },
-        { name: 'Tickets', link: '/support/tickets', icon: 'fa fa-ticket-alt' },
-        { name: 'Clients', link: '/support/clients', icon: 'fa fa-users' },
+        { name: 'Tickets', link: '/support/tickets', icon: 'fa fa-ticket-alt' }, // Tickets (Ticket)
+        { name: 'Clients', link: '/support/clients', icon: 'fa fa-users' }, // Clients (Users)
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
     else {
-      // Default case (e.g., Admin or Unknown role)
       this.sidebarItems = [
         { name: 'Dashboard', link: '/dashboard', icon: 'fa fa-tachometer-alt' },
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
