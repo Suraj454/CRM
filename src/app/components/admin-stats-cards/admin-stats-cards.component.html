@@ -1,0 +1,80 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+    <!-- Card Example -->
+    <div class="bg-white rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:shadow-2xl transition duration-300">
+      <div class="bg-blue-100 p-4 rounded-full">
+        <i class="fas fa-user-plus text-blue-500 text-2xl"></i>
+      </div>
+      <div>
+        <h3 class="text-gray-700 text-sm font-semibold">Total Leads</h3>
+        <p class="text-2xl font-bold text-blue-600">{{ totalLeads }}</p>
+      </div>
+    </div>
+  
+    <div class="bg-white rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:shadow-2xl transition duration-300">
+      <div class="bg-green-100 p-4 rounded-full">
+        <i class="fas fa-user-check text-green-500 text-2xl"></i>
+      </div>
+      <div>
+        <h3 class="text-gray-700 text-sm font-semibold">New Leads</h3>
+        <p class="text-2xl font-bold text-green-600">{{ newLeads }}</p>
+      </div>
+    </div>
+  
+    <div class="bg-white rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:shadow-2xl transition duration-300">
+      <div class="bg-yellow-100 p-4 rounded-full">
+        <i class="fas fa-user-tie text-yellow-500 text-2xl"></i>
+      </div>
+      <div>
+        <h3 class="text-gray-700 text-sm font-semibold">Qualified Leads</h3>
+        <p class="text-2xl font-bold text-yellow-600">{{ qualifiedLeads }}</p>
+      </div>
+    </div>
+  
+    <div class="bg-white rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:shadow-2xl transition duration-300">
+      <div class="bg-purple-100 p-4 rounded-full">
+        <i class="fas fa-paper-plane text-purple-500 text-2xl"></i>
+      </div>
+      <div>
+        <h3 class="text-gray-700 text-sm font-semibold">Proposed Leads</h3>
+        <p class="text-2xl font-bold text-purple-600">{{ proposedLeads }}</p>
+      </div>
+    </div>
+  
+    <!-- More cards for Negotiated, Lost, and Won -->
+
+    <!-- Negotiated Leads Card -->
+<div class="bg-white rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:shadow-2xl transition duration-300">
+    <div class="bg-orange-100 p-4 rounded-full">
+      <i class="fas fa-handshake text-orange-500 text-2xl"></i>
+    </div>
+    <div>
+      <h3 class="text-gray-700 text-sm font-semibold">Negotiated Leads</h3>
+      <p class="text-2xl font-bold text-orange-600">{{ negotiatedLeads }}</p>
+    </div>
+  </div>
+  
+  <!-- Lost Leads Card -->
+  <div class="bg-white rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:shadow-2xl transition duration-300">
+    <div class="bg-red-100 p-4 rounded-full">
+      <i class="fas fa-user-times text-red-500 text-2xl"></i>
+    </div>
+    <div>
+      <h3 class="text-gray-700 text-sm font-semibold">Lost Leads</h3>
+      <p class="text-2xl font-bold text-red-600">{{ lostLeads }}</p>
+    </div>
+  </div>
+  
+  <!-- Won Deals Card -->
+  <div class="bg-white rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:shadow-2xl transition duration-300">
+    <div class="bg-green-100 p-4 rounded-full">
+      <i class="fas fa-trophy text-green-500 text-2xl"></i>
+    </div>
+    <div>
+      <h3 class="text-gray-700 text-sm font-semibold">Won Deals</h3>
+      <p class="text-2xl font-bold text-green-600">{{ wonDeals }}</p>
+    </div>
+  </div>
+
+  
+  </div>
+  

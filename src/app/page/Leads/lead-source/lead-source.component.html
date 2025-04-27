@@ -6,46 +6,45 @@
   </button>
 
   <!-- Lead Sources Table -->
-  <div class="overflow-x-auto bg-white rounded-xl shadow">
-    <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
-      <thead class="bg-gray-100 text-xs uppercase text-gray-600">
-        <tr>
-          <th class="px-6 py-3">Lead Name</th>
-          <th class="px-6 py-3">Lead Email</th>
-          <th class="px-6 py-3">Contact No</th>
-          <th class="px-6 py-3">Company Name</th>
-          <th class="px-6 py-3">Company Add</th>
-          <th class="px-6 py-3">Source Type</th>
-          <th class="px-6 py-3">Service Name</th>
-          <th class="px-6 py-3">Date</th>
-          <th class="px-6 py-3 text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition">
-          <td class="px-6 py-4">{{ lead.leadName }}</td>
-          <td class="px-6 py-4">{{ lead.leadEmail }}</td>
-          <td class="px-6 py-4">{{ lead.contactNo }}</td>
-          <td class="px-6 py-4">{{ lead.companyName }}</td>
-          <td class="px-6 py-4">{{ lead.companyAdd }}</td>
-          <td class="px-6 py-4">{{ lead.sourceType }}</td>
-          <td class="px-6 py-4">{{ lead.crmService.serviceName }}</td>
-          <td class="px-6 py-4">{{ lead.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</td>
+<!-- Lead Sources Table -->
+<div class="overflow-x-auto bg-white rounded-xl shadow">
+  <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
+    <thead class="bg-gray-100 text-xs uppercase text-gray-600">
+      <tr>
+        <th class="px-6 py-3 whitespace-nowrap">Lead Name</th>
+        <th class="px-6 py-3 whitespace-nowrap">Lead Email</th>
+        <th class="px-6 py-3 whitespace-nowrap">Contact No</th>
+        <th class="px-6 py-3 whitespace-nowrap">Company Name</th>
+        <th class="px-6 py-3 whitespace-nowrap">Company Add</th>
+        <th class="px-6 py-3 whitespace-nowrap">Source Type</th>
+        <th class="px-6 py-3 whitespace-nowrap">Service Name</th>
+        <th class="px-6 py-3 whitespace-nowrap">Date</th>
+        <th class="px-6 py-3 text-center whitespace-nowrap">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition border-b border-gray-200">
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.leadName }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.leadEmail }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.contactNo }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.companyName }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.companyAdd }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.sourceType }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.crmService.serviceName }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ lead.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</td>
+        <td class="px-6 py-4 text-center whitespace-nowrap">
+          <button (click)="onEditLead(lead)" class="text-blue-500 hover:text-blue-700 mx-1" title="Edit">
+            <i class="fas fa-edit"></i> <!-- Edit Icon -->
+          </button>
+          <button (click)="onDeleteLead(lead.leadSourceId)" class="text-red-500 hover:text-red-700 mx-1" title="Delete">
+            <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-          <td class="px-6 py-4 text-center">
-            <button (click)="onEditLead(lead)" class="text-blue-500 hover:text-blue-700 mx-1" title="Edit">
-              <i class="fas fa-edit"></i> <!-- Edit Icon -->
-            </button>
-
-            <button (click)="onDeleteLead(lead.leadSourceId)" class="text-red-500 hover:text-red-700 mx-1"
-              title="Delete">
-              <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
 
 
@@ -180,3 +179,4 @@
       </form>
     </div>
   </div>
+  <app-pagination></app-pagination>

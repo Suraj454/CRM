@@ -22,6 +22,8 @@ export class LeadsComponent implements OnInit {
 
   leads: Lead[] = [];
   leadSources: LeadSourceInterface[] = [];
+  allLeads: Lead[] = [];  // Keep a backup of original leads
+
 
   timenow:string|any=''
  
@@ -55,29 +57,52 @@ export class LeadsComponent implements OnInit {
 
   // Load all leads from the backend
 
+  // loadLeads(): void {
+  //   this.leadService.getLeads().subscribe({
+  //   next: (data) => {
+  //   this.leads = data.map((item: any) => ({
+  //     leadId: item.leadId,
+  //   leadName: item.leadsource.leadName,
+  //   sourceType: item.leadsource.sourceType,
+  //   crmService:{
+  //      serviceName: item.leadsource.crmService.serviceName
+  //   },
+  //   contactNo: item.leadsource.contactNo,
+  //   companyName: item.leadsource.companyName,
+  //   companyAdd: item.leadsource.companyAdd,
+  //   leadEmail: item.leadsource.leadEmail,
+  //   leadStatus: item.leadStatus,
+  //   leadSourceId: item.leadsource.leadSourceId,
+  //   timeDate:item.timeStamp
+  //   }));
+  //   },
+  //   error: (err) => console.error('Error loading leads', err)
+  //   });
+  //   }
+
   loadLeads(): void {
     this.leadService.getLeads().subscribe({
-    next: (data) => {
-    this.leads = data.map((item: any) => ({
-      leadId: item.leadId,
-    leadName: item.leadsource.leadName,
-    sourceType: item.leadsource.sourceType,
-    crmService:{
-       serviceName: item.leadsource.crmService.serviceName
-    },
-    contactNo: item.leadsource.contactNo,
-    companyName: item.leadsource.companyName,
-    companyAdd: item.leadsource.companyAdd,
-    leadEmail: item.leadsource.leadEmail,
-    leadStatus: item.leadStatus,
-    leadSourceId: item.leadsource.leadSourceId,
-    timeDate:item.timeStamp
-    }));
-    },
-    error: (err) => console.error('Error loading leads', err)
+      next: (data) => {
+        this.allLeads = data.map((item: any) => ({
+          leadId: item.leadId,
+          leadName: item.leadsource.leadName,
+          sourceType: item.leadsource.sourceType,
+          crmService: {
+            serviceName: item.leadsource.crmService.serviceName
+          },
+          contactNo: item.leadsource.contactNo,
+          companyName: item.leadsource.companyName,
+          companyAdd: item.leadsource.companyAdd,
+          leadEmail: item.leadsource.leadEmail,
+          leadStatus: item.leadStatus,
+          leadSourceId: item.leadsource.leadSourceId,
+          timeDate: item.timeStamp
+        }));
+        this.leads = [...this.allLeads];
+      },
+      error: (err) => console.error('Error loading leads', err)
     });
-    }
-
+  }
   // Load all lead sources from the backend
   loadLeadSources(): void {
     this.leadService.getFilteredLeadSources().subscribe({
@@ -129,4 +154,19 @@ export class LeadsComponent implements OnInit {
     const source = this.leadSources.find(s => s.leadSourceId === id);
     return source ? source.sourceType : 'Unknown';
   }
+
+  // Implement the filter
+filterLeads(searchText: string): void {
+  const text = searchText.toLowerCase();
+  this.leads = this.allLeads.filter(lead =>
+    lead.leadName.toLowerCase().includes(text) ||
+    lead.leadEmail.toLowerCase().includes(text) ||
+    lead.contactNo.toLowerCase().includes(text) ||
+    lead.companyName.toLowerCase().includes(text) ||
+    lead.companyAdd.toLowerCase().includes(text) ||
+    lead.sourceType.toLowerCase().includes(text) ||
+    lead.crmService.serviceName.toLowerCase().includes(text)
+  );
+  
+}
 }

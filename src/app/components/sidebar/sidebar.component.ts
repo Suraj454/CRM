@@ -71,7 +71,7 @@ export class SidebarComponent implements OnInit {
     // Role-based sidebar items with Font Awesome icons
     if (role === 'marketing') {
       this.sidebarItems = [
-        { name: 'Dashboard', link: '/lead/dashboard', icon: 'fa fa-tachometer-alt' }, // Dashboard (Performance)
+        { name: 'Dashboard', link: '/marketing/dashboard', icon: 'fa fa-tachometer-alt' }, // Dashboard (Performance)
         { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-bullseye' }, // Lead Sources (Target)
         { name: 'Leads', link: '/leads', icon: 'fa fa-user-plus' }, // Leads (Adding users)
         { name: 'Reports', link: 'lead/reports', icon: 'fa fa-chart-line' }, // Reports (Growth Line)
@@ -80,6 +80,7 @@ export class SidebarComponent implements OnInit {
     }
     else if (role === 'salesperson') {
       this.sidebarItems = [
+        { name: 'Dashboard', link: '/sales/dashboard', icon: 'fa fa-tachometer-alt' },
         { name: 'Leads', link: '/sales/leads', icon: 'fa fa-address-book' }, // Leads (Contacts)
         { name: 'Negotiation', link: '/negotiation', icon: 'fa fa-handshake' }, // Negotiation (Deal Handshake)
         { name: 'Deals', link: '/deals', icon: 'fa fa-hand-holding-usd' }, // Deals (Money Deal)

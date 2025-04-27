@@ -29,6 +29,7 @@ export class NegotiationComponent implements OnInit {
     {
       leadId: 201,
       leadName: 'John Doe',
+      serviceName: 'Web Service',
       proposedDate: '2025-04-25',
       proposedValue: 15000,
       actualValue: 14000,
@@ -37,6 +38,7 @@ export class NegotiationComponent implements OnInit {
     {
       leadId: 202,
       leadName: 'Jane Smith',
+      serviceName: 'Web Service',
       proposedDate: '2025-04-26',
       proposedValue: 20000,
       actualValue: 19000,
@@ -52,6 +54,7 @@ export class NegotiationComponent implements OnInit {
 
   negotiationForm = {
     dealName: '',
+    serviceName:'',
     proposedValue: null,
     closedValue: null,
     proposedDate: '',
@@ -97,6 +100,7 @@ export class NegotiationComponent implements OnInit {
   openNegotiationModal(negotiation: any): void {
     this.negotiationForm = {
       dealName: negotiation.leadName || '',
+      serviceName:negotiation.serviceName || '',
       proposedValue: negotiation.proposedValue || null,
       closedValue: negotiation.actualValue || null,
       proposedDate: negotiation.proposedDate || '',

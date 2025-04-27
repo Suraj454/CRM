@@ -1,53 +1,53 @@
-<div class="p-6 bg-gray-100 min-h-screen">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Lead Dashboard</h2>
-  
-    <!-- Cards Row -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-      
-      <!-- Total Leads -->
-      <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-        <div class="bg-blue-100 p-3 rounded-full">
-          <i class="fas fa-users text-blue-600 text-xl"></i>
-        </div>
-        <div>
-          <p class="text-gray-600">Total Leads Sources</p>
-          <p class="text-xl font-semibold">1,294</p>
-        </div>
+<div class="p-6 bg-gray-100 min-h-fit">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Lead Dashboard</h2>
+
+  <!-- Cards Row -->
+  <div class="grid grid-cols-1 sm:grid-cols-4 gap-6"> <!-- changed sm:grid-cols-3 to sm:grid-cols-4 -->
+    
+    <!-- Total Lead Sources -->
+    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
+      <div class="bg-blue-100 p-3 rounded-full">
+        <i class="fas fa-users text-blue-600 text-xl"></i> <!-- icon: users -->
       </div>
-  
-      <!-- Converted Leads -->
-      <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-        <div class="bg-green-100 p-3 rounded-full">
-          <i class="fas fa-check-circle text-green-600 text-xl"></i>
-        </div>
-        <div>
-          <p class="text-gray-600">New Leads</p>
-          <p class="text-xl font-semibold">523</p>
-        </div>
+      <div>
+        <p class="text-gray-600">Total Lead Sources</p>
+        <p class="text-xl font-semibold">{{ totalLeadSources }}</p>
       </div>
-  
-      <!-- Upcoming Follow-ups -->
-      <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-        <div class="bg-yellow-100 p-3 rounded-full">
-          <i class="fas fa-calendar-alt text-yellow-600 text-xl"></i>
-        </div>
-        <div>
-          <p class="text-gray-600">Qualified Leads</p>
-          <p class="text-xl font-semibold">78</p>
-        </div>
-      </div>
-  
-      <!-- Dropped Leads -->
-      <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-        <div class="bg-red-100 p-3 rounded-full">
-          <i class="fas fa-times-circle text-red-600 text-xl"></i>
-        </div>
-        <div>
-          <p class="text-gray-600">Dropped Leads</p>
-          <p class="text-xl font-semibold">123</p>
-        </div>
-      </div>
-  
     </div>
+
+    <!-- New Leads -->
+    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
+      <div class="bg-green-100 p-3 rounded-full">
+        <i class="fas fa-user-plus text-green-600 text-xl"></i> <!-- updated icon: user-plus -->
+      </div>
+      <div>
+        <p class="text-gray-600">New Leads</p>
+        <p class="text-xl font-semibold">{{ totalNewLeads }}</p>
+      </div>
+    </div>
+
+    <!-- Qualified Leads -->
+    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
+      <div class="bg-yellow-100 p-3 rounded-full">
+        <i class="fas fa-user-check text-yellow-600 text-xl"></i> <!-- updated icon: user-check -->
+      </div>
+      <div>
+        <p class="text-gray-600">Qualified Leads</p>
+        <p class="text-xl font-semibold">{{ totalQualifiedLeads }}</p>
+      </div>
+    </div>
+
+    <!-- Negotiated Leads -->
+    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
+      <div class="bg-purple-100 p-3 rounded-full">
+        <i class="fas fa-handshake text-purple-600 text-xl"></i> <!-- perfect icon: handshake -->
+      </div>
+      <div>
+        <p class="text-gray-600">Negotiated Leads</p>
+        <p class="text-xl font-semibold">{{ totalNegotiationLeads }}</p>
+      </div>
+    </div>
+
   </div>
-  
+</div>
+

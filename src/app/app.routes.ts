@@ -14,6 +14,7 @@ import { NegotiationComponent } from './page/Deals/negotiation/negotiation.compo
 import { ClientServiceComponent } from './page/Clients/client-service/client-service.component';
 import { ClientProfileComponent } from './page/Clients/client-profile/client-profile.component';
 import { ClientSupportComponent } from './page/Clients/client-support/client-support.component';
+import { DealDashboardComponent } from './page/Deals/deal-dashboard/deal-dashboard.component';
 
 
 export const routes: Routes = [
@@ -26,8 +27,9 @@ export const routes: Routes = [
             {path:'deals', component:DealsComponent},
             {path:'leads', component:LeadsComponent},
             {path:'leadsource', component:LeadSourceComponent},
-            {path:'lead/dashboard', component:LeadDashboardComponent},
+            {path:'marketing/dashboard', component:LeadDashboardComponent},
             {path:'leadreports', component:LeadReportsComponent},
+            {path:'sales/dashboard', component:DealDashboardComponent},
             {path:'sales/leads', component:SalesleadsComponent},
             {path:'negotiation',component:NegotiationComponent},
             {path:'client/profile', component:ClientProfileComponent},

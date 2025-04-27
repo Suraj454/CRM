@@ -5,6 +5,7 @@
   <thead class="bg-gray-100">
     <tr>
       <th class="p-2">Lead Name</th>
+      <th class="p-2">Service Name</th>
       <th class="p-2">Proposed Date</th>
       <th class="p-2">Proposed Value</th>
       <th class="p-2">Actual Value</th>
@@ -15,6 +16,7 @@
   <tbody>
     <tr *ngFor="let negotiation of negotiations">
       <td class="p-2">{{ negotiation.leadName }}</td>
+      <td class="p-2">{{ negotiation.serviceName }}</td>
       <td class="p-2">{{ negotiation.proposedDate }}</td>
       <td class="p-2">{{ negotiation.proposedValue }}</td>
       <td class="p-2">{{ negotiation.actualValue }}</td>
@@ -53,39 +55,86 @@
         </button>
       </div>
   
+<!-- Form Grid -->
       <!-- Form Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Deal Name</label>
-          <input [(ngModel)]="negotiationForm.dealName" type="text" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Proposed Value</label>
-          <input [(ngModel)]="negotiationForm.proposedValue" type="number" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Closed Value</label>
-          <input [(ngModel)]="negotiationForm.closedValue" type="number" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Proposed Date</label>
-          <input [(ngModel)]="negotiationForm.proposedDate" type="date" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200">
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium text-gray-700">Closed Date</label>
-          <input [(ngModel)]="negotiationForm.closedDate" type="date" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-200">
-        </div>
-      </div>
-  
-      <!-- Action Buttons -->
-      <div class="mt-6 flex justify-end space-x-4">
-        <button (click)="markAsWon()" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center">
-          <i class="fas fa-thumbs-up mr-2"></i>Won
-        </button>
-        <button (click)="markAsLost()" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center">
-          <i class="fas fa-thumbs-down mr-2"></i>Lost
-        </button>
-      </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Deal Name</label>
+    <div class="relative mt-1">
+      <i class="fas fa-briefcase text-blue-500 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+      <input [(ngModel)]="negotiationForm.dealName" 
+             type="text" 
+             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400" 
+             placeholder="Enter deal name">
     </div>
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Service Name</label>
+    <div class="relative mt-1">
+      <i class="fas fa-cogs text-indigo-500 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+      <input [(ngModel)]="negotiationForm.serviceName" 
+             type="text" 
+             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-400" 
+             placeholder="Enter service name">
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Proposed Value</label>
+    <div class="relative mt-1">
+      <i class="fas fa-dollar-sign text-yellow-500 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+      <input [(ngModel)]="negotiationForm.proposedValue" 
+             type="number" 
+             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-400" 
+             placeholder="Enter proposed value">
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Closed Value</label>
+    <div class="relative mt-1">
+      <i class="fas fa-check-circle text-green-500 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+      <input [(ngModel)]="negotiationForm.closedValue" 
+             type="number" 
+             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-400" 
+             placeholder="Enter closed value">
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Proposed Date</label>
+    <div class="relative mt-1">
+      <i class="fas fa-calendar-day text-blue-500 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+      <input [(ngModel)]="negotiationForm.proposedDate" 
+             type="date" 
+             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">
+    </div>
+  </div>
+
+  <div class="md:col-span-2">
+    <label class="block text-sm font-medium text-gray-700">Closed Date</label>
+    <div class="relative mt-1">
+      <i class="fas fa-calendar-check text-green-500 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+      <input [(ngModel)]="negotiationForm.closedDate" 
+             type="date" 
+             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-400">
+    </div>
+  </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="mt-8 flex justify-end space-x-6">
+  <button (click)="markAsWon()" 
+          class="px-6 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-lg hover:from-green-500 hover:to-green-700 flex items-center shadow-lg transition-all duration-300 ease-in-out">
+    <i class="fas fa-thumbs-up mr-3"></i> Won
+  </button>
+  <button (click)="markAsLost()" 
+          class="px-6 py-3 bg-gradient-to-r from-red-400 to-red-600 text-white rounded-lg hover:from-red-500 hover:to-red-700 flex items-center shadow-lg transition-all duration-300 ease-in-out">
+    <i class="fas fa-thumbs-down mr-3"></i> Lost
+  </button>
+</div>
+
+
   </div>
   
