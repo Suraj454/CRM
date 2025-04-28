@@ -71,10 +71,9 @@ export class SidebarComponent implements OnInit {
     // Role-based sidebar items with Font Awesome icons
     if (role === 'marketing') {
       this.sidebarItems = [
-        { name: 'Dashboard', link: '/marketing/dashboard', icon: 'fa fa-tachometer-alt' }, // Dashboard (Performance)
+             { name: 'Dashboard', link: '/marketing/dashboard', icon: 'fa fa-tachometer-alt' }, // Dashboard (Performance)
         { name: 'Lead Sources', link: '/leadsource', icon: 'fa fa-bullseye' }, // Lead Sources (Target)
         { name: 'Leads', link: '/leads', icon: 'fa fa-user-plus' }, // Leads (Adding users)
-        { name: 'Reports', link: 'lead/reports', icon: 'fa fa-chart-line' }, // Reports (Growth Line)
         { name: 'Log Out', icon: 'fa fa-sign-out-alt' } // Log Out
       ];
     }
@@ -84,7 +83,6 @@ export class SidebarComponent implements OnInit {
         { name: 'Leads', link: '/sales/leads', icon: 'fa fa-address-book' }, // Leads (Contacts)
         { name: 'Negotiation', link: '/negotiation', icon: 'fa fa-handshake' }, // Negotiation (Deal Handshake)
         { name: 'Deals', link: '/deals', icon: 'fa fa-hand-holding-usd' }, // Deals (Money Deal)
-        { name: 'Reports', link: 'deals/reports', icon: 'fa fa-chart-line' }, // Reports (Bar Chart)
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
@@ -105,7 +103,6 @@ export class SidebarComponent implements OnInit {
         { name: 'Support', link: '/client/support', icon: 'fa fa-life-ring' }, // Support (Help Lifesaver)
         { name: 'Profile', link: '/client/profile', icon: 'fa fa-user-circle' }, // Profile (User Circle)
         { name: 'Dashboard', link: '/client/dashboard', icon: 'fa fa-home' }, // Dashboard (Home for client)
-        { name: 'Reports', link: '/client/reports', icon: 'fa fa-file-alt' }, // Reports (Document Report)
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }

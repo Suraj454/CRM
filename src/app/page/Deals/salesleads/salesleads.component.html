@@ -4,46 +4,54 @@
 
   <!-- Qualified Leads Table -->
 
-  <table class="w-full mt-4 text-sm text-gray-700 border border-gray-200">
-    <thead class="bg-gray-100">
+<!-- Sales Leads Table -->
+<div class="overflow-x-auto bg-white rounded-xl shadow-lg p-6 border border-gray-300">
+  <table class="min-w-full text-sm text-gray-800 table-auto">
+    <thead class="bg-gradient-to-r from-teal-400 to-blue-600 text-xs uppercase text-white sticky top-0 z-10">
       <tr>
-        <th class="p-2">Lead Name</th>
-        <th class="p-2">Lead Email</th>
-        <th class="p-2">Contact No</th>
-        <th class="p-2">Company Name</th>
-        <th class="p-2">Company Address</th>
-        <th class="p-2">Source Type</th>
-        <th class="p-2">Service Name</th>
-        <th class="p-2">Date</th>
-        <th class="p-2">Status</th>
-        <th class="p-2">Action</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Lead Name</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Lead Email</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Contact No</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Company Name</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Company Address</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Source Type</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Service Name</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Date</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Status</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Action</th>
       </tr>
     </thead>
     <tbody>
-  <tr *ngFor="let salesLead of qualifiedLeads">
-    <td class="p-2">{{ salesLead.lead.leadsource.leadName }}</td>
-    <td class="p-2">{{ salesLead.lead.leadsource.leadEmail }}</td>
-    <td class="p-2">{{ salesLead.lead.leadsource.contactNo }}</td>
-    <td class="p-2">{{ salesLead.lead.leadsource.companyName }}</td>
-    <td class="p-2">{{ salesLead.lead.leadsource.companyAdd }}</td>
-    <td class="p-2">{{ salesLead.lead.leadsource.sourceType }}</td>
-    <td class="p-2">{{ salesLead.lead.leadsource.crmService.serviceName }}</td>
-    <td class="p-2">{{ salesLead.lead.leadsource.timeStamp | date: 'short' }}</td>
-    <td class="p-2">
-      <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
-            [ngClass]="getBadgeClass(salesLead.lead.leadStatus)">
-        {{ salesLead.lead.leadStatus }}
-      </span>
-    </td>
-    <td class="p-2 text-center">
-      <button (click)="openEmailModal(salesLead)" title="Send Email" class="text-blue-600 hover:text-blue-800">
-        <i class="fas fa-envelope"></i>
-      </button>
-    </td>
-  </tr>
+      <tr *ngFor="let salesLead of qualifiedLeads; let i = index"
+          [ngClass]="{
+            'bg-gray-50': i % 2 === 0,
+            'bg-white': i % 2 !== 0
+          }"
+          class="hover:bg-gray-100 transition duration-200 ease-in-out border-b border-gray-300 text-center">
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.leadName }}</td>
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.leadEmail }}</td>
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.contactNo }}</td>
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.companyName }}</td>
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.companyAdd }}</td>
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.sourceType }}</td>
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.crmService.serviceName }}</td>
+        <td class="px-6 py-5 align-middle">{{ salesLead.lead.leadsource.timeStamp | date: 'short' }}</td>
+        <td class="px-6 py-5 align-middle">
+          <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
+                [ngClass]="getBadgeClass(salesLead.lead.leadStatus)">
+            {{ salesLead.lead.leadStatus }}
+          </span>
+        </td>
+        <td class="px-6 py-5 align-middle space-x-2">
+          <button (click)="openEmailModal(salesLead)" title="Send Email" class="text-blue-600 hover:text-blue-800">
+            <i class="fas fa-envelope"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-</tbody>
-</table> 
 
   
   

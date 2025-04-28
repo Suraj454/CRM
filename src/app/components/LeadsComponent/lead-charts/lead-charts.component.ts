@@ -1,62 +1,36 @@
-import { Component } from '@angular/core';
-import { ChartData,ChartOptions } from 'chart.js';
-
+import { Component, OnInit } from '@angular/core';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgChartsConfiguration } from 'ng2-charts';
 @Component({
   selector: 'app-lead-charts',
-  imports: [],
+  imports: [BrowserModule],
   templateUrl: './lead-charts.component.html',
-  styleUrl: './lead-charts.component.css'
+  styleUrls: ['./lead-charts.component.css']
 })
-export class LeadChartsComponent {
-
-  public donutChartData: ChartData<'doughnut'> = {
-    labels: ['New Leads', 'Qualified Leads'],
-    datasets: [
-      {
-        data: [75, 25],
-        backgroundColor: ['#00C853', '#2196F3'], // Green for new leads, Blue for qualified leads
-        hoverBackgroundColor: ['#66BB6A', '#42A5F5'],
-      }
-    ]
+export class LeadChartsComponent implements OnInit {
+  public pieChartType: ChartType = 'pie';
+  
+  public pieChartData: ChartData<'pie'> = {
+    labels: ['New', 'In Progress', 'Converted', 'Lost'],
+    datasets: [{
+      data: [30, 25, 15, 10],
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#E7E9ED']
+    }]
   };
 
-  public donutChartOptions: ChartOptions<'doughnut'> = {
+  public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     plugins: {
       legend: {
+        display: true,
         position: 'top',
-      },
-    },
-  };
-
-  // Bar Chart Data (for lead sources)
-  public barChartData: ChartData<'bar'> = {
-    labels: ['Organic', 'Paid Ads', 'Social Media', 'Referrals'],
-    datasets: [
-      {
-        data: [120, 75, 60, 45], // Number of leads from each source
-        backgroundColor: '#FFEB3B', // Yellow
-        hoverBackgroundColor: '#FFEB3B',
-      }
-    ]
-  };
-
-  public barChartOptions: ChartOptions<'bar'> = {
-    responsive: true,
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Lead Sources'
-        }
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'Number of Leads'
-        }
       }
     }
   };
 
+  constructor() { }
+
+  ngOnInit(): void { }
 }

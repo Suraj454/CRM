@@ -44,6 +44,8 @@ export class LeadSourceComponent {
     this.leadSourceService.getLeadSources().subscribe({
       next: (response: LeadSourceInterface[]) => {
         this.leadSources = response;
+        this.calculateTotalPages();
+    this.updatePaginatedLeadSources();
         console.log('Lead sources fetched successfully:', response);
       },
       error: (error) => {
@@ -152,4 +154,50 @@ saveLeadSource() {
     this.editingLeadId = null;
     this.isEditMode = false;
   }
+
+  // Pagination related
+currentPage: number = 1;
+itemsPerPage: number = 6; // Show 5 leads per page
+totalPages: number = 0;
+
+// New sliced data
+paginatedLeadSources: any[] = [];
+
+
+  // Calculate total pages based on number of leads
+calculateTotalPages() {
+  this.totalPages = Math.ceil(this.leadSources.length / this.itemsPerPage);
+}
+
+// Get current page's leads
+updatePaginatedLeadSources() {
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  const end = start + this.itemsPerPage;
+  this.paginatedLeadSources = this.leadSources.slice(start, end);
+}
+
+// When user clicks 'Next'
+nextPage() {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+    this.updatePaginatedLeadSources();
+  }
+}
+
+// When user clicks 'Previous'
+previousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.updatePaginatedLeadSources();
+  }
+}
+
+// When user clicks a page number
+goToPage(page: number) {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
+    this.updatePaginatedLeadSources();
+  }
+}
+
 }

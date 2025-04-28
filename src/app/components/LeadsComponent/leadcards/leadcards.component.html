@@ -1,53 +1,60 @@
 <div class="p-6 bg-gray-100 min-h-fit">
-  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Lead Dashboard</h2>
+  <h2 class="text-3xl font-semibold text-gray-800 mb-6">Lead Dashboard</h2>
 
   <!-- Cards Row -->
-  <div class="grid grid-cols-1 sm:grid-cols-4 gap-6"> <!-- changed sm:grid-cols-3 to sm:grid-cols-4 -->
-    
+  <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+
     <!-- Total Lead Sources -->
-    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-      <div class="bg-blue-100 p-3 rounded-full">
-        <i class="fas fa-users text-blue-600 text-xl"></i> <!-- icon: users -->
-      </div>
-      <div>
-        <p class="text-gray-600">Total Lead Sources</p>
-        <p class="text-xl font-semibold">{{ totalLeadSources }}</p>
+    <div class="bg-gradient-to-r from-teal-400 to-blue-600 shadow-lg rounded-lg p-6 flex items-center justify-between transform hover:scale-105 transition-transform duration-300">
+      <div class="flex items-center space-x-4">
+        <div class="bg-white text-teal-600 p-4 rounded-full shadow-md">
+          <i class="fas fa-users text-4xl"></i> <!-- Increased icon size -->
+        </div>
+        <div>
+          <p class="text-white text-xl">Total Lead Sources</p> <!-- Increased label size -->
+          <p class="text-3xl font-semibold text-white">{{ totalLeadSources }}</p> <!-- Increased count size -->
+        </div>
       </div>
     </div>
 
     <!-- New Leads -->
-    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-      <div class="bg-green-100 p-3 rounded-full">
-        <i class="fas fa-user-plus text-green-600 text-xl"></i> <!-- updated icon: user-plus -->
-      </div>
-      <div>
-        <p class="text-gray-600">New Leads</p>
-        <p class="text-xl font-semibold">{{ totalNewLeads }}</p>
+    <div class="bg-gradient-to-r from-green-400 to-green-600 shadow-lg rounded-lg p-6 flex items-center justify-between transform hover:scale-105 transition-transform duration-300">
+      <div class="flex items-center space-x-4">
+        <div class="bg-white text-green-600 p-4 rounded-full shadow-md">
+          <i class="fas fa-user-plus text-4xl"></i> <!-- Increased icon size -->
+        </div>
+        <div>
+          <p class="text-white text-xl">New Leads</p> <!-- Increased label size -->
+          <p class="text-3xl font-semibold text-white">{{ totalNewLeads }}</p> <!-- Increased count size -->
+        </div>
       </div>
     </div>
 
     <!-- Qualified Leads -->
-    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-      <div class="bg-yellow-100 p-3 rounded-full">
-        <i class="fas fa-user-check text-yellow-600 text-xl"></i> <!-- updated icon: user-check -->
-      </div>
-      <div>
-        <p class="text-gray-600">Qualified Leads</p>
-        <p class="text-xl font-semibold">{{ totalQualifiedLeads }}</p>
+    <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 shadow-lg rounded-lg p-6 flex items-center justify-between transform hover:scale-105 transition-transform duration-300">
+      <div class="flex items-center space-x-4">
+        <div class="bg-white text-yellow-600 p-4 rounded-full shadow-md">
+          <i class="fas fa-user-check text-4xl"></i> <!-- Increased icon size -->
+        </div>
+        <div>
+          <p class="text-white text-xl">Qualified Leads</p> <!-- Increased label size -->
+          <p class="text-3xl font-semibold text-white">{{ totalQualifiedLeads }}</p> <!-- Increased count size -->
+        </div>
       </div>
     </div>
 
     <!-- Negotiated Leads -->
-    <div class="bg-white shadow rounded-lg p-4 flex items-center space-x-4">
-      <div class="bg-purple-100 p-3 rounded-full">
-        <i class="fas fa-handshake text-purple-600 text-xl"></i> <!-- perfect icon: handshake -->
-      </div>
-      <div>
-        <p class="text-gray-600">Negotiated Leads</p>
-        <p class="text-xl font-semibold">{{ totalNegotiationLeads }}</p>
+    <div class="bg-gradient-to-r from-purple-400 to-purple-600 shadow-lg rounded-lg p-6 flex items-center justify-between transform hover:scale-105 transition-transform duration-300">
+      <div class="flex items-center space-x-4">
+        <div class="bg-white text-purple-600 p-4 rounded-full shadow-md">
+          <i class="fas fa-handshake text-4xl"></i> <!-- Increased icon size -->
+        </div>
+        <div>
+          <p class="text-white text-xl">Proposed Leads</p> <!-- Increased label size -->
+          <p class="text-3xl font-semibold text-white">{{ totalProposedLeads }}</p> <!-- Increased count size -->
+        </div>
       </div>
     </div>
 
   </div>
 </div>
-

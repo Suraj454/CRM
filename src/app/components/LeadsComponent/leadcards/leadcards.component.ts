@@ -17,6 +17,7 @@ export class LeadcardsComponent implements OnInit {
   totalNewLeads: number = 0;
   totalQualifiedLeads: number = 0;
   totalNegotiationLeads: number = 0;
+  totalProposedLeads: number = 0;
 
   constructor(
     private leadSourceService: LeadsourceService,
@@ -34,7 +35,7 @@ export class LeadcardsComponent implements OnInit {
       this.totalLeadSources = leadSources.length;
       this.totalNewLeads = allLeads.filter(lead => lead.leadStatus === 'NEW_LEAD').length;
       this.totalQualifiedLeads = allLeads.filter(lead => lead.leadStatus === 'QUALIFIED').length;
-      this.totalNegotiationLeads = allLeads.filter(lead => lead.leadStatus === 'NEGOTIATED').length;
+      this.totalProposedLeads = allLeads.filter(lead => lead.leadStatus === 'PROPOSED').length;
     });
   }
 

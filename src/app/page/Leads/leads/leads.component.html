@@ -9,7 +9,7 @@
 
 <div *ngIf="showPreviewRow" class="mt-8 mx-8">
 
-  <div class="overflow-x-auto rounded-2xl shadow-md">
+  <div class="overflow-x-auto bg-white rounded-xl shadow-lg p-2 border border-gray-300">
     <table class="min-w-full bg-white border border-gray-300">
     
       <tbody *ngIf="leadSources.length > 0; else noData">
@@ -53,61 +53,61 @@
 
 
 <!-- Leads Table -->
- 
-<table class="w-full mt-4 text-sm text-gray-700 border border-gray-200">
-  <thead class="bg-gray-100">
-    <tr>
-      <th class="p-2">Lead Name</th>
-      <th class="p-2">Lead Email</th>
-      <th class="p-2">Contact No</th>
-      <th class="p-2">Company Name</th>
-      <th class="p-2">Company Address</th>
-      <th class="p-2">Source Type</th>
-      <th class="p-2">Service Name</th>
-      <th class="p-2">Date</th>
-      <th class="p-2">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let lead of leads">
-      <td class="p-2">{{ lead.leadName }}</td>
-      <td class="p-2">{{ lead.leadEmail }}</td>
-      <td class="p-2">{{ lead.contactNo }}</td>
-      <td class="p-2">{{ lead.companyName }}</td>
-      <td class="p-2">{{ lead.companyAdd }}</td>
-      <td class="p-2">{{ lead.sourceType }}</td>
-      <td class="p-2">{{ lead.crmService.serviceName }}</td>
-      <td class="p-2">{{ lead.timeDate }}</td>
-    
-
-
-
-      <td class="p-2">
-        <div *ngIf="lead.leadStatus === 'NEW_LEAD'; else staticStatus">
-          <select
-            [(ngModel)]="lead.leadStatus"
-            (change)="onStatusChange(lead)"
-            class="appearance-none bg-blue-100 text-blue-800 border border-blue-300 px-2 py-1 rounded-md text-xs font-semibold shadow-sm focus:outline-none"
-          >
-            <option value="NEW_LEAD">NEW LEAD</option>
-            <option value="QUALIFIED">QUALIFIED</option>
-          </select>
-        </div>
+<div class="overflow-x-auto bg-white rounded-xl shadow-lg p-6 border border-gray-300">
+  <table class="min-w-full text-sm text-gray-800 table-auto">
+    <thead class="bg-gradient-to-r from-teal-400 to-blue-600 text-xs uppercase text-white sticky top-0 z-10">
+      <tr>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Lead Name</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Lead Email</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Contact No</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Company Name</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Company Address</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Source Type</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Service Name</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Date</th>
+        <th class="px-6 py-5 font-semibold text-center align-middle">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lead of leads; let i = index"
+          [ngClass]="{
+            'bg-gray-50': i % 2 === 0,
+            'bg-white': i % 2 !== 0
+          }"
+          class="hover:bg-gray-100 transition duration-200 ease-in-out border-b border-gray-300 text-center">
+        <td class="px-6 py-5 align-middle">{{ lead.leadName }}</td>
+        <td class="px-6 py-5 align-middle">{{ lead.leadEmail }}</td>
+        <td class="px-6 py-5 align-middle">{{ lead.contactNo }}</td>
+        <td class="px-6 py-5 align-middle">{{ lead.companyName }}</td>
+        <td class="px-6 py-5 align-middle">{{ lead.companyAdd }}</td>
+        <td class="px-6 py-5 align-middle">{{ lead.sourceType }}</td>
+        <td class="px-6 py-5 align-middle">{{ lead.crmService.serviceName }}</td>
+        <td class="px-6 py-5 align-middle">{{ lead.timeDate | date: 'dd MMM yyyy, hh:mm a' }}</td>
+        <td class="px-6 py-5 align-middle">
+          <div *ngIf="lead.leadStatus === 'NEW_LEAD'; else staticStatus">
+            <select
+              [(ngModel)]="lead.leadStatus"
+              (change)="onStatusChange(lead)"
+              class="appearance-none bg-blue-100 text-blue-800 border border-blue-300 px-2 py-1 rounded-md text-xs font-semibold shadow-sm focus:outline-none"
+            >
+              <option value="NEW_LEAD">NEW LEAD</option>
+              <option value="QUALIFIED">QUALIFIED</option>
+            </select>
+          </div>
       
-        <ng-template #staticStatus>
-          <span
-            class="inline-block px-2 py-1 rounded text-xs font-semibold"
-            [ngClass]="getBadgeClass(lead.leadStatus)"
-          >
-            {{ lead.leadStatus }}
-          </span>
-        </ng-template>
-      </td>
-      
-   
+          <ng-template #staticStatus>
+            <span
+              class="inline-block px-2 py-1 rounded text-xs font-semibold"
+              [ngClass]="getBadgeClass(lead.leadStatus)"
+            >
+              {{ lead.leadStatus }}
+            </span>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-    </tr>
-  </tbody>
-</table>
 
 <app-pagination></app-pagination>

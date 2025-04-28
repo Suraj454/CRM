@@ -6,47 +6,50 @@
   </button>
 
   <!-- Lead Sources Table -->
-<!-- Lead Sources Table -->
-<div class="overflow-x-auto bg-white rounded-xl shadow">
-  <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
-    <thead class="bg-gray-100 text-xs uppercase text-gray-600">
-      <tr>
-        <th class="px-6 py-3 whitespace-nowrap">Lead Name</th>
-        <th class="px-6 py-3 whitespace-nowrap">Lead Email</th>
-        <th class="px-6 py-3 whitespace-nowrap">Contact No</th>
-        <th class="px-6 py-3 whitespace-nowrap">Company Name</th>
-        <th class="px-6 py-3 whitespace-nowrap">Company Add</th>
-        <th class="px-6 py-3 whitespace-nowrap">Source Type</th>
-        <th class="px-6 py-3 whitespace-nowrap">Service Name</th>
-        <th class="px-6 py-3 whitespace-nowrap">Date</th>
-        <th class="px-6 py-3 text-center whitespace-nowrap">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let lead of leadSources" class="hover:bg-gray-50 transition border-b border-gray-200">
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.leadName }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.leadEmail }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.contactNo }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.companyName }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.companyAdd }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.sourceType }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.crmService.serviceName }}</td>
-        <td class="px-6 py-4 whitespace-nowrap">{{ lead.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</td>
-        <td class="px-6 py-4 text-center whitespace-nowrap">
-          <button (click)="onEditLead(lead)" class="text-blue-500 hover:text-blue-700 mx-1" title="Edit">
-            <i class="fas fa-edit"></i> <!-- Edit Icon -->
-          </button>
-          <button (click)="onDeleteLead(lead.leadSourceId)" class="text-red-500 hover:text-red-700 mx-1" title="Delete">
-            <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-
+  <div class="overflow-x-auto bg-white rounded-xl shadow-lg p-6 border border-gray-300">
+    <table class="min-w-full text-sm text-gray-800 table-auto">
+      <thead class="bg-gradient-to-r from-teal-400 to-blue-600 text-xs uppercase text-white sticky top-0 z-10">
+        <tr>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Lead Name</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Lead Email</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Contact No</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Company Name</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Company Address</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Source Type</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Service Name</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Date</th>
+          <th class="px-6 py-5 font-semibold text-center align-middle">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lead of leadSources; let i = index"
+            [ngClass]="{
+              'bg-gray-50': i % 2 === 0,
+              'bg-white': i % 2 !== 0
+            }"
+            class="hover:bg-gray-100 transition duration-200 ease-in-out border-b border-gray-300 text-center">
+          <td class="px-6 py-5 align-middle">{{ lead.leadName }}</td>
+          <td class="px-6 py-5 align-middle">{{ lead.leadEmail }}</td>
+          <td class="px-6 py-5 align-middle">{{ lead.contactNo }}</td>
+          <td class="px-6 py-5 align-middle">{{ lead.companyName }}</td>
+          <td class="px-6 py-5 align-middle">{{ lead.companyAdd }}</td>
+          <td class="px-6 py-5 align-middle">{{ lead.sourceType }}</td>
+          <td class="px-6 py-5 align-middle">{{ lead.crmService.serviceName }}</td>
+          <td class="px-6 py-5 align-middle">{{ lead.timeStamp | date: 'dd MMM yyyy, hh:mm a' }}</td>
+          <td class="px-6 py-5 align-middle text-center">
+            <button (click)="onEditLead(lead)" class="text-blue-500 hover:text-blue-700 mx-1" title="Edit">
+              <i class="fas fa-edit" aria-hidden="true"></i>
+            </button>
+            <button (click)="onDeleteLead(lead.leadSourceId)" class="text-red-500 hover:text-red-700 mx-1" title="Delete">
+              <i class="fas fa-trash-alt" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
 
   <!-- Modal Form -->
   <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-white/20">

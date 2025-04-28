@@ -1,20 +1,9 @@
-// import { CommonModule } from '@angular/common';
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-negotiation',
-//   imports: [CommonModule],
-//   templateUrl: './negotiation.component.html',
-//   styleUrl: './negotiation.component.css'
-// })
-// export class NegotiationComponent {
-
-// }
 
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DealstableheaderComponent } from '../../../components/DealsComponent/dealstableheader/dealstableheader.component';
+import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.service';
 
 @Component({
   selector: 'app-negotiation',
@@ -25,30 +14,47 @@ import { DealstableheaderComponent } from '../../../components/DealsComponent/de
 })
 export class NegotiationComponent implements OnInit {
 
-  negotiations = [
-    {
-      leadId: 201,
-      leadName: 'John Doe',
-      serviceName: 'Web Service',
-      proposedDate: '2025-04-25',
-      proposedValue: 15000,
-      actualValue: 14000,
-      status: 'IN NEGOTIATION'
-    },
-    {
-      leadId: 202,
-      leadName: 'Jane Smith',
-      serviceName: 'Web Service',
-      proposedDate: '2025-04-26',
-      proposedValue: 20000,
-      actualValue: 19000,
-      status: 'OFFER ACCEPTED'
+  negotiations: any[] = []; // Array to hold the fetched negotiation data
+
+  constructor(private salesLeadsService: SalesLeadsService) {}
+
+  ngOnInit(): void {
+    this.fetchNegotiations(); // Fetch negotiations when the component initializes
+  }
+
+  fetchNegotiations(): void {
+    this.salesLeadsService.getNegotiations().subscribe(data => {
+      this.negotiations = data.map(item => ({
+        leadName: item.lead.leadsource.leadName,   // Extract only the necessary fields
+        dealName: item.dealName,
+        serviceName: item.lead.leadsource.crmService.serviceName,
+        proposedDate: item.proposedDate,
+        closeddDate: item.closedDate,
+        proposedValue: item.proposedValue,
+        actualValue: item.lead.leadsource.crmService.price || 0,  // Handle null closed value
+        status: item.lead.leadStatus
+      }));
+    });
+  }
+
+  getBadgeClass(status: string): string {
+    switch (status) {
+      case 'PROPOSED':
+        return 'bg-yellow-200 text-yellow-800';
+      case 'IN NEGOTIATION':
+        return 'bg-yellow-200 text-yellow-800';
+      case 'OFFER ACCEPTED':
+        return 'bg-green-200 text-green-800';
+      case 'OFFER REJECTED':
+        return 'bg-red-200 text-red-800';
+      default:
+        return 'bg-gray-200 text-gray-800';
     }
-  ];
+  }
 
-  constructor() {}
 
-  ngOnInit(): void {}
+
+  // Negotiation Form Modal
 
   showNegotiationModal = false;
 
@@ -62,19 +68,6 @@ export class NegotiationComponent implements OnInit {
   };
   
 
-  getBadgeClass(status: string): string {
-    switch (status) {
-      case 'IN NEGOTIATION':
-        return 'bg-yellow-200 text-yellow-800';
-      case 'OFFER ACCEPTED':
-        return 'bg-green-200 text-green-800';
-      case 'OFFER REJECTED':
-        return 'bg-red-200 text-red-800';
-      default:
-        return 'bg-gray-200 text-gray-800';
-    }
-  }
-
   editNegotiation(negotiation: any): void {
     console.log('Edit negotiation:', negotiation);
     // Open modal or navigate to edit form
@@ -84,6 +77,8 @@ export class NegotiationComponent implements OnInit {
     console.log('Delete negotiation:', negotiation);
     // Confirm and delete logic here
   }
+
+  
 
   markAsWon(): void {
     console.log('Marked as WON:', this.negotiationForm);
@@ -99,7 +94,7 @@ export class NegotiationComponent implements OnInit {
 
   openNegotiationModal(negotiation: any): void {
     this.negotiationForm = {
-      dealName: negotiation.leadName || '',
+      dealName: '' ,
       serviceName:negotiation.serviceName || '',
       proposedValue: negotiation.proposedValue || null,
       closedValue: negotiation.actualValue || null,

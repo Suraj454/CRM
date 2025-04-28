@@ -1,26 +1,10 @@
 <div class="charts-container">
-    <!-- Donut Chart for Lead Status -->
-    <div class="chart-container">
-      <h2>Lead Status</h2>
-      <div style="width: 50%; height: 300px;">
-        <canvas baseChart 
-                [data]="donutChartData" 
-                [options]="donutChartOptions" 
-                [chartType]="'doughnut'">
-        </canvas>
-      </div>
-    </div>
-  
-    <!-- Bar Chart for Lead Sources -->
-    <div class="chart-container">
-      <h2>Lead Sources</h2>
-      <div style="width: 80%; height: 300px;">
-        <canvas baseChart 
-                [data]="barChartData" 
-                [options]="barChartOptions" 
-                [chartType]="'bar'">
-        </canvas>
-      </div>
-    </div>
+  <div class="charts-container">
+    <canvas baseChart
+      [type]="pieChartType"
+      [data]="pieChartData"
+      [options]="pieChartOptions">
+    </canvas>
   </div>
-  
+
+</div>

@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/loginservices/login.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,RouterModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
