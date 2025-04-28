@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/loginservices/login.service';
 
 @Component({
   selector: 'app-login',
   standalone:true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -34,13 +34,13 @@ onSubmit() {
           const role = response.role.roleName.toLowerCase();
           console.log(role);
           if (role === 'client') {
-            this.router.navigate(['/clients']);
+            this.router.navigate(['/client/service']);
           } 
           else if (role === 'marketing') {
             this.router.navigate(['/leadsource']);
           } 
-          else if (role === 'saleperson') {
-            this.router.navigate(['/deals']);
+          else if (role === 'salesperson') {
+            this.router.navigate(['sales/dashboard']);
           } 
           else if (role === 'support') {
             this.router.navigate(['/dashboard']);
