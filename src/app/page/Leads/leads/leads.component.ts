@@ -55,6 +55,28 @@ export class LeadsComponent implements OnInit {
    
   }
 
+  // 1. Pagination Variables
+currentPage: number = 1;
+itemsPerPage: number = 5;
+
+// 2. Leads for the current page
+displayedLeads: Lead[] = [];
+
+// 3. Function to update displayed leads based on current page
+updateDisplayedLeads() {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  
+  this.displayedLeads = this.leads.slice(startIndex, endIndex);
+}
+
+// 4. Method to handle page change (called by PaginationComponent)
+onPageChange(page: number) {
+  this.currentPage = page;
+  this.updateDisplayedLeads();
+}
+
+
   // Load all leads from the backend
 
   // loadLeads(): void {
@@ -99,6 +121,7 @@ export class LeadsComponent implements OnInit {
           timeDate: item.timeStamp
         }));
         this.leads = [...this.allLeads];
+        this.updateDisplayedLeads();
       },
       error: (err) => console.error('Error loading leads', err)
     });
@@ -140,6 +163,7 @@ export class LeadsComponent implements OnInit {
       default: return 'bg-gray-200 text-gray-800';
     }
   }
+  
   onStatusChange(lead: Lead): void {
     this.leadService.changeStatus(lead.leadId, lead.leadStatus).subscribe({
       next: () => {

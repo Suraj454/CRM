@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lead of leadSources; let i = index"
+        <tr *ngFor="let lead of displayedLeadSources; let i = index"
             [ngClass]="{
               'bg-gray-50': i % 2 === 0,
               'bg-white': i % 2 !== 0
@@ -182,4 +182,9 @@
       </form>
     </div>
   </div>
-  <app-pagination></app-pagination>
+  <app-pagination
+  [totalItems]="leadSources.length"         
+  [itemsPerPage]="itemsPerPage"              
+  [currentPage]="currentPage"                 
+  (pageChanged)="onPageChange($event)"        
+></app-pagination>

@@ -15,31 +15,62 @@ import { ClientServiceComponent } from './page/Clients/client-service/client-ser
 import { ClientProfileComponent } from './page/Clients/client-profile/client-profile.component';
 import { ClientSupportComponent } from './page/Clients/client-support/client-support.component';
 import { DealDashboardComponent } from './page/Deals/deal-dashboard/deal-dashboard.component';
+import { authGuard } from './guards/auth.guard';
 
+
+// export const routes: Routes = [
+//     {path:'login', component:LoginComponent},
+//     {path:'signup', component: SignUpComponent},
+//     {path:'',component:MainLayoutComponent,
+//         children:[
+//             {path:'dashboard',component:DashboardComponent},
+//             {path:'clients',component:ClientComponent},
+//             {path:'deals', component:DealsComponent},
+//             {path:'leads', component:LeadsComponent},
+//             {path:'marketing/dashboard', component:LeadDashboardComponent},
+//             {path:'leadsource', component:LeadSourceComponent},
+//             {path:'leadreports', component:LeadReportsComponent},
+//             {path:'sales/dashboard', component:DealDashboardComponent},
+//             {path:'sales/leads', component:SalesleadsComponent},
+//             {path:'negotiation',component:NegotiationComponent},
+//             {path:'client/profile', component:ClientProfileComponent},
+//             {path:'client/service', component:ClientServiceComponent},
+//             {path:'client/support', component:ClientSupportComponent}
+
+//         ]
+//     },
+
+//     {path:'**',redirectTo:"/login"}
+// ];
 
 export const routes: Routes = [
-    {path:'login', component:LoginComponent},
-    {path:'signup', component: SignUpComponent},
-    {path:'',component:MainLayoutComponent,
-        children:[
-            {path:'dashboard',component:DashboardComponent},
-            {path:'clients',component:ClientComponent},
-            {path:'deals', component:DealsComponent},
-            {path:'leads', component:LeadsComponent},
-            {path:'marketing/dashboard', component:LeadDashboardComponent},
-            {path:'leadsource', component:LeadSourceComponent},
-            {path:'leadreports', component:LeadReportsComponent},
-            {path:'sales/dashboard', component:DealDashboardComponent},
-            {path:'sales/leads', component:SalesleadsComponent},
-            {path:'negotiation',component:NegotiationComponent},
-            {path:'client/profile', component:ClientProfileComponent},
-            {path:'client/service', component:ClientServiceComponent},
-            {path:'client/support', component:ClientSupportComponent}
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard], data: { roles: ['admin'] } },
+      { path: 'clients', component: ClientComponent, canActivate: [authGuard], data: { roles: ['admin'] } },
+      { path: 'deals', component: DealsComponent, canActivate: [authGuard], data: { roles: ['salesperson', 'admin'] } },
+      { path: 'leads', component: LeadsComponent, canActivate: [authGuard], data: { roles: ['marketing', 'admin'] } },
 
-        ]
-    },
+      { path: 'marketing/dashboard', component: LeadDashboardComponent, canActivate: [authGuard], data: { roles: ['marketing'] } },
+      { path: 'leadsource', component: LeadSourceComponent, canActivate: [authGuard], data: { roles: ['marketing', 'admin'] } },
+      { path: 'leadreports', component: LeadReportsComponent, canActivate: [authGuard], data: { roles: ['marketing', 'admin'] } },
 
-    {path:'**',redirectTo:"/login"}
+      { path: 'sales/dashboard', component: DealDashboardComponent, canActivate: [authGuard], data: { roles: ['salesperson'] } },
+      { path: 'sales/leads', component: SalesleadsComponent, canActivate: [authGuard], data: { roles: ['salesperson'] } },
+      { path: 'negotiation', component: NegotiationComponent, canActivate: [authGuard], data: { roles: ['salesperson'] } },
+
+      { path: 'client/profile', component: ClientProfileComponent, canActivate: [authGuard], data: { roles: ['client'] } },
+      { path: 'client/service', component: ClientServiceComponent, canActivate: [authGuard], data: { roles: ['client'] } },
+      { path: 'client/support', component: ClientSupportComponent, canActivate: [authGuard], data: { roles: ['client'] } },
+
+      // You can add support/admin-specific routes here
+    ]
+  },
+  { path: '**', redirectTo: '/login' }
 ];
 
 

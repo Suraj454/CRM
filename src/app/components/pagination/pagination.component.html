@@ -1,25 +1,44 @@
-<div class="w-full flex justify-center items-center my-3">
-    <!-- Previous -->
-    <button (click)="previousPage()" [disabled]="currentPage === 1"
-      class="flex items-center px-4 py-2 mx-1 text-gray-500 bg-white rounded-md dark:bg-gray-800 dark:text-gray-600 hover:bg-gray-200">
-      Previous
+<div class="flex justify-center mt-6">
+  <nav class="flex items-center gap-x-2 bg-white p-3 rounded-lg shadow-md" aria-label="Pagination">
+
+    <!-- Previous Button -->
+    <button
+      type="button"
+      (click)="goToPrevious()"
+      [disabled]="currentPage === 1"
+      class="min-h-9.5 min-w-9.5 py-2 px-3 inline-flex justify-center items-center gap-x-1.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+      aria-label="Previous"
+    >
+      <i class="fas fa-arrow-left"></i>
+      <span class="ml-1">Previous</span>
     </button>
-  
+
     <!-- Page Numbers -->
-    <ng-container *ngFor="let page of [].constructor(totalPages); let index = index">
-      <button (click)="goToPage(index + 1)"
-        [class.bg-blue-600]="currentPage === index + 1"
-        [class.text-white]="currentPage === index + 1"
-        class="items-center hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 hover:text-white">
-        {{ index + 1 }}
+    <div class="flex items-center gap-x-2">
+      <button
+        *ngFor="let page of totalPages"
+        (click)="goToPage(page)"
+        class="min-h-9.5 min-w-9.5 flex justify-center items-center py-2 px-4 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        [ngClass]="{
+          'text-white bg-indigo-600 hover:bg-indigo-700': currentPage === page,
+          'text-gray-700 bg-gray-100 hover:bg-gray-200': currentPage !== page
+        }"
+      >
+        {{ page }}
       </button>
-    </ng-container>
-  
-    <!-- Next -->
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages"
-      class="flex items-center px-4 py-2 mx-1 text-gray-700 bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-gray-200">
-      Next
+    </div>
+
+    <!-- Next Button -->
+    <button
+      type="button"
+      (click)="goToNext()"
+      [disabled]="currentPage === totalPages.length || totalPages.length === 0"
+      class="min-h-9.5 min-w-9.5 py-2 px-3 inline-flex justify-center items-center gap-x-1.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+      aria-label="Next"
+    >
+      <span class="mr-1">Next</span>
+      <i class="fas fa-arrow-right"></i>
     </button>
-  </div>
-  
-<!--Logic Remaining -->
+
+  </nav>
+</div>

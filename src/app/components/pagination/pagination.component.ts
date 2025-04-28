@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,Input,Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -9,32 +9,35 @@ import { Component } from '@angular/core';
 })
 export class PaginationComponent {
 
-  currentPage: number = 1;
-  totalPages: number = 1; // <-- ADD THIS LINE
+  @Input() totalItems: number = 0;       // Total number of items (like leads.length)
+  @Input() itemsPerPage: number = 5;      // Items per page
+  @Input() currentPage: number = 1;       // Current page number
 
-  // Optional: Add pageNumbers array if you want
-  pageNumbers: number[] = [];
+  @Output() pageChanged = new EventEmitter<number>();   // Emit page change
 
-  ngOnInit() {
-    // Example: Set totalPages and generate page numbers
-    this.totalPages = 5; // You can later set this dynamically
-    this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  get totalPages(): number[] {
+    const pageCount = Math.ceil(this.totalItems / this.itemsPerPage);
+    return Array(pageCount).fill(0).map((_, index) => index + 1);
   }
 
-  previousPage() {
+  goToPage(page: number): void {
+    if (page >= 1 && page <= Math.ceil(this.totalItems / this.itemsPerPage)) {
+      this.pageChanged.emit(page); // Emit the correct page change
+    }
+  }
+
+  goToPrevious(): void {
     if (this.currentPage > 1) {
-      this.currentPage--;
+      this.pageChanged.emit(this.currentPage - 1);
     }
   }
 
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
+  goToNext(): void {
+    if (this.currentPage < Math.ceil(this.totalItems / this.itemsPerPage)) {
+      this.pageChanged.emit(this.currentPage + 1);
     }
   }
 
-  goToPage(page: number) {
-    this.currentPage = page;
-  }
+
 }
 
