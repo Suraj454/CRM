@@ -25,7 +25,7 @@ export class LeadSourceComponent {
 
     // Pagination variables
     currentPage: number = 1;
-    itemsPerPage: number = 5;   
+    itemsPerPage: number = 3;   
   
   
 

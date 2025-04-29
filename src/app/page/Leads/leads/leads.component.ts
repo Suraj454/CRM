@@ -24,6 +24,10 @@ export class LeadsComponent implements OnInit {
   leadSources: LeadSourceInterface[] = [];
   allLeads: Lead[] = [];  // Keep a backup of original leads
 
+  displayedLeads: Lead[] = [];  // Leads for the current page
+  currentPage: number = 1;      // Current page
+  itemsPerPage: number = 3;     // Number of leads per page
+
 
   timenow:string|any=''
  
@@ -54,28 +58,7 @@ export class LeadsComponent implements OnInit {
     this.loadLeadSources();
    
   }
-
-  // 1. Pagination Variables
-currentPage: number = 1;
-itemsPerPage: number = 5;
-
-// 2. Leads for the current page
-displayedLeads: Lead[] = [];
-
-// 3. Function to update displayed leads based on current page
-updateDisplayedLeads() {
-  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-  const endIndex = startIndex + this.itemsPerPage;
   
-  this.displayedLeads = this.leads.slice(startIndex, endIndex);
-}
-
-// 4. Method to handle page change (called by PaginationComponent)
-onPageChange(page: number) {
-  this.currentPage = page;
-  this.updateDisplayedLeads();
-}
-
 
   // Load all leads from the backend
 
@@ -120,13 +103,27 @@ onPageChange(page: number) {
           leadSourceId: item.leadsource.leadSourceId,
           timeDate: item.timeStamp
         }));
-        
         this.leads = [...this.allLeads];
-        this.updateDisplayedLeads();
+        this.updateDisplayedLeads();  // Update displayed leads based on current page
+
       },
       error: (err) => console.error('Error loading leads', err)
     });
   }
+
+  // Update displayed leads based on the current page
+  updateDisplayedLeads(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedLeads = this.leads.slice(startIndex, endIndex);
+  }
+
+  // This method will be called when the page is changed
+  onPageChange(page: number): void {
+    this.currentPage = page;  // Set the current page
+    this.updateDisplayedLeads();  // Update displayed leads for the new page
+  }
+
   // Load all lead sources from the backend
   loadLeadSources(): void {
     this.leadService.getFilteredLeadSources().subscribe({
@@ -141,19 +138,51 @@ onPageChange(page: number) {
   }
 
   // Add a new lead from a selected lead source
+  // addLeadFromSource(source: LeadSourceInterface): void {
+  //   const leadId = source.leadSourceId;  // Use the leadSourceId as the leadId
+  //   const timenow = new Date().toISOString();
+  //   console.log('Current time:', timenow);
+  
+  //   this.leadService.addLead(leadId,timenow).subscribe({
+  //     next: (addedLead) => {
+  //       this.leads.push(addedLead);  // Add the created lead to the list
+  //       this.showPreviewRow = false; // Hide preview row after adding
+  //     },
+  //     error: (err) => console.error('Error adding lead from source', err)
+  //   });
+  // }
+
   addLeadFromSource(source: LeadSourceInterface): void {
-    const leadId = source.leadSourceId;  // Use the leadSourceId as the leadId
+    const leadId = source.leadSourceId;
     const timenow = new Date().toISOString();
     console.log('Current time:', timenow);
   
-    this.leadService.addLead(leadId,timenow).subscribe({
-      next: (addedLead) => {
-        this.leads.push(addedLead);  // Add the created lead to the list
-        this.showPreviewRow = false; // Hide preview row after adding
+    this.leadService.addLead(leadId, timenow).subscribe({
+      next: (item: any) => {
+        const newLead: Lead = {
+          leadId: item.leadId,
+          leadName: item.leadsource.leadName,
+          sourceType: item.leadsource.sourceType,
+          crmService: {
+            serviceName: item.leadsource.crmService.serviceName
+          },
+          contactNo: item.leadsource.contactNo,
+          companyName: item.leadsource.companyName,
+          companyAdd: item.leadsource.companyAdd,
+          leadEmail: item.leadsource.leadEmail,
+          leadStatus: item.leadStatus,
+          leadSourceId: item.leadsource.leadSourceId,
+          timeDate: item.timeStamp
+        };
+  
+        this.leads.push(newLead);
+        this.allLeads.push(newLead); // Keep backup consistent
+        this.showPreviewRow = false;
       },
       error: (err) => console.error('Error adding lead from source', err)
     });
   }
+  
 
 
   // Get the CSS class for a lead's status (for badges)

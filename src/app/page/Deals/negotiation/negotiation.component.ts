@@ -15,6 +15,9 @@ import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.serv
 export class NegotiationComponent implements OnInit {
 
   negotiations: any[] = []; // Array to hold the fetched negotiation data
+  filteredNegotiations: any[] = [];  // Array to hold the filtered negotiations
+  searchTerm: string = '';  // Variable to bind to the search input
+
 
   constructor(private salesLeadsService: SalesLeadsService) {}
 
@@ -36,8 +39,40 @@ export class NegotiationComponent implements OnInit {
         status: item.dealStatus,
         salesLeadId: item.salesLeadId // Assuming the `id` is available in the respons
       }));
+      this.filteredNegotiations = this.negotiations;  // Initialize filtered negotiations
     });
   }
+
+    // This function will be called when the search term changes
+    onSearchTermChange(searchTerm: string): void {
+      this.searchTerm = searchTerm;  // Update the search term
+      this.filterNegotiations(searchTerm);  // Filter negotiations based on the search term
+    }
+  
+
+    // Function to filter negotiations based on the search term
+    filterNegotiations(searchTerm: string): void {
+      const term = searchTerm.toLowerCase().trim();  // Convert search term to lowercase
+      if (!term) {
+        this.filteredNegotiations = this.negotiations;  // If no search term, show all negotiations
+        return;
+      }
+  
+      // Filter negotiations based on the search term
+      this.filteredNegotiations = this.negotiations.filter(negotiation =>
+        [
+          negotiation.leadName,
+          negotiation.dealName,
+          negotiation.serviceName,
+          negotiation.status,
+          negotiation.proposedDate,
+          negotiation.closedDate
+        ]
+          .map(field => (field || '').toString().toLowerCase())  // Convert fields to lowercase
+          .some(field => field.includes(term))  // Check if any field includes the search term
+      );
+    }
+  
 
   getBadgeClass(status: string): string {
     switch (status) {

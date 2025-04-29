@@ -16,6 +16,9 @@ import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.serv
 export class DealsComponent {
 
   deals: any[] = [];
+  filteredDeals: any[] = []; //searching
+
+  searchTerm: string = '';  // The variable to bind to the search input
 
   constructor(private salesLeadsService: SalesLeadsService) {}
 
@@ -37,8 +40,42 @@ export class DealsComponent {
         status: item.dealStatus,
         salesLeadId: item.salesLeadId
       }));
+
+      this.filteredDeals = this.deals; // initialize filteredDeals
     });
   }
+
+    
+  // This function will be called when the search term changes
+  onSearchChange(searchTerm: string): void {
+    this.searchTerm = searchTerm; // Update the searchTerm
+    this.filterDeals(searchTerm);  // Filter deals based on the search term
+  }
+
+  filterDeals(searchTerm: string): void {
+    const term = searchTerm.toLowerCase().trim();  // Convert search term to lowercase
+    if (!term) {
+      this.filteredDeals = this.deals;  // If no search term, show all deals
+      return;
+    }
+
+    // Filter deals based on the search term
+    this.filteredDeals = this.deals.filter(deal =>
+      [
+        deal.leadName,
+        deal.dealName,
+        deal.serviceName,
+        deal.status,
+        deal.proposedDate,
+        deal.closedDate
+      ]
+        .map(field => (field || '').toString().toLowerCase())
+        .some(field => field.includes(term))
+    );
+  }
+       
+
+
 
   getBadgeClass(status: string): string {
     switch (status) {

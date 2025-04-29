@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.service';
 import { SalesLeadInterface } from './sales-lead-interface';
 import { DealstableheaderComponent } from '../../../components/DealsComponent/dealstableheader/dealstableheader.component';
+import { PaginationComponent } from '../../../components/pagination/pagination.component';
 
 @Component({
   selector: 'app-salesleads',
   standalone: true,
- imports: [CommonModule,FormsModule,DealstableheaderComponent ],
+ imports: [CommonModule,FormsModule,DealstableheaderComponent,PaginationComponent],
   templateUrl: './salesleads.component.html',
   styleUrl: './salesleads.component.css'
 })
@@ -17,7 +18,11 @@ export class SalesleadsComponent implements OnInit {
 
   qualifiedLeads: SalesLeadInterface[] = [];  // Array to hold qualified leads
     allQualifiedLeads: SalesLeadInterface[] = [];  // Keep a backup of original leads
+
     searchText: string = '';  
+
+    currentPage: number = 1;
+    itemsPerPage: number = 3;
 
   constructor(private salesLeadsService: SalesLeadsService) {}
 
@@ -40,6 +45,21 @@ export class SalesleadsComponent implements OnInit {
     );
   }
 
+  
+  // ✅ Pagination logic
+  updatePaginatedLeads(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.qualifiedLeads = this.allQualifiedLeads.slice(startIndex, endIndex);
+  }
+
+  // ✅ Triggered when pagination changes
+  onPageChanged(newPage: number): void {
+    this.currentPage = newPage;
+    this.updatePaginatedLeads();
+  }
+
+
     // Filter leads based on search text
     filterLeads(searchText: string): void {
       // Use the passed search text directly
@@ -53,6 +73,7 @@ export class SalesleadsComponent implements OnInit {
         lead.lead.leadsource.sourceType.toLowerCase().includes(text) ||
         lead.lead.leadsource.crmService.serviceName.toLowerCase().includes(text)
       );
+      this.updatePaginatedLeads();
     }
   
 

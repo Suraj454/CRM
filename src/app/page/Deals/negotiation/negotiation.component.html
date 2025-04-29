@@ -1,5 +1,7 @@
 
-<app-dealstableheader></app-dealstableheader>
+<app-dealstableheader
+(searchLeads)="onSearchTermChange($event)"
+></app-dealstableheader>
 
 <!-- Negotiation Table -->
 <div class="overflow-x-auto bg-white rounded-xl shadow-lg p-6 border border-gray-300">
@@ -19,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let negotiation of negotiations; let i = index"
+      <tr *ngFor="let negotiation of filteredNegotiations; let i = index"
           [ngClass]="{
             'bg-gray-50': i % 2 === 0,
             'bg-white': i % 2 !== 0

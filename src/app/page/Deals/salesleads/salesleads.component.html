@@ -130,3 +130,10 @@
     </div>
   </div>
 </div>
+
+<app-pagination
+  [totalItems]="allQualifiedLeads.length"
+  [itemsPerPage]="itemsPerPage"
+  [currentPage]="currentPage"
+  (pageChanged)="onPageChanged($event)">
+</app-pagination>
