@@ -7,12 +7,13 @@ export interface SalesLeadInterface {
         leadsource: LeadSourceInterface;
         leadId: number;
         leadName: string;
+        
     };  // This will be the source lead data
     leadStatus: string;
     timeStamp: string;
     proposedValue: number;
     proposedDate: string | null;
-    closedDate: string | null;
+    closedDate: string ;
     closedValue: number ;
     dealName: string;
     dealStatus:string

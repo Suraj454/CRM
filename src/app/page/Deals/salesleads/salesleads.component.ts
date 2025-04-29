@@ -64,6 +64,7 @@ export class SalesleadsComponent implements OnInit {
   }
 
   showEmailModal = false;
+  
   emailForm = {
     to: '',
     subject: '',
@@ -99,13 +100,19 @@ export class SalesleadsComponent implements OnInit {
     if (this.currentLeadId === null) return;
 
     this.showEmailModal = false;
+
+
+  const now = new Date();
+  const proposedDate = now.toISOString();  // or format it as needed
+
   
     const emailPayload = {
       recipient: this.emailForm.to,
       subject: this.emailForm.subject,
       msgBody: this.emailForm.body,
       attachment: this.emailForm.attachment ? this.emailForm.attachment.name : '',
-      dealValue: parseFloat(this.emailForm.proposedValue) || 0
+      dealValue: parseFloat(this.emailForm.proposedValue) || 0,
+      proposedDate: proposedDate  // ✅ Include current timestamp
     };
   
     this.salesLeadsService.sendEmailToLead(this.currentLeadId, emailPayload).subscribe({

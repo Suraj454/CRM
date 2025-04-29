@@ -26,12 +26,13 @@ export class NegotiationComponent implements OnInit {
     this.salesLeadsService.getNegotiations().subscribe(data => {
       this.negotiations = data.map(item => ({
         leadName: item.lead.leadsource.leadName,   // Extract only the necessary fields
-        dealName: item.dealName,
         serviceName: item.lead.leadsource.crmService.serviceName,
+        dealName: item.dealName,
         proposedDate: item.proposedDate,
-        closeddDate: item.closedDate,
         proposedValue: item.proposedValue,
         actualValue: item.lead.leadsource.crmService.price || 0,  // Handle null closed value
+        closedValue: item.closedValue,
+        closedDate: item.closedDate,
         status: item.dealStatus,
         salesLeadId: item.salesLeadId // Assuming the `id` is available in the respons
       }));
@@ -132,7 +133,7 @@ export class NegotiationComponent implements OnInit {
       dealName: '' ,
       serviceName:negotiation.serviceName || '',
       proposedValue: negotiation.proposedValue || null,
-      closedValue: negotiation.actualValue || null,
+      closedValue: 0,
       proposedDate: negotiation.proposedDate || '',
       closedDate: '',
       dealStatus: negotiation.dealStatus
