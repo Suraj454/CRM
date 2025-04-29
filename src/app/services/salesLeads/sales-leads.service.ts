@@ -10,7 +10,6 @@ export class SalesLeadsService {
 
   private apiUrl = 'http://localhost:8080/salesLeads/qualified'; // Adjust the base URL as per your environment settings
   private negotiationsUrl = 'http://localhost:8080/salesLeads/getNego'; // URL for fetching negotiations
-  private updateUrl = 'http://localhost:8080/salesLeads/updateNego';
 
   constructor(private http: HttpClient) {}
 
@@ -28,13 +27,18 @@ export class SalesLeadsService {
     return this.http.get<SalesLeadInterface[]>(this.negotiationsUrl); // Fetch negotiations data from the new API
   }
 
+  updateNegotiation(id: number, updatedData: SalesLeadInterface | any): Observable<any> {
+    return this.http.put(`http://localhost:8080/salesLeads/updateNego/${id}`, updatedData);
+  }
 
-  updateNegotiation(id: number, negotiation: SalesLeadInterface): Observable<any> {
-    return this.http.post(`${this.updateUrl}/${id}`, negotiation);
+  getWonDeals(): Observable<SalesLeadInterface[]> {
+    return this.http.get<SalesLeadInterface[]>('http://localhost:8080/salesLeads/wins');
+  }
+
 
   
 }
-}
+
 // 'http://localhost:8080/salesLeads/getNego
 
 
@@ -50,7 +54,7 @@ export class SalesLeadsService {
 
 // 'http://localhost:8080/salesLeads/updateNego/{id}
 
-// @PostMapping("/updateNego/{id}")
+// @PutMapping("/updateNego/{id}")
 // public ResponseEntity<String> update(@RequestBody SalesLead salesLead, @PathVariable int id) {
 //     // Fetch the existing SalesLead from the database by id
 //     Optional<SalesLead> existingSalesLead = salesLeadService.findbyId(id);
@@ -73,4 +77,16 @@ export class SalesLeadsService {
 //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sales Lead not found!");
 //     }
 // }
+
+
+//http://localhost:8080/salesLeads/wins
+
+// @GetMapping("/wins")
+// public List<SalesLead> getDeals(){
+//     return salesLeadService.getall().stream().filter(
+//             salesLead -> salesLead.getDealStatus().equals(SalesLeadStatus.WON)
+//     ).toList();
+// }
+
+
 

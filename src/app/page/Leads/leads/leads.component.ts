@@ -120,6 +120,7 @@ onPageChange(page: number) {
           leadSourceId: item.leadsource.leadSourceId,
           timeDate: item.timeStamp
         }));
+        
         this.leads = [...this.allLeads];
         this.updateDisplayedLeads();
       },

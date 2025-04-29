@@ -1,67 +1,54 @@
-// import { Component } from '@angular/core';
-// import { ClientTableComponent } from '../../components/client-table/client-table.component';
-
-// @Component({
-//   selector: 'app-deals',
-//   imports: [],
-//   templateUrl: './deals.component.html',
-//   styleUrl: './deals.component.css'
-// })
-// export class DealsComponent {
-
-// }
-
-
 
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
-import { DataTableComponent } from '../../../data-table/data-table.component';
 import { DealstableheaderComponent } from '../../../components/DealsComponent/dealstableheader/dealstableheader.component';
+import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.service';
 
 @Component({
   selector: 'app-deals',
   standalone: true,
-  imports: [CommonModule, DataTableComponent,DealstableheaderComponent,PaginationComponent],
+  imports: [CommonModule,PaginationComponent,DealstableheaderComponent],
   templateUrl: './deals.component.html',
    styleUrl: './deals.component.css'
 })
 
 export class DealsComponent {
-  columns = [
-    { field: 'name', header: 'Deal Name' },
-    { field: 'companyname', header: 'Company Name' },
-    { field: 'phone', header: 'Phone' },
-    { field: 'dealamount', header: 'Deal Amount' },
-    { field: 'status', header: 'Deal Status' },
-    { field: 'closeDate', header: 'Close Date' }
-  ];
 
-  deals = [
-    { name: 'Naved', companyname: 'Company A', phone:'12345677', dealamount: '20,000', status: 'New', closeDate: new Date('2024-01-05') },
-    { name: 'Suraj', companyname: 'Company B', phone:'12345677',  dealamount: '50,000', status: 'Contacted', closeDate: new Date('2024-02-12') },
-    // ...more leadsPhone
-  ];
+  deals: any[] = [];
+
+  constructor(private salesLeadsService: SalesLeadsService) {}
+
+  ngOnInit(): void {
+    this.fetchWonDeals();
+  }
+
+  fetchWonDeals(): void {
+    this.salesLeadsService.getWonDeals().subscribe(data => {
+      this.deals = data.map(item => ({
+        leadName: item.lead.leadsource.leadName,
+        dealName: item.dealName,
+        serviceName: item.lead.leadsource.crmService.serviceName,
+        proposedDate: item.proposedDate,
+        closedDate: item.closedDate,
+        proposedValue: item.proposedValue,
+        actualValue: item.lead.leadsource.crmService.price || 0,
+        closedValue: item.closedValue || 0,
+        status: item.dealStatus,
+        salesLeadId: item.salesLeadId
+      }));
+    });
+  }
 
   getBadgeClass(status: string): string {
     switch (status) {
-      case 'New': return 'bg-blue-200 text-blue-800';
-      case 'Contacted': return 'bg-green-200 text-green-800';
-      case 'Qualified': return 'bg-purple-200 text-purple-800';
-      default: return 'bg-gray-200 text-gray-800';
+      case 'WON':
+        return 'bg-green-200 text-green-800';
+      default:
+        return 'bg-gray-200 text-gray-800';
     }
   }
 
-  editUser(deals: any) {
-    console.log('Editing lead:', deals);
-  }
-
-  deleteUser(deals: any) {
-    console.log('Deleting lead:', deals);
-  }
-
-  showOptions(deals: any) {
-    console.log('Options for lead:', deals);
-  }
+  
 }
 

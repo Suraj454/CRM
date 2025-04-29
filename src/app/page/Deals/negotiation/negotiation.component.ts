@@ -32,7 +32,8 @@ export class NegotiationComponent implements OnInit {
         closeddDate: item.closedDate,
         proposedValue: item.proposedValue,
         actualValue: item.lead.leadsource.crmService.price || 0,  // Handle null closed value
-        status: item.lead.leadStatus
+        status: item.dealStatus,
+        salesLeadId: item.salesLeadId // Assuming the `id` is available in the respons
       }));
     });
   }
@@ -41,11 +42,11 @@ export class NegotiationComponent implements OnInit {
     switch (status) {
       case 'PROPOSED':
         return 'bg-yellow-200 text-yellow-800';
-      case 'IN NEGOTIATION':
+      case 'NEGOTIATION':
         return 'bg-yellow-200 text-yellow-800';
-      case 'OFFER ACCEPTED':
+      case 'WON':
         return 'bg-green-200 text-green-800';
-      case 'OFFER REJECTED':
+      case 'Lost':
         return 'bg-red-200 text-red-800';
       default:
         return 'bg-gray-200 text-gray-800';
@@ -54,52 +55,87 @@ export class NegotiationComponent implements OnInit {
 
 
 
-  // Negotiation Form Modal
+  // Negotiation Form Modal logic
+
+  
 
   showNegotiationModal = false;
 
   negotiationForm = {
+    salesLeadId: 0,
     dealName: '',
     serviceName:'',
-    proposedValue: null,
-    closedValue: null,
+    proposedValue: 0,
+    closedValue: 0,
     proposedDate: '',
-    closedDate: ''
+    closedDate: '',
+    dealStatus:''
   };
   
 
-  editNegotiation(negotiation: any): void {
-    console.log('Edit negotiation:', negotiation);
-    // Open modal or navigate to edit form
-  }
+  // editNegotiation(negotiation: any): void {
+  //   console.log('Edit negotiation:', negotiation);
+  //   // Open modal or navigate to edit form
+  // }
 
-  deleteNegotiation(negotiation: any): void {
-    console.log('Delete negotiation:', negotiation);
-    // Confirm and delete logic here
-  }
+  // deleteNegotiation(negotiation: any): void {
+  //   console.log('Delete negotiation:', negotiation);
+  //   // Confirm and delete logic here
+  // }
 
   
 
   markAsWon(): void {
+
     console.log('Marked as WON:', this.negotiationForm);
+
     this.showNegotiationModal = false;
     // Save/update status logic here
+
+    this.negotiationForm.dealStatus = 'WON';
+    
+    this.salesLeadsService.updateNegotiation(this.negotiationForm.salesLeadId, this.negotiationForm).subscribe({
+      next: (response) => {
+        console.log('Negotiation status updated successfully:', response);
+        this.fetchNegotiations(); // Refresh the list after updating
+      },
+      error: (error) => {
+        console.error('Error updating negotiation status:', error);
+      }
+    });
   }
   
   markAsLost(): void {
     console.log('Marked as LOST:', this.negotiationForm);
     this.showNegotiationModal = false;
+
     // Save/update status logic here
+    this.negotiationForm.dealStatus = 'LOST';
+
+    this.salesLeadsService.updateNegotiation(this.negotiationForm.salesLeadId, this.negotiationForm).subscribe({
+      next: (response) => {
+        console.log('Negotiation status updated successfully:', response);
+        this.fetchNegotiations(); // Refresh the list after updating
+      },
+      error: (error) => {
+        console.error('Error updating negotiation status:', error);
+      }
+    });
+
   }
+
+  
 
   openNegotiationModal(negotiation: any): void {
     this.negotiationForm = {
+      salesLeadId: negotiation.salesLeadId,
       dealName: '' ,
       serviceName:negotiation.serviceName || '',
       proposedValue: negotiation.proposedValue || null,
       closedValue: negotiation.actualValue || null,
       proposedDate: negotiation.proposedDate || '',
-      closedDate: ''
+      closedDate: '',
+      dealStatus: negotiation.dealStatus
     };
     this.showNegotiationModal = true;
   }

@@ -15,4 +15,5 @@ export interface SalesLeadInterface {
     closedDate: string | null;
     closedValue: number ;
     dealName: string;
+    dealStatus:string
 }

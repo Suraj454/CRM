@@ -61,7 +61,7 @@
       <form #leadForm="ngForm" (ngSubmit)="saveLeadSource()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <!-- Lead Name -->
-        <div>
+        <div *ngIf="">
           <label for="leadName" class="block font-medium mb-2">Lead Name</label>
           <div class="flex items-center border border-gray-300 rounded-lg px-3">
             <i class="fas fa-user text-gray-400 mr-2"></i>
@@ -135,10 +135,11 @@
             <select id="serviceId" [(ngModel)]="newLeadSource.crmService" name="serviceId" required
               class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
               <option value="" disabled selected>Select Service</option>
-              <option value="1">Service1</option>
-              <option value="2">Service2</option>
-              <option value="3">Service3</option>
-              <option value="4">Service4</option>
+              <option value="1">Digital Transformation & Automation</option>
+              <option value="2">Cloud & Infrastructure Services</option>
+              <option value="3">Custom Software & Application Development	</option>
+              <option value="4">Data & Analytics</option>
+              <option value="5">IT Consulting & Managed Services</option>
             </select>
             <i class="fas fa-cogs absolute top-3 left-3 text-gray-400"></i>
           </div>

@@ -15,14 +15,20 @@ import { PaginationComponent } from '../../../components/pagination/pagination.c
   styleUrl: './lead-source.component.css'
 })
 export class LeadSourceComponent {
-  leadSources: LeadSourceInterface[] = []; // All lead sources
-  
-  displayedLeadSources: LeadSourceInterface[] = []; // Lead sources for the current page
-  
+
+  leadSources: LeadSourceInterface[] = [];
   showModal = false;
   isEditMode = false;
   editingLeadId: number | null = null;
+
+  displayedLeadSources: LeadSourceInterface[] = []; // Lead sources for the current page
+
+    // Pagination variables
+    currentPage: number = 1;
+    itemsPerPage: number = 5;   
   
+  
+
   newLeadSource: LeadSourceInterface = {
     sourceType: '',
     crmService: 0,
@@ -31,15 +37,12 @@ export class LeadSourceComponent {
     companyName: '',
     companyAdd: '',
     leadEmail: '',
-    leadSourceId: 0,
+    leadSourceId:0,
     timeStamp: ''
+
   };
 
-  // Pagination variables
-  currentPage: number = 1;
-  itemsPerPage: number = 5;   
-
-  constructor(private leadSourceService: LeadsourceService) {}
+  constructor(private leadSourceService: LeadsourceService) { }
 
   ngOnInit() {
     this.fetchLeadSources();
@@ -58,19 +61,20 @@ export class LeadSourceComponent {
     });
   }
 
-  // Function to update displayed leads based on current page
-  updateDisplayedLeads() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
+    // Function to update displayed leads based on current page
+    updateDisplayedLeads() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      
+      // Slice the leadSources array based on the current page and itemsPerPage
+      this.displayedLeadSources = this.leadSources.slice(startIndex, endIndex);
+    }
+    // This method will be called when the page is changed
+    onPageChange(page: number) {
+      this.currentPage = page;  // Set current page
+      this.updateDisplayedLeads();  // Update the displayed leads based on the page
+    }
     
-    // Slice the leadSources array based on the current page and itemsPerPage
-    this.displayedLeadSources = this.leadSources.slice(startIndex, endIndex);
-  }
-  // This method will be called when the page is changed
-  onPageChange(page: number) {
-    this.currentPage = page;  // Set current page
-    this.updateDisplayedLeads();  // Update the displayed leads based on the page
-  }
   addLeadSource() {
     this.resetForm();
     this.showModal = true;
@@ -82,52 +86,58 @@ export class LeadSourceComponent {
     this.resetForm();
   }
 
-  saveLeadSource() {
-    const payload = {
-      ...this.newLeadSource,
-      crmService: typeof this.newLeadSource.crmService === 'object'
-        ? this.newLeadSource.crmService.serviceId
-        : this.newLeadSource.crmService
-    };
 
-    // Check for duplicates before calling API
-    const isDuplicate = this.leadSources.some(ls =>
-      ls.leadName.trim().toLowerCase() === this.newLeadSource.leadName.trim().toLowerCase() &&
-      ls.leadEmail.trim().toLowerCase() === this.newLeadSource.leadEmail.trim().toLowerCase() &&
-      (!this.isEditMode || ls.leadSourceId !== this.editingLeadId) // skip match if editing current item
-    );
+saveLeadSource() {
 
-    if (isDuplicate) {
-      alert('Lead with same name and email already exists!');
-      return;
-    }
+  const payload = {
+    ...this.newLeadSource,
+    crmService: typeof this.newLeadSource.crmService === 'object'
+      ? this.newLeadSource.crmService.serviceId
+      : this.newLeadSource.crmService
+  };
 
-    if (this.isEditMode && this.editingLeadId !== null) {
-      // Update existing lead
-      this.leadSourceService.updateLeadSource(this.editingLeadId, payload).subscribe({
-        next: () => {
-          console.log('Lead source updated successfully');
-          this.fetchLeadSources();  // Re-fetch data after update
-          this.closeModal();
-        },
-        error: (error) => {
-          console.error('Error updating lead source:', error);
-        }
-      });
-    } else {
-      // Create new lead
-      this.leadSourceService.createLeadSource(payload).subscribe({
-        next: (response) => {
-          console.log('Lead source saved successfully:', response);
-          this.fetchLeadSources();  // Re-fetch data after saving
-          this.closeModal();
-        },
-        error: (error) => {
-          console.error('Error saving lead source:', error);
-        }
-      });
-    }
+
+   // 🛑 Check for duplicates before calling API
+   const isDuplicate = this.leadSources.some(ls =>
+    ls.leadName.trim().toLowerCase() === this.newLeadSource.leadName.trim().toLowerCase() &&
+    ls.leadEmail.trim().toLowerCase() === this.newLeadSource.leadEmail.trim().toLowerCase() &&
+    (!this.isEditMode || ls.leadSourceId !== this.editingLeadId) // skip match if editing current item
+  );
+
+  if (isDuplicate) {
+    alert('Lead with same name and email already exists!');
+    return;
   }
+
+
+  if (this.isEditMode && this.editingLeadId !== null) {
+    // ✅ Update existing lead
+    this.leadSourceService.updateLeadSource(this.editingLeadId, payload).subscribe({
+      next: () => {
+        console.log('Lead source updated successfully');
+        this.fetchLeadSources();
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error updating lead source:', error);
+      }
+    });
+  } else {
+    // ✅ Create new lead
+    this.leadSourceService.createLeadSource(payload).subscribe({
+      next: (response) => {
+        console.log('Lead source saved successfully:', response);
+        this.fetchLeadSources();
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error saving lead source:', error);
+      }
+    });
+  }
+
+}
+
 
   onEditLead(lead: LeadSourceInterface) {
     this.newLeadSource = { ...lead }; // Clone to avoid reference issues
@@ -159,11 +169,10 @@ export class LeadSourceComponent {
       companyName: '',
       companyAdd: '',
       leadEmail: '',
-      leadSourceId: 0,
+      leadSourceId:0,
       timeStamp: ''
     };
     this.editingLeadId = null;
     this.isEditMode = false;
   }
- 
 }
