@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { LeadcardsComponent } from '../../../components/LeadsComponent/leadcards/leadcards.component';
-import { RecentActivityComponent } from '../../../components/LeadsComponent/recent-activity/recent-activity.component';
-
-
-
-
+import { LeadsChartsComponent } from '../../../components/LeadsComponent/leads-charts/leads-charts.component';
 @Component({
   selector: 'app-lead-dashboard',
-  imports: [LeadcardsComponent,RecentActivityComponent],
+  imports: [LeadcardsComponent, LeadsChartsComponent],
+  standalone: true,
   templateUrl: './lead-dashboard.component.html',
   styleUrl: './lead-dashboard.component.css'
 })

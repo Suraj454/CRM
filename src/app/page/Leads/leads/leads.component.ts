@@ -26,7 +26,7 @@ export class LeadsComponent implements OnInit {
 
   displayedLeads: Lead[] = [];  // Leads for the current page
   currentPage: number = 1;      // Current page
-  itemsPerPage: number = 3;     // Number of leads per page
+  itemsPerPage: number = 8;     // Number of leads per page
 
 
   timenow:string|any=''
@@ -153,43 +153,52 @@ export class LeadsComponent implements OnInit {
   // }
 
   addLeadFromSource(source: LeadSourceInterface): void {
-    const leadId = source.leadSourceId;
+    const leadSourceId = source.leadSourceId;
     const timenow = new Date().toISOString();
     console.log('Current time:', timenow);
   
-    this.leadService.addLead(leadId, timenow).subscribe({
+    this.leadService.addLead(leadSourceId, timenow).subscribe({
       next: (item: any) => {
+        if (!item || !item.leadId) {
+          console.warn('Lead not returned from backend. Refetching lead list instead.');
+          this.loadLeads(); // fallback: refresh entire list
+          this.showPreviewRow = false;
+          return;
+        }
+  
         const newLead: Lead = {
           leadId: item.leadId,
-          leadName: item.leadsource.leadName,
-          sourceType: item.leadsource.sourceType,
+          leadName: item.leadsource?.leadName || '',
+          sourceType: item.leadsource?.sourceType || '',
           crmService: {
-            serviceName: item.leadsource.crmService.serviceName
+            serviceName: item.leadsource?.crmService?.serviceName || ''
           },
-          contactNo: item.leadsource.contactNo,
-          companyName: item.leadsource.companyName,
-          companyAdd: item.leadsource.companyAdd,
-          leadEmail: item.leadsource.leadEmail,
-          leadStatus: item.leadStatus,
-          leadSourceId: item.leadsource.leadSourceId,
-          timeDate: item.timeStamp
+          contactNo: item.leadsource?.contactNo || '',
+          companyName: item.leadsource?.companyName || '',
+          companyAdd: item.leadsource?.companyAdd || '',
+          leadEmail: item.leadsource?.leadEmail || '',
+          leadStatus: item.leadStatus || 'NEW_LEAD',
+          leadSourceId: item.leadsource?.leadSourceId || leadSourceId,
+          timeDate: item.timeStamp || timenow
         };
   
         this.leads.push(newLead);
-        this.allLeads.push(newLead); // Keep backup consistent
+        this.allLeads.push(newLead);
+        this.updateDisplayedLeads(); // update paginated view
         this.showPreviewRow = false;
       },
-      error: (err) => console.error('Error adding lead from source', err)
+      error: (err) => {
+        console.error('Error adding lead from source:', err);
+      }
     });
   }
   
 
-
   // Get the CSS class for a lead's status (for badges)
   getBadgeClass(status: string): string {
     switch (status) {
-      case 'NEW_LEAD': return 'bg-blue-200 text-blue-800';
-      case 'QUALIFIED': return 'bg-purple-200 text-purple-800';
+      case 'NEW_LEAD': return '	bg-blue-100 text-blue-800';
+      case 'QUALIFIED': return 'bg-purple-100 text-purple-800';
       default: return 'bg-gray-200 text-gray-800';
     }
   }
@@ -210,17 +219,21 @@ export class LeadsComponent implements OnInit {
   }
 
   // Implement the filter
-filterLeads(searchText: string): void {
-  const text = searchText.toLowerCase();
-  this.leads = this.allLeads.filter(lead =>
-    lead.leadName.toLowerCase().includes(text) ||
-    lead.leadEmail.toLowerCase().includes(text) ||
-    lead.contactNo.toLowerCase().includes(text) ||
-    lead.companyName.toLowerCase().includes(text) ||
-    lead.companyAdd.toLowerCase().includes(text) ||
-    lead.sourceType.toLowerCase().includes(text) ||
-    lead.crmService.serviceName.toLowerCase().includes(text)
-  );
+  filterLeads(searchText: string): void {
+    const text = searchText.toLowerCase();
+    this.leads = this.allLeads.filter(lead =>
+      lead.leadName.toLowerCase().includes(text) ||
+      lead.leadEmail.toLowerCase().includes(text) ||
+      lead.contactNo.toLowerCase().includes(text) ||
+      lead.companyName.toLowerCase().includes(text) ||
+      lead.companyAdd.toLowerCase().includes(text) ||
+      lead.sourceType.toLowerCase().includes(text) ||
+      lead.crmService.serviceName.toLowerCase().includes(text)
+    );
   
-}
+    this.currentPage = 1; // Reset to first page after filtering
+    this.updateDisplayedLeads(); // Important to refresh view
+  }
+  
+
 }

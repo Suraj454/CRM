@@ -21,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let negotiation of filteredNegotiations; let i = index"
+      <tr *ngFor="let negotiation of displayedNegotiations ; let i = index"
           [ngClass]="{
             'bg-gray-50': i % 2 === 0,
             'bg-white': i % 2 !== 0
@@ -30,11 +30,11 @@
         <td class="px-6 py-5 align-middle">{{ negotiation.leadName }}</td>
         <td class="px-6 py-5 align-middle">{{ negotiation.serviceName }}</td>
         <td class="px-6 py-5 align-middle">{{ negotiation.dealName }}</td>
-        <td class="px-6 py-5 align-middle">{{ negotiation.proposedDate }}</td>
+        <td class="px-6 py-5 align-middle">{{ negotiation.proposedDate | date: 'dd MMM yyyy, hh:mm a'}}</td>
         <td class="px-6 py-5 align-middle">{{ negotiation.proposedValue }}</td>
         <td class="px-6 py-5 align-middle">{{ negotiation.actualValue }}</td>
         <td class="px-6 py-5 align-middle">{{ negotiation.closedValue }}</td>
-        <td class="px-6 py-5 align-middle">{{ negotiation.closedDate }}</td>
+        <td class="px-6 py-5 align-middle">{{ negotiation.closedDate | date: 'dd MMM yyyy, hh:mm a' }}</td>
         <td class="px-6 py-5 align-middle">
           <span class="inline-block px-2 py-1 rounded text-xs font-semibold"
                 [ngClass]="getBadgeClass(negotiation.status)">
@@ -58,6 +58,12 @@
 </div>
 
 
+<app-pagination
+  [totalItems]="filteredNegotiations.length"
+  [itemsPerPage]="itemsPerPage"
+  [currentPage]="currentPage"
+  (pageChanged)="onPageChange($event)"
+></app-pagination>
 
 
 <!-- Modal Background -->
@@ -105,13 +111,14 @@
   <div>
     <label class="block text-sm font-medium text-gray-700">Proposed Value</label>
     <div class="relative mt-1">
-      <i class="fas fa-dollar-sign text-yellow-500 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+      <span class="text-yellow-500 absolute left-3 top-1/2 transform -translate-y-1/2 text-lg font-semibold">₹</span>
       <input [(ngModel)]="negotiationForm.proposedValue" 
              type="number" 
              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-400" 
              placeholder="Enter proposed value">
     </div>
   </div>
+  
 
   <div>
     <label class="block text-sm font-medium text-gray-700">Closed Value</label>
@@ -191,4 +198,6 @@
 
 
   </div>
+
+
   

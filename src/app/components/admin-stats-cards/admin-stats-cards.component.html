@@ -1,5 +1,5 @@
 <div class="p-6 bg-gray-100 min-h-fit">
-  <h2 class="text-3xl font-semibold text-gray-800 mb-6">Lead Dashboard</h2>
+  <h2 class="text-3xl font-semibold text-gray-800 mb-6">Admin Dashboard</h2>
 
   <!-- Cards Row -->
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -10,8 +10,8 @@
         <i class="fas fa-user-plus text-3xl"></i>
       </div>
       <div>
-        <h3 class="text-white text-sm font-semibold">Total Leads</h3>
-        <p class="text-3xl font-bold text-white">{{ totalLeads }}</p>
+        <h3 class="text-white text-sm font-semibold">Total Lead Sources</h3>
+        <p class="text-3xl font-bold text-white">{{ totalLeadSources }}</p>
       </div>
     </div>
 
@@ -22,7 +22,7 @@
       </div>
       <div>
         <h3 class="text-white text-sm font-semibold">New Leads</h3>
-        <p class="text-3xl font-bold text-white">{{ newLeads }}</p>
+        <p class="text-3xl font-bold text-white">{{ totalNewLeads }}</p>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
       </div>
       <div>
         <h3 class="text-white text-sm font-semibold">Qualified Leads</h3>
-        <p class="text-3xl font-bold text-white">{{ qualifiedLeads }}</p>
+        <p class="text-3xl font-bold text-white">{{ totalQualifiedLeads }}</p>
       </div>
     </div>
 
@@ -44,20 +44,10 @@
       </div>
       <div>
         <h3 class="text-white text-sm font-semibold">Proposed Leads</h3>
-        <p class="text-3xl font-bold text-white">{{ proposedLeads }}</p>
+        <p class="text-3xl font-bold text-white">{{ totalProposedLeads }}</p>
       </div>
     </div>
 
-    <!-- Negotiated Leads -->
-    <div class="bg-gradient-to-r from-orange-400 to-orange-600 rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:scale-105 transform transition duration-300">
-      <div class="bg-white text-orange-600 p-4 rounded-full shadow-md">
-        <i class="fas fa-handshake text-3xl"></i>
-      </div>
-      <div>
-        <h3 class="text-white text-sm font-semibold">Negotiated Leads</h3>
-        <p class="text-3xl font-bold text-white">{{ negotiatedLeads }}</p>
-      </div>
-    </div>
 
     <!-- Lost Leads -->
     <div class="bg-gradient-to-r from-red-400 to-red-600 rounded-2xl shadow-xl p-6 flex items-center space-x-4 hover:scale-105 transform transition duration-300">
@@ -66,7 +56,7 @@
       </div>
       <div>
         <h3 class="text-white text-sm font-semibold">Lost Leads</h3>
-        <p class="text-3xl font-bold text-white">{{ lostLeads }}</p>
+        <p class="text-3xl font-bold text-white">{{ totalLostLeads }}</p>
       </div>
     </div>
 
@@ -78,7 +68,7 @@
     </div>
     <div>
       <h3 class="text-white text-sm font-semibold">Won Deals</h3>
-      <p class="text-3xl font-bold text-white">{{ wonDeals }}</p>
+      <p class="text-3xl font-bold text-white">{{ totalWonLeads }}</p>
     </div>
   </div>
 

@@ -81,7 +81,7 @@ export const routes: Routes = [
           path: 'leadsource', 
           component: LeadSourceComponent, 
           canActivate: [authGuard], 
-          data: { roles: ['marketing'] }
+          data: { roles: ['marketing', 'admin'] }
         },
         { 
           path: 'leadreports', 

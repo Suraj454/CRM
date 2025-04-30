@@ -10,7 +10,7 @@ import { Component,Input,Output,EventEmitter } from '@angular/core';
 export class PaginationComponent {
 
   @Input() totalItems: number = 0;       // Total number of items (like leads.length)
-  @Input() itemsPerPage: number = 3;      // Items per page
+  @Input() itemsPerPage: number = 6;      // Items per page
   @Input() currentPage: number = 1;       // Current page number
 
   @Output() pageChanged = new EventEmitter<number>();   // Emit page change

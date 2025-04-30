@@ -17,8 +17,15 @@ export class DealsComponent {
 
   deals: any[] = [];
   filteredDeals: any[] = []; //searching
+  displayedDeals: any[] = [];  // Array to hold deals displayed on the current page
+
 
   searchTerm: string = '';  // The variable to bind to the search input
+
+
+  currentPage: number = 1;  // Track the current page
+  itemsPerPage: number = 5; // Number of items per page
+
 
   constructor(private salesLeadsService: SalesLeadsService) {}
 
@@ -42,8 +49,22 @@ export class DealsComponent {
       }));
 
       this.filteredDeals = this.deals; // initialize filteredDeals
+      this.updateDisplayedDeals();  // Initialize displayed deals on the current page
     });
   }
+
+    // Update the deals displayed on the current page
+    updateDisplayedDeals(): void {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      this.displayedDeals = this.filteredDeals.slice(startIndex, endIndex);  // Get the sliced array for pagination
+    }
+  
+    // Method to handle page change from the pagination component
+    onPageChange(page: number): void {
+      this.currentPage = page;  // Update the current page
+      this.updateDisplayedDeals();  // Update the displayed deals when the page changes
+    }
 
     
   // This function will be called when the search term changes

@@ -7,7 +7,7 @@ import { PaginationComponent } from '../../../components/pagination/pagination.c
 
 @Component({
   selector: 'app-client',
-  imports: [TableHeaderComponent,ClientTableComponent,PageHeaderComponent,PaginationComponent],
+  imports: [TableHeaderComponent,ClientTableComponent,PaginationComponent],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css'
 })

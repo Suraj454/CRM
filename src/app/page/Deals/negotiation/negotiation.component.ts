@@ -4,11 +4,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DealstableheaderComponent } from '../../../components/DealsComponent/dealstableheader/dealstableheader.component';
 import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.service';
+import { PaginationComponent } from '../../../components/pagination/pagination.component';
 
 @Component({
   selector: 'app-negotiation',
   standalone: true,
-  imports: [CommonModule, FormsModule,DealstableheaderComponent ],
+  imports: [CommonModule, FormsModule, DealstableheaderComponent,PaginationComponent],
   templateUrl: './negotiation.component.html',
   styleUrl: './negotiation.component.css'
 })
@@ -16,6 +17,14 @@ export class NegotiationComponent implements OnInit {
 
   negotiations: any[] = []; // Array to hold the fetched negotiation data
   filteredNegotiations: any[] = [];  // Array to hold the filtered negotiations
+  displayedNegotiations: any[] = [];  // Array to hold negotiations displayed on the current page
+
+ // pagination
+ 
+  currentPage: number = 1;  // Track the current page
+  itemsPerPage: number = 5; // Number of items per page
+  
+  
   searchTerm: string = '';  // Variable to bind to the search input
 
 
@@ -40,6 +49,8 @@ export class NegotiationComponent implements OnInit {
         salesLeadId: item.salesLeadId // Assuming the `id` is available in the respons
       }));
       this.filteredNegotiations = this.negotiations;  // Initialize filtered negotiations
+      this.updateDisplayedNegotiations();  // Initialize displayed negotiations
+      
     });
   }
 
@@ -71,21 +82,36 @@ export class NegotiationComponent implements OnInit {
           .map(field => (field || '').toString().toLowerCase())  // Convert fields to lowercase
           .some(field => field.includes(term))  // Check if any field includes the search term
       );
+
+      this.updateDisplayedNegotiations();  // Update displayed negotiations after filtering
+
     }
+
+
+      // Update the negotiations displayed on the current page
+  updateDisplayedNegotiations(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedNegotiations = this.filteredNegotiations.slice(startIndex, endIndex);
+  }
+
+  // Method to handle page change from the pagination component
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.updateDisplayedNegotiations(); // Update displayed negotiations when page changes
+  }
   
 
   getBadgeClass(status: string): string {
     switch (status) {
       case 'PROPOSED':
-        return 'bg-yellow-200 text-yellow-800';
-      case 'NEGOTIATION':
-        return 'bg-yellow-200 text-yellow-800';
+        return '	bg-yellow-100 text-yellow-800';
       case 'WON':
-        return 'bg-green-200 text-green-800';
+        return 'bg-green-100 text-green-800';
       case 'Lost':
         return 'bg-red-200 text-red-800';
       default:
-        return 'bg-gray-200 text-gray-800';
+        return 'bg-red-100 text-red-800';
     }
   }
 

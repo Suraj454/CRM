@@ -79,7 +79,7 @@ export class SalesleadsComponent implements OnInit {
 
   getBadgeClass(status: string): string {
     switch (status) {
-      case 'QUALIFIED': return 'bg-purple-200 text-purple-800';
+      case 'NEW_LEAD': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-200 text-gray-800';
     }
   }

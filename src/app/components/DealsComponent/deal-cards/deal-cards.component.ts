@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { LeadsourceService } from '../../../services/leadsourceServices/leadsource.service';
-import { LeadservicesService } from '../../../services/leadServices/leadservices.service';
+// import { LeadsourceService } from '../../../services/leadsourceServices/leadsource.service';
+// import { LeadservicesService } from '../../../services/leadServices/leadservices.service';
+import { SalesLeadsService } from '../../../services/salesLeads/sales-leads.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -10,34 +11,29 @@ import { forkJoin } from 'rxjs';
   styleUrl: './deal-cards.component.css'
 })
 export class DealCardsComponent {
-  totalLeadSources: number = 0;
+
 
   totalNewLeads: number = 0;
   totalProposedLeads: number = 0;
-  totalWonLeads: number = 0;
   totalLostLeads: number = 0;
+  totalWonLeads: number = 0;
 
-  constructor(
-    private leadSourceService: LeadsourceService,
-    private leadService: LeadservicesService
-  ) {}
+  constructor(private salesLeadsService: SalesLeadsService) {}
 
-  ngOnInit() {
-    this.loadDashboardData();
+  ngOnInit(): void {
+    this.loadSalesDashboardData();
   }
 
-  loadDashboardData() {
+  loadSalesDashboardData(): void {
     forkJoin({
-      leadSources: this.leadSourceService.getLeadSources(),
-      allLeads: this.leadService.getLeads()
-    }).subscribe(({ leadSources, allLeads }) => {
-      this.totalLeadSources = leadSources.length;
-
-      this.totalNewLeads = allLeads.filter(lead => lead.leadStatus === 'NEW_LEAD').length;
-      this.totalProposedLeads = allLeads.filter(lead => lead.leadStatus === 'PROPOSED').length;
-      this.totalWonLeads = allLeads.filter(lead => lead.leadStatus === 'WON').length;
-      this.totalLostLeads = allLeads.filter(lead => lead.leadStatus === 'LOST').length;
+      qualifiedLeads: this.salesLeadsService.getQualifiedLeads(),
+      negotiations: this.salesLeadsService.getNegotiations(),
+      wonDeals: this.salesLeadsService.getWonDeals()
+    }).subscribe(({ qualifiedLeads, negotiations, wonDeals }) => {
+      this.totalNewLeads = qualifiedLeads.filter(lead => lead.dealStatus === 'NEW_LEAD').length;
+      this.totalProposedLeads = negotiations.filter(lead => lead.dealStatus === 'PROPOSED').length;
+      this.totalLostLeads = negotiations.filter(lead => lead.dealStatus === 'LOST').length;
+      this.totalWonLeads = wonDeals.length;
     });
   }
-
 }
