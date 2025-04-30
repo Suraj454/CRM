@@ -9,13 +9,13 @@
 
         <!-- Search Input -->
         <form class="flex items-center w-full md:w-80">
-          <label for="search" class="sr-only">Search leads</label>
+          <label for="search" class="sr-only">Search </label>
           <div class="relative w-full">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
               <i class="fas fa-search"></i>
             </div>
             <input type="text" id="search" [(ngModel)]="searchTerm" (input)="onSearchChange()"
-              placeholder="Search leads..." name="search"
+              placeholder="Search " name="search"
               class="block w-full p-2 pl-10 text-sm text-white border border-gray-700 rounded-lg bg-gray-800 focus:ring-blue-500 focus:border-blue-500" />
           </div>
         </form>

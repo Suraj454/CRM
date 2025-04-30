@@ -9,35 +9,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+ 
   roleName: string = 'Dashboard';
   username: string = 'User';
-
 
   ngOnInit(): void {
     const role = localStorage.getItem('role')?.toLowerCase();
     const storedUsername = localStorage.getItem('username');
 
-    if (storedUsername) {
+    if (storedUsername && storedUsername.trim() !== '') {
       this.username = storedUsername;
     }
 
-
-    if (role === 'marketing') {
-      this.roleName = 'Marketing';
-    } else if (role === 'salesperson') {
-      this.roleName = 'Sales';
-    } else if (role === 'admin') {
-      this.roleName = 'Admin';
-    } else if (role === 'client') {
-      this.roleName = 'Client';
-    } else if (role === 'support') {
-      this.roleName = 'Support';
-    } else {
-      this.roleName = 'Dashboard';
+    switch (role) {
+      case 'marketing':
+        this.roleName = 'Marketing';
+        break;
+      case 'salesperson':
+        this.roleName = 'Sales';
+        break;
+      case 'admin':
+        this.roleName = 'Admin';
+        break;
+      case 'client':
+        this.roleName = 'Client';
+        break;
+      case 'support':
+        this.roleName = 'Support';
+        break;
+      default:
+        this.roleName = 'Dashboard';
+        break;
     }
-
-}
-
+  }
     
   }
 

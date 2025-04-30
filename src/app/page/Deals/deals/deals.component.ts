@@ -27,6 +27,7 @@ export class DealsComponent {
   itemsPerPage: number = 5; // Number of items per page
 
 
+
   constructor(private salesLeadsService: SalesLeadsService) {}
 
   ngOnInit(): void {
@@ -93,6 +94,8 @@ export class DealsComponent {
         .map(field => (field || '').toString().toLowerCase())
         .some(field => field.includes(term))
     );
+    this.updateDisplayedDeals();  // After filtering, update the displayed deals
+
   }
        
 
@@ -107,6 +110,25 @@ export class DealsComponent {
     }
   }
 
-  
+  showToast: boolean = false;
+toastMessage: string = ''
+
+showPopupMessage(message: string): void {
+  this.toastMessage = message;
+  this.showToast = true;
+  console.log('Popup Message:', message); // Th
+
+  setTimeout(() => {
+    this.showToast = false;
+    this.toastMessage = '';
+  }, 3000); // hide after 3 seconds
+}
+
+generateCredentials(): void {
+  // your logic to generate credentials
+
+  this.showPopupMessage('Mail sent successfully!');
+}
+
 }
 

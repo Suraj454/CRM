@@ -12,7 +12,7 @@ export interface SalesLeadInterface {
     leadStatus: string;
     timeStamp: string;
     proposedValue: number;
-    proposedDate: string | null;
+    proposedDate: string;
     closedDate: string ;
     closedValue: number ;
     dealName: string;

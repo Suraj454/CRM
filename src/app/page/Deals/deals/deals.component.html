@@ -3,6 +3,11 @@
 (searchLeads)="onSearchChange($event)">
 ></app-dealstableheader>
 
+<div *ngIf="showToast" 
+     class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-blue-500 text-white px-6 py-3 rounded-2xl shadow-xl transition-opacity duration-300 font-semibold text-center">
+  {{ toastMessage }}
+</div>
+
 <!-- Deals Table -->
 <div class="overflow-x-auto bg-white rounded-xl shadow-lg p-6 border border-gray-300">
   <table class="min-w-full text-sm text-gray-800 table-auto">
@@ -41,7 +46,13 @@
             {{ deal.status }}
           </span>
         </td>
-        <td class="px-6 py-5 align-middle text-gray-500 italic">—</td>
+        
+        <td class="px-6 py-5 align-middle space-x-2">
+          <button title="Generate Credentials" (click)="generateCredentials()" class="text-green-600 hover:text-green-800">
+            <i class="fas fa-key"></i>
+          </button>
+        </td>
+
       </tr>
     </tbody>
   </table>

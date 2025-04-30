@@ -59,6 +59,8 @@ export class SalesleadsComponent implements OnInit {
     this.updatePaginatedLeads();
   }
 
+  onSearchChange(searchTerm: string): void {}
+
 
     // Filter leads based on search text
     filterLeads(searchText: string): void {
@@ -120,12 +122,10 @@ export class SalesleadsComponent implements OnInit {
   sendEmail(): void {
     if (this.currentLeadId === null) return;
 
-    this.showEmailModal = false;
+    const now = new Date();
+    const proposedDate = now.toISOString();  // or format it as needed
 
-
-  const now = new Date();
-  const proposedDate = now.toISOString();  // or format it as needed
-
+     this.showEmailModal = false;  // Close the modal after sending the email
   
     const emailPayload = {
       recipient: this.emailForm.to,
@@ -139,6 +139,9 @@ export class SalesleadsComponent implements OnInit {
     this.salesLeadsService.sendEmailToLead(this.currentLeadId, emailPayload).subscribe({
       next: (response) => {
         console.log('Email sent successfully:', response);
+        console.log('Sending email with payload:', emailPayload);
+
+
       },
       error: (error) => {
         console.error('Error sending email:', error);
