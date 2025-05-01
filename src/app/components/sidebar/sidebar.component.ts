@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
         { name: 'Leads', link: '/leads', icon: 'fa fa-users' }, 
         { name: 'Deals', link: '/deals', icon: 'fa fa-hand-holding-usd' },
         { name: 'Clients', link: '/clients', icon: 'fa fa-building' }, // Clients (Organization)
-        { name: 'Reports', link: '/admin/reports', icon: 'fa fa-chart-pie' },
+        { name: 'Services', link: '/admin/services', icon: 'fa fa-building' },// Services (Settings/Cogs)
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }

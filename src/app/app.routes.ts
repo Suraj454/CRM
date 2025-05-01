@@ -15,7 +15,9 @@ import { ClientServiceComponent } from './page/Clients/client-service/client-ser
 import { ClientProfileComponent } from './page/Clients/client-profile/client-profile.component';
 import { ClientSupportComponent } from './page/Clients/client-support/client-support.component';
 import { DealDashboardComponent } from './page/Deals/deal-dashboard/deal-dashboard.component';
+import { AdminServices } from './page/admin-services/admin-services-interface';
 import { authGuard } from './guards/auth.guard';
+import { AdminServicesComponent } from './page/admin-services/admin-services.component';
 
 
 // export const routes: Routes = [
@@ -124,6 +126,12 @@ export const routes: Routes = [
           component: ClientSupportComponent, 
           canActivate: [authGuard], 
           data: { roles: ['client'] }
+        },
+        {
+          path: 'admin/services',
+          component: AdminServicesComponent,
+          canActivate: [authGuard],
+          data: { roles: ['admin'] }
         }
       ]
     },
