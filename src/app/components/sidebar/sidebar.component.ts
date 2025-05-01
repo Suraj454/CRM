@@ -1,49 +1,4 @@
 
-// import { Component } from '@angular/core';
-// import { RouterLink } from '@angular/router';
-// import { CommonModule } from '@angular/common';
-
-// @Component({
-//   selector: 'app-sidebar',
-//   imports: [CommonModule, RouterLink],
-//   templateUrl: './sidebar.component.html',
-//   styleUrls: ['./sidebar.component.css']
-// })
-// export class SidebarComponent {
-//   // Define sidebar items with Font Awesome class names
-//   sidebarItems = [
-//     {
-//       name: 'Dashboard',
-//       icon: 'fas fa-tachometer-alt',  // Font Awesome icon class
-//       link : '/dashboard'
-//     },
-//     {
-//       name: 'Leads',
-//       icon: 'fas fa-users',  // Font Awesome icon class
-//       link: '/leads'
-//     },
-//     {
-//       name: 'Deals',
-//       icon: 'fas fa-handshake',  // Font Awesome icon class
-//       link: '/deals'
-//     },
-//     {
-//       name: 'Clients',
-//       icon: 'fas fa-briefcase',  // Font Awesome icon class
-//       link: '/clients'
-//     },
-//     {
-//       name: 'Analytics',
-//       icon: 'fas fa-chart-line',  // Font Awesome icon class
-//       link: '/analytics'
-//     },
-//     {
-//       name: 'Log Out',
-//       icon: 'fas fa-sign-out-alt',  // Font Awesome icon class
-//       link: '/logout'
-//     }
-//   ];
-// }
 
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -102,7 +57,6 @@ export class SidebarComponent implements OnInit {
         { name: 'Service', link: '/client/service', icon: 'fa fa-cogs' }, // Service (Settings/Cogs)
         { name: 'Support', link: '/client/support', icon: 'fa fa-life-ring' }, // Support (Help Lifesaver)
         { name: 'Profile', link: '/client/profile', icon: 'fa fa-user-circle' }, // Profile (User Circle)
-        { name: 'Dashboard', link: '/client/dashboard', icon: 'fa fa-home' }, // Dashboard (Home for client)
         { name: 'Log Out', link: '/logout', icon: 'fa fa-sign-out-alt' }
       ];
     }
@@ -127,7 +81,6 @@ export class SidebarComponent implements OnInit {
       localStorage.clear();
       this.router.navigate(['/login']);
       console.log("Log out");
-      alert("Log ")
     } else if (item.link) {
       this.router.navigate([item.link]);
     }

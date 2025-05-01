@@ -12,42 +12,55 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent {
-  username : string = '';
-  email : string = '';
-  password : string ='';
-  cfpassword : string = '';
-  roleId : number = 0;
-  constructor(private router:Router,private loginService:LoginService){}
 
-   
+    username: string = '';
+  email: string = '';
+  password: string = '';
+  cfpassword: string = '';
+  roleId: number | null = null;
 
-onSubmit() {
-  if (!this.username || !this.email || !this.password  || !this.roleId) {
-    alert('All fields are required!');
-    return;
-  }
+  constructor(private router: Router, private loginService: LoginService) {}
 
-  // if (this.password !== this.cfpassword) {
-  //   alert('Passwords do not match.');
-  //   return;
-  // }
-
-  const userData = {
-    userName: this.username,
-    emailId: this.email,
-    password: this.password,
-    roleId: this.roleId  // 👈 Send nested role object
-  };
-
-  this.loginService.signup(this.username, this.email, this.password, this.roleId).subscribe({
-    next: (res) => {
-    //  alert('Signup successful!');
-      this.router.navigate(['/login']);
-    },
-    error: (err) => {
-      console.error('Signup failed:', err);
-      alert('Something went wrong during signup.');
+  onSubmit() {
+    // Basic frontend validation
+    if (!this.username.trim() || !this.email.trim() || !this.password.trim() || !this.roleId) {
+      alert('All fields are required!');
+      return;
     }
-  });
-}
+
+    // Email format validation (basic)
+    const trimmedEmail = this.email.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailPattern.test(trimmedEmail)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // // Password match check
+    // if (this.password !== this.cfpassword) {
+    //   alert('Passwords do not match.');
+    //   return;
+    // }
+
+    // Prepare the user data
+    const userData = {
+      userName: this.username,
+      emailId: trimmedEmail,
+      password: this.password,
+      roleId: this.roleId
+    };
+
+    // Call backend API
+    this.loginService.signup(this.username, this.email, this.password, this.roleId).subscribe({
+      next: (res) => {
+        // Success redirect
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('Signup failed:', err);
+        alert('Something went wrong during signup.');
+      }
+    });
+  }
 }

@@ -1,52 +1,63 @@
-<div class="p-6 bg-gradient-to-b from-gray-100 to-gray-200 min-h-[90vh]">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-      <i class="fas fa-concierge-bell mr-2 text-blue-600"></i> My Services
-    </h2>
-  
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  
-      <!-- Service Card -->
-      <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
-        <div class="flex items-center space-x-4 mb-4">
-          <div class="bg-blue-100 p-3 rounded-full">
-            <i class="fas fa-cogs text-blue-600 text-2xl"></i>
-          </div>
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800">Website Hosting</h3>
-            <p class="text-sm text-gray-500">Active Service</p>
-          </div>
-        </div>
-  
-        <div class="text-sm text-gray-600 space-y-2">
-          <p><i class="fas fa-calendar-alt mr-2 text-blue-500"></i> <strong>Start Date:</strong> 01 Jan 2025</p>
-          <p><i class="fas fa-calendar-check mr-2 text-green-500"></i> <strong>End Date:</strong> 31 Dec 2025</p>
-          <p><i class="fas fa-dollar-sign mr-2 text-yellow-500"></i> <strong>Amount:</strong> ₹ 12,000</p>
-          <p><i class="fas fa-chart-line mr-2 text-purple-500"></i> <strong>Usage:</strong> 80% Completed</p>
-        </div>
-      </div>
-  
-      <!-- Another Service Card -->
-      <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
-        <div class="flex items-center space-x-4 mb-4">
-          <div class="bg-green-100 p-3 rounded-full">
-            <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
-          </div>
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800">Security Package</h3>
-            <p class="text-sm text-gray-500">Active Service</p>
-          </div>
-        </div>
-  
-        <div class="text-sm text-gray-600 space-y-2">
-          <p><i class="fas fa-calendar-alt mr-2 text-blue-500"></i> <strong>Start Date:</strong> 15 Feb 2025</p>
-          <p><i class="fas fa-calendar-check mr-2 text-green-500"></i> <strong>End Date:</strong> 14 Feb 2026</p>
-          <p><i class="fas fa-dollar-sign mr-2 text-yellow-500"></i> <strong>Amount:</strong> ₹ 20,000</p>
-          <p><i class="fas fa-chart-line mr-2 text-purple-500"></i> <strong>Usage:</strong> 45% Completed</p>
-        </div>
-      </div>
-  
-      <!-- Add more cards if needed -->
-  
+<!-- <div *ngIf="service" class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+  <div class="flex items-center space-x-4 mb-4">
+    <div class="bg-blue-100 p-3 rounded-full">
+      <i class="fas fa-cogs text-blue-600 text-2xl"></i>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800">{{ service.salesLead.lead.leadsource.crmService.serviceName }}</h3>
+      <p class="text-sm text-gray-500">Active Service</p>
     </div>
   </div>
-  
+
+  <div class="text-sm text-gray-600 space-y-2">
+    <p><i class="fas fa-calendar-alt mr-2 text-blue-500"></i> <strong>Duration:</strong> {{ service.salesLead.lead.leadsource.crmService.durationInDays }} days</p>
+    <p><i class="fas fa-dollar-sign mr-2 text-yellow-500"></i> <strong>Amount:</strong> ₹ {{ service.salesLead.lead.leadsource.crmService.price }}</p>
+    <p><i class="fas fa-chart-line mr-2 text-purple-500"></i> <strong>Status:</strong> {{ service.salesLead.dealStatus }}</p>
+    <p><i class="fas fa-file-alt mr-2 text-gray-500"></i> <strong>Description:</strong> {{ service.salesLead.lead.leadsource.crmService.description }}</p>
+  </div>
+</div> -->
+<div *ngIf="service" class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition transform p-8 max-w-lg mx-15 my-10 h-auto">
+  <div class="flex items-center space-x-6 mb-6">
+    <!-- Icon -->
+    <div class="bg-indigo-500 p-5 rounded-full shadow-md">
+      <i class="fas fa-cogs text-white text-4xl"></i>
+    </div>
+    <!-- Service Title and Status -->
+    <div>
+      <h3 class="text-3xl font-semibold text-gray-900">{{ service.salesLead.lead.leadsource.crmService.serviceName }}</h3>
+      <p class="text-lg text-gray-600">{{ service.salesLead.dealStatus }}</p>
+    </div>
+  </div>
+
+  <!-- Service Details -->
+  <div class="space-y-6 text-gray-800">
+    <!-- Service Description -->
+    <p class="text-lg"><i class="fas fa-file-alt text-gray-500 mr-2"></i> <strong>Description:</strong> {{ service.salesLead.lead.leadsource.crmService.description }}</p>
+
+    <!-- Service Price -->
+    <p class="text-lg"><i class="fas fa-dollar-sign text-yellow-500 mr-2"></i> <strong>Amount:</strong> ₹ {{ service.salesLead.lead.leadsource.crmService.price }}</p>
+
+    <!-- Duration -->
+    <p class="text-lg"><i class="fas fa-calendar-alt text-blue-500 mr-2"></i> <strong>Duration:</strong> {{ service.salesLead.lead.leadsource.crmService.durationInDays }} days</p>
+
+    <!-- Start Date -->
+    <p class="text-lg"><i class="fas fa-calendar-check text-green-500 mr-2"></i> <strong>Start Date:</strong> {{ service.salesLead.timeStamp | date: 'shortDate' }}</p>
+
+    <!-- End Date -->
+    <p class="text-lg"><i class="fas fa-calendar-times text-red-500 mr-2"></i> <strong>End Date:</strong> {{ service.salesLead.closedDate | date: 'shortDate' }}</p>
+  </div>
+
+  <!-- Service Status Badge -->
+  <div class="mt-6 flex justify-between items-center">
+    <span class="px-6 py-3 rounded-full text-white text-lg font-semibold"
+      [ngClass]="{
+        'bg-green-500': service.salesLead.dealStatus === 'WON',
+        'bg-yellow-500': service.salesLead.dealStatus === 'PENDING',
+        'bg-red-500': service.salesLead.dealStatus === 'LOST',
+        'bg-blue-500': service.salesLead.dealStatus === 'ACTIVE',
+        'bg-gray-500': service.salesLead.dealStatus === 'CANCELLED'
+      }">
+      {{ service.salesLead.dealStatus }}
+    </span>
+  </div>
+</div>
