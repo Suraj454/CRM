@@ -56,6 +56,7 @@ export class SignUpComponent {
       next: (res) => {
         // Success redirect
         this.router.navigate(['/login']);
+        console.log('Signup successful:', res);
       },
       error: (err) => {
         console.error('Signup failed:', err);

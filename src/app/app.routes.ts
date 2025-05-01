@@ -42,7 +42,8 @@ import { AdminServicesComponent } from './page/admin-services/admin-services.com
 //         ]
 //     },
 export const routes: Routes = [
-
+  
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignUpComponent },
     { 

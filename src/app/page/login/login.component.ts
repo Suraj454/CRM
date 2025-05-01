@@ -27,7 +27,7 @@ onSubmit() {
 
           localStorage.setItem('isLoggined', 'true');
           localStorage.setItem('userId', response.userId);
-          localStorage.setItem('username', response.userName);
+          localStorage.setItem('username', response.username);
           localStorage.setItem('role', response.role.roleName); // ✅ Store role
 
           // ✅ Role-based routing
@@ -37,7 +37,7 @@ onSubmit() {
             this.router.navigate(['/client/service']);
           } 
           else if (role === 'marketing') {
-            this.router.navigate(['/leadsource']);
+            this.router.navigate(['/marketing/dashboard']);
           } 
           else if (role === 'salesperson') {
             this.router.navigate(['sales/dashboard']);

@@ -103,13 +103,43 @@ export class SalesleadsComponent implements OnInit {
     }
   }
 
+  // sendEmail(): void {
+  //   if (this.currentLeadId === null) return;
+
+  //   const now = new Date();
+  //   const proposedDate = now.toISOString();  // or format it as needed
+
+  //    this.showEmailModal = false;  // Close the modal after sending the email
+  
+  //   const emailPayload = {
+  //     recipient: this.emailForm.to,
+  //     subject: this.emailForm.subject,
+  //     msgBody: this.emailForm.body,
+  //     attachment: this.emailForm.attachment ? this.emailForm.attachment.name : '',
+  //     dealValue: parseFloat(this.emailForm.proposedValue) || 0,
+  //     proposedDate: proposedDate  // ✅ Include current timestamp
+  //   };
+  
+  //   this.salesLeadsService.sendEmailToLead(this.currentLeadId, emailPayload).subscribe({
+  //     next: (response) => {
+  //       console.log('Email sent successfully:', response);
+  //       console.log('Sending email with payload:', emailPayload);
+
+
+  //     },
+  //     error: (error) => {
+  //       console.error('Error sending email:', error);
+  //     }
+  //   });
+  // }
+
   sendEmail(): void {
     if (this.currentLeadId === null) return;
-
+  
     const now = new Date();
-    const proposedDate = now.toISOString();  // or format it as needed
-
-     this.showEmailModal = false;  // Close the modal after sending the email
+    const proposedDate = now.toISOString();
+  
+    this.showEmailModal = false;
   
     const emailPayload = {
       recipient: this.emailForm.to,
@@ -117,19 +147,20 @@ export class SalesleadsComponent implements OnInit {
       msgBody: this.emailForm.body,
       attachment: this.emailForm.attachment ? this.emailForm.attachment.name : '',
       dealValue: parseFloat(this.emailForm.proposedValue) || 0,
-      proposedDate: proposedDate  // ✅ Include current timestamp
+      proposedDate: proposedDate
     };
   
     this.salesLeadsService.sendEmailToLead(this.currentLeadId, emailPayload).subscribe({
       next: (response) => {
         console.log('Email sent successfully:', response);
         console.log('Sending email with payload:', emailPayload);
-
-
+  
+        this.getQualifiedLeads(); // ✅ Reload updated leads after sending email
       },
       error: (error) => {
         console.error('Error sending email:', error);
       }
     });
   }
+  
 }

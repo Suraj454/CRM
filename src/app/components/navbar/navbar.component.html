@@ -1,27 +1,17 @@
-<nav class="w-full flex justify-between items-center py-6 px-12 bg-gradient-to-r from-purple-800 to-slate-800 text-white">
+<nav class="w-full flex justify-between items-center py-6 px-12 bg-slate-800 text-white">
     <!-- Left Side: Dashboard -->
-    <div class="text-lg font-semibold">
-        {{ roleName }} Dashboard
+    <div class="text-2xl font-semibold">
+      {{ roleName }} 
     </div>
-
+  
     <!-- Right Side: Notification, User Info, and Image -->
     <div class="flex items-center space-x-4">
-        <!-- Notification Icon -->
-        <div class="relative">
-            <button class="p-2">
-                <!-- Font Awesome Bell Icon for Notifications -->
-                <i class="fas fa-bell text-xl"></i>
-                
-                <!-- Badge Notification (Optional) -->
-                <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold rounded-full">3</span>
-            </button>
-        </div>
-
-        <!-- User Info -->
-        <div class="flex items-center space-x-2">
-            <span class="text-lg font-semibold">{{ username }}</span>
-        </div>
-        <!-- User Icon on the Right Side -->
-       <i class="fas fa-user-circle text-3xl text-white"></i>
+      <!-- User Info -->
+      <div class="flex items-center space-x-2">
+        <!-- User Icon first -->
+        <i class="fas fa-user-circle text-3xl text-white"></i>
+        <span class="text-lg font-semibold">{{ username }}</span>
+      </div>
     </div>
-</nav>
+  </nav>
+  

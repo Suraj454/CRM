@@ -22,7 +22,7 @@ export class NegotiationComponent implements OnInit {
  // pagination
  
   currentPage: number = 1;  // Track the current page
-  itemsPerPage: number = 5; // Number of items per page
+  itemsPerPage: number = 7; // Number of items per page
   
   
   searchTerm: string = '';  // Variable to bind to the search input

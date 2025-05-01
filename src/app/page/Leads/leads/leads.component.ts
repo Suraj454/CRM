@@ -25,7 +25,7 @@ export class LeadsComponent implements OnInit {
 
   displayedLeads: Lead[] = [];  // Leads for the current page
   currentPage: number = 1;      // Current page
-  itemsPerPage: number = 8;     // Number of leads per page
+  itemsPerPage: number = 7;     // Number of leads per page
 
 
   timenow:string|any=''

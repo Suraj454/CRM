@@ -11,9 +11,10 @@ export const authGuard: CanActivateFn = (route, state) => {
   // Define your route's allowed roles (this should be dynamic depending on the route)
   const allowedRoles = route.data['roles'] as string[];
 
-  // If no role is found or the user role is not in the allowed roles, redirect to login page
+  //
+  // If no role is found or the role is not authorized, redirect to login
   if (!userRole || !allowedRoles.includes(userRole)) {
-    router.navigate(['/login']);
+    router.navigate(['/login'], { replaceUrl: true }); // prevents navigating back
     return false;
   }
   
