@@ -124,17 +124,27 @@ showPopupMessage(message: string): void {
   }, 3000); // hide after 3 seconds
 }
 
+
 generateCredentials(salesLeadId: number): void {
   this.salesLeadsService.sendCredentials(salesLeadId).subscribe({
     next: (response) => {
       console.log('API Success:', response);
-      // Show success message on UI
-      this.showPopupMessage('Mail sent successfully!');
+      const message = response.message || '';
+      if (message.includes('Email sent')) {
+        this.showPopupMessage('Mail sent successfully!');
+      } else {
+        this.showPopupMessage(message); // fallback
+      }
     },
     error: (error) => {
       console.error('API Error:', error);
-      // Show error message on UI
-      this.showPopupMessage('Failed to send credentials!');
+      const errorMsg = error?.error?.message || error?.error?.error || '';
+
+      if (error.status === 409 && errorMsg.includes('already exists')) {
+        this.showPopupMessage('Credentials have already been sent to this client!');
+      } else {
+        this.showPopupMessage('Failed to send credentials!');
+      }
     }
   });
 }

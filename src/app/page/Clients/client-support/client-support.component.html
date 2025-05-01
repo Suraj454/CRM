@@ -3,7 +3,7 @@
       <h2 class="text-2xl font-bold text-gray-800 flex items-center">
         <i class="fas fa-headset text-blue-600 mr-2"></i> Support Center
       </h2>
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
+      <button   (click)="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
         <i class="fas fa-plus-circle mr-2"></i> Raise Ticket
       </button>
     </div>
@@ -44,3 +44,89 @@
     </div>
   </div>
   
+
+  <!-- Raise Ticket Modal -->
+<div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-white/20">
+  <div class="bg-white rounded-xl w-full max-w-3xl p-8 shadow-2xl">
+    <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center gap-2">
+      <i class="fas fa-ticket-alt text-blue-600 text-xl"></i> Raise Support Ticket
+    </h2>
+
+    <form #ticketForm="ngForm" (ngSubmit)="submitTicket()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Ticket ID (read-only) -->
+      <div>
+        <label for="ticketId" class="block font-medium mb-2">Ticket ID</label>
+        <div class="flex items-center border border-gray-300 rounded-lg px-3 bg-gray-100">
+          <i class="fas fa-hashtag text-gray-400 mr-2"></i>
+          <input id="ticketId" [(ngModel)]="ticket.ticketId" name="ticketId" readonly class="w-full p-2 bg-gray-100 outline-none" />
+        </div>
+      </div>
+
+      <!-- Subject -->
+      <div>
+        <label for="subject" class="block font-medium mb-2">Subject</label>
+        <div class="flex items-center border border-gray-300 rounded-lg px-3">
+          <i class="fas fa-pen text-gray-400 mr-2"></i>
+          <input id="subject" [(ngModel)]="ticket.subject" name="subject" required class="w-full p-2 outline-none" />
+        </div>
+        <p *ngIf="ticketForm.submitted && !ticket.subject" class="text-red-500 text-sm">Subject is required</p>
+      </div>
+
+      <!-- Service -->
+      <div>
+        <label for="service" class="block font-medium mb-2">Service</label>
+        <div class="relative">
+          <select id="service" [(ngModel)]="ticket.service" name="service" required
+            class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
+            <option value="" disabled selected>Select Service</option>
+            <option value="Digital Transformation & Automation">Digital Transformation & Automation</option>
+            <option value="Cloud & Infrastructure Services">Cloud & Infrastructure Services</option>
+            <option value="Custom Software & App Dev">Custom Software & App Dev</option>
+            <option value="Data & Analytics">Data & Analytics</option>
+            <option value="IT Consulting">IT Consulting</option>
+          </select>
+          <i class="fas fa-cogs absolute top-3 left-3 text-gray-400"></i>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div>
+        <label for="status" class="block font-medium mb-2">Status</label>
+        <div class="relative">
+          <select id="status" [(ngModel)]="ticket.status" name="status" required
+            class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white appearance-none">
+            <option value="" disabled selected>Select Status</option>
+            <option value="OPEN">Open</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="RESOLVED">Resolved</option>
+          </select>
+          <i class="fas fa-info-circle absolute top-3 left-3 text-gray-400"></i>
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div>
+        <label for="date" class="block font-medium mb-2">Date & Time</label>
+        <div class="relative">
+          <i class="fas fa-calendar-alt absolute top-3 left-3 text-gray-400"></i>
+          <input type="datetime-local" id="date" [(ngModel)]="ticket.date" name="date" required
+            class="w-full p-2 pl-10 border border-gray-300 rounded-lg bg-white outline-none" />
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="md:col-span-2 flex justify-end gap-4 mt-6">
+        <button type="submit" [disabled]="ticketForm.invalid"
+          class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all shadow">
+          <i class="fas fa-paper-plane mr-2"></i> Submit
+        </button>
+
+        <button type="button" (click)="closeModal()"
+          class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-all shadow">
+          <i class="fas fa-times mr-2"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
