@@ -35,11 +35,15 @@ export class SalesLeadsService {
     return this.http.get<SalesLeadInterface[]>('http://localhost:8080/salesLeads/wins');
   }
 
+  sendCredentials(id: number): Observable<any> {
+    return this.http.post(`http://localhost:8080/salesLeads/sendCredentials/${id}`, {});
+  }
+
 
   
 }
 
-// 'http://localhost:8080/salesLeads/getNego
+// 'http://localhost:8080/salesLeads//sendCredentials/{id}
 
 
 // @GetMapping("/getNego")

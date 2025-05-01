@@ -16,13 +16,15 @@ import { PaginationComponent } from '../../../components/pagination/pagination.c
 })
 export class SalesleadsComponent implements OnInit {
 
+   
   qualifiedLeads: SalesLeadInterface[] = [];  // Array to hold qualified leads
     allQualifiedLeads: SalesLeadInterface[] = [];  // Keep a backup of original leads
 
-    searchText: string = '';  
+    searchTerm: string = '';  // The variable to bind to the search input 
+    
 
     currentPage: number = 1;
-    itemsPerPage: number = 3;
+    itemsPerPage: number = 2;
 
   constructor(private salesLeadsService: SalesLeadsService) {}
 
@@ -38,7 +40,7 @@ export class SalesleadsComponent implements OnInit {
         this.qualifiedLeads = response; 
         this.allQualifiedLeads = [...response];  // Store original data as backup
         console.log(response) // Store the fetched leads in the qualifiedLeads array
-      },
+      }, 
       (error) => {
         console.error('Error fetching qualified leads:', error);
       }
@@ -59,25 +61,7 @@ export class SalesleadsComponent implements OnInit {
     this.updatePaginatedLeads();
   }
 
-  onSearchChange(searchTerm: string): void {}
-
-
-    // Filter leads based on search text
-    filterLeads(searchText: string): void {
-      // Use the passed search text directly
-      const text = searchText.toLowerCase();
-      this.qualifiedLeads = this.allQualifiedLeads.filter(lead =>
-        lead.lead.leadsource.leadName.toLowerCase().includes(text) ||
-        lead.lead.leadsource.leadEmail.toLowerCase().includes(text) ||
-        lead.lead.leadsource.contactNo.toLowerCase().includes(text) ||
-        lead.lead.leadsource.companyName.toLowerCase().includes(text) ||
-        lead.lead.leadsource.companyAdd.toLowerCase().includes(text) ||
-        lead.lead.leadsource.sourceType.toLowerCase().includes(text) ||
-        lead.lead.leadsource.crmService.serviceName.toLowerCase().includes(text)
-      );
-      this.updatePaginatedLeads();
-    }
-  
+ 
 
   getBadgeClass(status: string): string {
     switch (status) {

@@ -124,11 +124,48 @@ showPopupMessage(message: string): void {
   }, 3000); // hide after 3 seconds
 }
 
-generateCredentials(): void {
-  // your logic to generate credentials
-
-  this.showPopupMessage('Mail sent successfully!');
+generateCredentials(salesLeadId: number): void {
+  this.salesLeadsService.sendCredentials(salesLeadId).subscribe({
+    next: (response) => {
+      console.log('API Success:', response);
+      // Show success message on UI
+      this.showPopupMessage('Mail sent successfully!');
+    },
+    error: (error) => {
+      console.error('API Error:', error);
+      // Show error message on UI
+      this.showPopupMessage('Failed to send credentials!');
+    }
+  });
 }
+
+
+
+// showPopupMessage(message: string): void {
+//   this.toastMessage = message;
+//   this.showToast = true;
+//   console.log('Popup Message:', message); // Debugging log
+
+//   setTimeout(() => {
+//     this.showToast = false;
+//     this.toastMessage = '';
+//   }, 3000); // hide after 3 seconds
+// }
+
+// generateCredentials(salesLeadId: number): void {
+//   this.salesLeadsService.sendCredentials(salesLeadId).subscribe({
+//     next: (response) => {
+//       console.log('API Success:', response);
+//       // Show success message on UI
+//       this.showPopupMessage('Mail sent successfully!');
+//     },
+//     error: (error) => {
+//       console.error('API Error:', error);
+//       // Show error message on UI
+//       this.showPopupMessage('Failed to send credentials!');
+//     }
+//   });
+// }
 
 }
 

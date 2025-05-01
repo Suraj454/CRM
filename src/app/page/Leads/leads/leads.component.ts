@@ -1,5 +1,4 @@
 
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -228,6 +227,7 @@ export class LeadsComponent implements OnInit {
       lead.companyName.toLowerCase().includes(text) ||
       lead.companyAdd.toLowerCase().includes(text) ||
       lead.sourceType.toLowerCase().includes(text) ||
+      lead.leadStatus.toLowerCase().includes(text) ||
       lead.crmService.serviceName.toLowerCase().includes(text)
     );
   
